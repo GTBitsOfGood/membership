@@ -1,5 +1,4 @@
-# React + Node Starter
-_for [Heroku](https://www.heroku.com/) deployment_
+# Bits of Good Membership Portal
 
 ## Overview
 
