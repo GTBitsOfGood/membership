@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-var mongoDB = `mongodb://${process.env.DATABASE_HOST || '127.0.0.1'}/${process.env.DATABASE_NAME || 'membership-portal'}`;
+var mongoDB = process.env.MONGODB_URI;
 mongoose.connect(mongoDB, {
-  useMongoClient: true
+  useMongoClient: true,
 });
 
 //Get the default connection
