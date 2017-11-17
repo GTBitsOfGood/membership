@@ -27,30 +27,6 @@ describe('Model - User', function() {
             done();
         });
     });
-    it('should be invalid if graduation_date is empty', function(done) {
-        var m = new User();
-    
-        m.validate(function(err) {
-            expect(err.errors.graduation_date).to.exist;
-            done();
-        });
-    });
-    it('should be invalid if credit_hours is empty', function(done) {
-        var m = new User();
-    
-        m.validate(function(err) {
-            expect(err.errors.credit_hours).to.exist;
-            done();
-        });
-    });
-    it('should be invalid if free_response is empty', function(done) {
-        var m = new User();
-    
-        m.validate(function(err) {
-            expect(err.errors.free_response).to.exist;
-            done();
-        });
-    });
     it('should be invalid if score is not a number', function(done) {
         var m = new User({
             score: 'TEST'
