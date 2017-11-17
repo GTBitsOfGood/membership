@@ -6,12 +6,13 @@ const app = express();
 
 // Local Imports & Constants
 require('dotenv').config(); // load env vars
+
+// Require the database models/schemas
+require('./backend/db');
+
 const PORT = process.env.PORT || 3000;
 const api = require('./backend/routes');
 
-
-// Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, { useMongoClient: true });
 mongoose.Promise = global.Promise;
 
 app.use(express.static(path.join(__dirname, 'public')));

@@ -10,7 +10,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const router = express.Router();
 
 // Local Imports
-const User = require('../models/user');
+const User = require('../models/applicant');
 const users = require('./users');
 
 // Middleware

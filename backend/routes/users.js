@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 
 // Local Imports
-const User = require('../models/user');
+const User = require('../models/applicant');
 
 
 // This method is purposely put before the login wall so that
