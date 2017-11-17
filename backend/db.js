@@ -8,8 +8,7 @@ mongoose.connect(mongoDB, {
 //Get the default connection
 var db = mongoose.connection;
 
-require('./models/admin');
-require('./models/applicant');
+require('./models/user');
 require('./models/language');
 require('./models/project');
 

@@ -5,7 +5,7 @@
 
 // // Local Imports & Config
 // const db = require('../backend/db');
-// const User = require('mongoose').model('Applicant');
+// const User = require('mongoose').model('User');
 // const server = require('../server');
 // const should = chai.should;
 // const expect = chai.expect;

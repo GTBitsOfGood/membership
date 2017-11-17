@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const applicantSchema = Schema({
+const userSchema = Schema({
   first_name: {
     type: String,
     required: true
@@ -10,32 +10,29 @@ const applicantSchema = Schema({
     type: String,
     required: true
   },
+  title: {
+    type: String,
+    required: false
+  },
   email: {
     type: String,
     required: true
   },
-  graduation_date: {
-    type: Date,
-    required: true
-  },
+  graduation_date: Date,
   languages: [{
     type: Schema.ObjectId,
     ref: 'Language'
   }],
   websites: [ String ],
-  credit_hours: {
-    type: Number,
-    required: true
-  },
-  free_response: {
-    type: Array,
-    required: true
-  },
-  score: {
-    type: Number,
-    required: false
+  credit_hours: Number,
+  free_response: Array,
+  score: Number,
+  role: {
+    type: String,
+    default: 'applicant',
+    enum: ['applicant', 'admin']
   }
 }, { timestamps: true });
 
 // export user model to app
-module.exports = mongoose.model('Applicant', applicantSchema);
+module.exports = mongoose.model('User', userSchema);

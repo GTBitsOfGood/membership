@@ -30,7 +30,7 @@ const projectSchema = Schema({
   },
   project_members: [{
     type: Schema.ObjectId,
-    ref: 'Applicant'
+    ref: 'User'
   }]
 }, { timestamps: true });
 
