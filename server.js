@@ -1,24 +1,18 @@
-// NPM Imports
+'use strict';
+
+require('dotenv').config();
+
 const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 const express = require('express');
 const path = require('path');
 const app = express();
-
-// Local Imports & Constants
-require('dotenv').config(); // load env vars
-
-// Require the database models/schemas
-require('./backend/db');
-
 const PORT = process.env.PORT || 3000;
-const api = require('./backend/routes');
 
-mongoose.Promise = global.Promise;
+const api = require('./backend/application');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-// Route API Calls to seperate router
 app.use('/api', api);
 
 // Render React page

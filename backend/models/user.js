@@ -20,7 +20,7 @@ const userSchema = Schema({
   },
   graduation_date: Date,
   languages: [{
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Language'
   }],
   websites: [ String ],

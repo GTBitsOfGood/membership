@@ -25,11 +25,11 @@ const projectSchema = Schema({
     }
   },
   project_manager: {
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     required: false
   },
   project_members: [{
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User'
   }]
 }, { timestamps: true });
