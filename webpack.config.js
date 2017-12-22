@@ -1,5 +1,8 @@
+"use strict";
+
 const webpack = require('webpack');
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: [
@@ -7,12 +10,22 @@ module.exports = {
   ],
   module: {
     rules: [
-            { test: /\.js?$/, loader: 'babel-loader', exclude: /node_modules/ },
-            { test: /\.s?css$/, loader: 'style-loader!css-loader!sass-loader' },
+            {
+              test: /\.js?$/,
+              loader: 'babel-loader',
+              options: {
+                  // cacheDirectory: true
+                  presets: ['es2015', 'react'],
+                  plugins: [['import', { libraryName: 'antd', style: true}]]
+              },
+              exclude: /node_modules/
+            },
+            { test: /\.less/, loader: 'style-loader!css-loader!less-loader' },
+            { test: /\.css/, loader: 'style-loader!css-loader' },
     ],
   },
   resolve: {
-    extensions: ['.js', '.scss']
+    extensions: ['.js', '.less', '.css']
   },
   output: {
     path: path.join(__dirname, '/public'),
@@ -25,6 +38,7 @@ module.exports = {
     hot: true
   },
   plugins: [
+    new Dotenv({path: './.env.frontend'}),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
