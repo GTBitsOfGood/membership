@@ -63,5 +63,10 @@ typings/
 
 # dotenv environment variables file
 .env
+!.env.example
+.env.frontend
+!.env.frontend.example
+
+
 
 public/*.js
