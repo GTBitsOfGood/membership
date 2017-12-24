@@ -1,42 +1,8 @@
 // NPM Import
 import axios from 'axios';
-
+import { push } from 'react-router-redux';
 // Action Creators
 import * as types from './types';
-
-/*
- * Action Creators for controlled input fields
- */
-export function firstNameChange(first_name) {
-  return { type: types.FIRST_NAME_CHANGE, first_name };
-}
-export function lastNameChange(last_name) {
-  return { type: types.LAST_NAME_CHANGE, last_name };
-}
-export function emailChange(email) {
-  return { type: types.EMAIL_CHANGE, email };
-}
-export function passwordChange(password) {
-  return { type: types.PASSWORD_CHANGE, password };
-}
-export function phoneNumberChange(phone_number) {
-  return { type: types.PHONE_NUMBER_CHANGE, phone_number };
-}
-export function streetAddressChange(street_address) {
-  return { type: types.STREET_ADDRESS_CHANGE, street_address };
-}
-export function stateChange(state) {
-  return { type: types.STATE_CHANGE, state };
-}
-export function cityChange(city) {
-  return { type: types.CITY_CHANGE, city };
-}
-export function zipCodeChange(zip_code) {
-  return { type: types.ZIP_CODE_CHANGE, zip_code };
-}
-export function dateOfBirthChange(date_of_birth) {
-  return { type: types.DATE_OF_BIRTH_CHANGE, date_of_birth };
-}
 
 
 /*
@@ -44,12 +10,19 @@ export function dateOfBirthChange(date_of_birth) {
  */
 export function login() {
   return (dispatch, getState) => { // using Thunks
-    const { email, password } = getState().auth;
-    axios.post('/api/login', {  email, password })
-      .then(resp => {
-        dispatch(loginGenerator(resp.data.user));
+    axios.get('/api/profile')
+      .then(({ data }) => {
+        if (data.user) {
+          console.log('about to successfully authenticate user');
+          return dispatch(loginGenerator(data.user));
+        }
+        console.log('fail to login....');
+        // return dispatch(push('/login'));
       })
-      .catch(err => dispatch(loginGenerator()));
+      .catch(err => {
+        console.log('pushing login.... ')
+        dispatch(push('/login')
+      }));
   };
 }
 

@@ -6,18 +6,13 @@ const SplashInfo = () => (
   <div>
     <h3>Volunteering at drawchange</h3>
     <p>
-      Thank you for your interest in volunteering with us!
-      You can volunteer to help us with a specific project,
-      event, going to the homeless shelters with us or helping
-      us out around the office. Whatever it is, you are
-      guaranteed to leave with a full heart and ear to ear smile!
+      Eu dolor laborum dolore ut duis.Laborum quis enim sit velit labore voluptate pariatur velit excepteur.Ea incididunt duis sint tempor tempor sint amet ea aliquip Lorem.Labore dolor elit officia ex ea laborum exercitation nulla culpa labore ad quis ut.Tempor tempor aute sit ullamco ea dolor cillum officia nostrud in sint.
     </p>
     <p>
-      While we greatly need and appreciate all of the volunteer
-      assistance we receive, we do not have a full time volunteer
-      manager on staff. Thank you in advance for understanding
-      that your application may take a few weeks to get processed.
+      Eu dolor laborum dolore ut duis.Laborum quis enim sit velit labore voluptate pariatur velit excepteur.Ea incididunt duis sint tempor tempor sint amet ea aliquip Lorem.Labore dolor elit officia ex ea laborum exercitation nulla culpa labore ad quis ut.Tempor tempor aute sit ullamco ea dolor cillum officia nostrud in sint.
     </p>
+
+
   </div>
 );
 
