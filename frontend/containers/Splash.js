@@ -1,6 +1,7 @@
 // NPM Packages
 import React from 'react';
-import { Jumbotron, Col, Panel } from 'react-bootstrap';
+
+import {Row, Col, Card, Button} from 'antd';
 
 // Local Imports
 import SplashInfo from '../components/SplashInfo';
@@ -9,20 +10,13 @@ import SplashAuth from '../components/SplashAuth';
 // Home component
 const Splash = () => (
   <div>
-    <Jumbotron style={{ backgroundColor: '#deffcf' }}>
-      <div style={{ paddingLeft: '25px' }}>
-        <h1>Welcome to the drawchange Volunteer Portal!</h1>
-        <p>From here you can become a volunteer and sign up for events!</p>
-      </div>
-    </Jumbotron>
-    <Col md={7}>
-      <SplashInfo />
-      {/* Add this for insta feed http://instafeedjs.com/ */}
-
-    </Col>
-    <Col md={5}>
-      <SplashAuth/>
-    </Col>
+    <Row type='flex' justify='centered'>
+      <Col span={12} offset={6}>
+        <Card title='Apply Now!'>
+          <Button type='primary' size='large'>Sign in with GitHub</Button>
+        </Card>
+      </Col>
+    </Row>
   </div>
 );
 

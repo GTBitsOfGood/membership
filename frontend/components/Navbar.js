@@ -1,32 +1,33 @@
 // NPM Packages
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Menu } from 'antd';
 
 // Local Imports
 
-const NavBar = ({ logoutAction }) => {
-  return (
-    <Navbar inverse collapseOnSelect>
-      <Navbar.Header>
-        <Navbar.Brand>
-          <Link to="/">drawchange Volunteer Portal</Link>
-        </Navbar.Brand>
-        <Navbar.Toggle />
-      </Navbar.Header>
-      <Navbar.Collapse>
-        <Nav pullRight>
-          <LinkContainer isActive={() => false} onClick={ logoutAction } to="/">
-            <NavItem>Logout</NavItem>
-          </LinkContainer>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
-  );
-};
+class NavBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedKeys: ''
+    };
+  }
 
+  render() {
+    const {selectedKeys} = this.state;
+    return (
+        <Menu
+          mode="horizontal"
+          theme="dark"
+          selectedKeys={[selectedKeys]}>
+          <Menu.Item key="home" selected style={{paddingTop: '10px', paddingBottom: '10px'}}>GT Bits of Good</Menu.Item>
+        </Menu>
+    );
+  }
+}
 
 NavBar.propTypes = {
   logoutAction: PropTypes.func

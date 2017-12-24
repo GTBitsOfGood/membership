@@ -9,13 +9,19 @@ import Navbar from '../components/Navbar';
 
 import * as actions from '../actions/auth';
 
+import {Layout} from 'antd';
 
 const AppContainer = ({ logout }) => {
+  const {Header, Content, Footer} = Layout;
   return (
-    <div>
-      <Navbar logoutAction={ logout } />
-      <Splash />
-    </div>
+    <Layout>
+      <Header>
+        <Navbar logoutAction={ logout } />
+      </Header>
+      <Content style={{padding: '0 50px'}}>
+        <Splash />
+      </Content>
+    </Layout>
 
   );
 };
