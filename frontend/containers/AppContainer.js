@@ -17,7 +17,7 @@ const { Header, Content, Footer } = Layout;
 
 
 const AppContainer = ({ logout }) => {
-  return (<div style={{width: "600px"}}>
+  return (<div style={{width: "800px"}}>
     <Application/>
   </div>);
 
