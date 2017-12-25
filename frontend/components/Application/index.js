@@ -1,43 +1,40 @@
+// NPM Imports
 import {
   Form,
   Select,
   InputNumber,
   Switch,
-  Radio,
-  Slider,
   Button,
-  Upload,
   Icon,
   Rate,
   Input,
   DatePicker,
   Tooltip
 } from "antd";
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import propTypes from "prop-types";
 
-import SelectMultiple from './Application/select-multiple';
-import { programmingLanguages, webTechnologies, deployment, databases } from './Application/questions';
-
+// Local Imports and Constants
+import {
+  programmingLanguages,
+  webTechnologies,
+  deployment,
+  databases
+} from "./questions";
 const FormItem = Form.Item;
 const Option = Select.Option;
-const RadioButton = Radio.Button;
-const RadioGroup = Radio.Group;
 const { TextArea } = Input;
-
-
-// confst programmingLanguages = ['Python',	'C',	'Java',	'C++',	'C#',	'JavaScript',	'PHP',	'Go',	'Swift/Objective-C',	'Scala',	'Ruby',	'Web Assembly'];
 
 class Application extends Component {
   constructor() {
     super();
-
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit(e) {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        console.log("Received values of form: ", values);
       }
     });
   }
@@ -45,7 +42,7 @@ class Application extends Component {
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
       labelCol: { span: 10 },
-      wrapperCol: { span: 10 },
+      wrapperCol: { span: 10 }
     };
     return (<Form onSubmit={this.handleSubmit}>
         {/* Name */}
@@ -115,16 +112,7 @@ class Application extends Component {
 
         {/* Programming Languages */}
         <FormItem {...formItemLayout} label="Programming Languages">
-          {getFieldDecorator("programming-language", {
-            rules: [
-              {
-                required: true,
-                message:
-                  "Please select the programming languages you are proficient with.",
-                type: "array"
-              }
-            ]
-          })(<Select mode="multiple" placeholder="Select Proficient Languages">
+          {getFieldDecorator("programming-language")(<Select mode="multiple" placeholder="Select Proficient Languages">
               {programmingLanguages.map((item, index) => (
                 <Option key={`${item + index}`} value={item}>
                   {item}
@@ -135,16 +123,7 @@ class Application extends Component {
 
         {/* Web Technologies */}
         <FormItem {...formItemLayout} label="Web Technologies">
-          {getFieldDecorator("web-technology", {
-            rules: [
-              {
-                required: true,
-                message:
-                  "Please select the web technologies you are proficient with.",
-                type: "array"
-              }
-            ]
-          })(<Select mode="multiple" placeholder="Select Proficient Web Techs">
+          {getFieldDecorator("web-technology")(<Select mode="multiple" placeholder="Select Proficient Web Techs">
               {webTechnologies.map((item, index) => (
                 <Option key={`${item + index}`} value={item}>
                   {item}
@@ -155,16 +134,7 @@ class Application extends Component {
 
         {/* Database Technology */}
         <FormItem {...formItemLayout} label="Database Technologies">
-          {getFieldDecorator("database-technology", {
-            rules: [
-              {
-                required: true,
-                message:
-                  "Please select the database technologies you are proficient with.",
-                type: "array"
-              }
-            ]
-          })(<Select mode="multiple" placeholder="Select Proficient Database Techs">
+          {getFieldDecorator("database-technology")(<Select mode="multiple" placeholder="Select Proficient Database Techs">
               {databases.map((item, index) => (
                 <Option key={`${item + index}`} value={item}>
                   {item}
@@ -175,16 +145,7 @@ class Application extends Component {
 
         {/* Deployment Technology */}
         <FormItem {...formItemLayout} label="Deployment Technologies">
-          {getFieldDecorator("deployment-technology", {
-            rules: [
-              {
-                required: true,
-                message:
-                  "Please select the deployment technologies you are proficient with.",
-                type: "array"
-              }
-            ]
-          })(<Select mode="multiple" placeholder="Select Proficient Deployment Techs">
+          {getFieldDecorator("deployment-technology")(<Select mode="multiple" placeholder="Select Proficient Deployment Techs">
               {deployment.map((item, index) => (
                 <Option key={`${item + index}`} value={item}>
                   {item}
@@ -229,7 +190,7 @@ class Application extends Component {
                 whitespace: true
               }
             ]
-          })(<TextArea placeholder="Why do you want to be part of Bits of Good?" />)}
+          })(<TextArea placeholder="Why do you want to be part of Bits of Good?" autosize={{ minRows: 2, maxRows: 6 }} />)}
         </FormItem>
 
         {/* Teamwork */}
@@ -242,7 +203,7 @@ class Application extends Component {
                 whitespace: true
               }
             ]
-          })(<TextArea placeholder="Tell us about a time when you worked on a team." />)}
+          })(<TextArea placeholder="Tell us about a time when you worked on a team." autosize={{ minRows: 2, maxRows: 6 }} />)}
         </FormItem>
 
         {/* Project */}
@@ -255,7 +216,7 @@ class Application extends Component {
                 whitespace: true
               }
             ]
-          })(<TextArea placeholder="Tell us about your favorite project (ex. school, personal, internship, research)" />)}
+          })(<TextArea placeholder="Tell us about your favorite project (ex. school, personal, internship, research)" autosize={{ minRows: 2, maxRows: 6 }} />)}
         </FormItem>
 
         {/* Commitments */}
@@ -268,13 +229,17 @@ class Application extends Component {
                 whitespace: true
               }
             ]
-          })(<TextArea placeholder="What other commitments do you have this semester (ex. TA, Clubs, Greek Life, etc.)" />)}
+          })(<TextArea placeholder="What other commitments do you have this semester (ex. TA, Clubs, Greek Life, etc.)" autosize={{ minRows: 2, maxRows: 6 }} />)}
         </FormItem>
 
         {/* Project Preference */}
         <FormItem {...formItemLayout} label={<span>
               Project Preference&nbsp;
-              <Tooltip title={(<span>Click to <a href="https://bitsofgood.org" target="_blank">view projects</a></span>)}>
+              <Tooltip title={<span>
+                    Click to <a href="https://bitsofgood.org" target="_blank">
+                      view projects
+                    </a>
+                  </span>}>
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>}>
@@ -286,11 +251,16 @@ class Application extends Component {
                 whitespace: true
               }
             ]
-          })(<TextArea placeholder="What projects are you most interested in?" />)}
+          })(<TextArea placeholder="What projects are you most interested in?" autosize={{ minRows: 2, maxRows: 6 }} />)}
         </FormItem>
 
         {/* PM Interest */}
-        <FormItem {...formItemLayout} label="Project Manager Interest">
+        <FormItem {...formItemLayout} label={<span>
+              Project Manager Interest&nbsp;
+              <Tooltip title="Are you interestd in being a project manager?">
+                <Icon type="question-circle-o" />
+              </Tooltip>
+            </span>}>
           {getFieldDecorator("pm-interest", {
             valuePropName: "checked"
           })(<Switch />)}
@@ -304,6 +274,10 @@ class Application extends Component {
       </Form>);
   }
 }
+
+Application.propTypes = {
+  form: propTypes.object
+};
 
 const WrappedApplication = Form.create()(Application);
 

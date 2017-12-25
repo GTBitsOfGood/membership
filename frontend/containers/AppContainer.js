@@ -8,7 +8,7 @@ import Splash from './Splash';
 import Navbar from '../components/Navbar';
 import Clean from '../components/Clean';
 import MemberDash from "./MemberDash";
-import Application from "../components/Application3";
+import Application from "../components/Application";
 
 import * as actions from '../actions/auth';
 
@@ -17,29 +17,23 @@ const { Header, Content, Footer } = Layout;
 
 
 const AppContainer = ({ logout }) => {
-  return (<div style={{width: "800px"}}>
-    <Application/>
-  </div>);
+  return (
 
-    // <Layout className="layout">
-    //   <Header>
-    //     <Navbar />
-    //   </Header>
-    //   <Content style={{ padding: "0 50px" }}>
-    //     {/* <Breadcrumb style={{ margin: "16px 0" }}>
-    //     <Breadcrumb.Item>Home</Breadcrumb.Item>
-    //     <Breadcrumb.Item>List</Breadcrumb.Item>
-    //     <Breadcrumb.Item>App</Breadcrumb.Item>
-    //   </Breadcrumb> */}
-    //     <div style={{ background: "#fff", padding: 24, minHeight: "500" }}>
-    //       Content
-    //       <Splash />
-    //     </div>
-    //   </Content>
-    //   <Footer style={{ textAlign: "center" }}>
-    //     Ant Design ©2016 Created by Ant UED
-    //   </Footer>
-    // </Layout>);
+    <Layout className="layout">
+      <Header>
+        <Navbar />
+      </Header>
+      <Content style={{ padding: "0 50px" }}>
+        <div style={{ background: "#fff", padding: 24, minHeight: "500" }}>
+          {/* Content
+          <Splash /> */}
+          <Application />
+        </div>
+      </Content>
+      <Footer style={{ textAlign: "center" }}>
+        Ant Design ©2016 Created by Ant UED
+      </Footer>
+    </Layout>);
   // const {Header, Content, Footer} = Layout;
   // return (
   //   <Layout>
