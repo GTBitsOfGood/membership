@@ -41,10 +41,13 @@ class Application extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
-      labelCol: { span: 10 },
+      labelCol: { span: 8 },
       wrapperCol: { span: 10 }
     };
-    return (<Form onSubmit={this.handleSubmit}>
+    return (
+    <div>
+      <h1 className="center">Join Bits of Good!</h1>
+    <Form onSubmit={this.handleSubmit}>
         {/* Name */}
         <FormItem {...formItemLayout} label="Name">
           {getFieldDecorator("name", {
@@ -266,12 +269,13 @@ class Application extends Component {
           })(<Switch />)}
         </FormItem>
 
-        <FormItem wrapperCol={{ span: 10, offset: 10 }}>
+        <FormItem wrapperCol={{ span: 10, offset: 12 }}>
           <Button type="primary" htmlType="submit">
             Submit
           </Button>
         </FormItem>
-      </Form>);
+      </Form>
+      </div>);
   }
 }
 

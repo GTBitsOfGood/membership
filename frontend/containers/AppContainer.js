@@ -25,8 +25,6 @@ const AppContainer = ({ logout }) => {
       </Header>
       <Content style={{ padding: "0 50px" }}>
         <div style={{ background: "#fff", padding: 24, minHeight: "500" }}>
-          {/* Content
-          <Splash /> */}
           <Application />
         </div>
       </Content>
