@@ -32,16 +32,29 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: "http://127.0.0.1:3000/api/auth/github/callback"
+      callbackURL: process.env.GITHUB_CALLBACK_URL
     },
-    function(accessToken, refreshToken, profile, done) {
-      process.nextTick(function() {
+    (accessToken, refreshToken, profile, done) => {
+      process.nextTick(() => {
         // try to find the user based on their google id
-        User.findOne({ github_id: profile.id }, function(err, user) {
+        User.findOne({ github_id: profile.id }, (err, user) => {
+          // check for error
           if (err) return done(err);
+
+          // return user if exists in db
           if (user) return done(null, user);
-          const { id, login, avatar_url, html_url,
-            name, email, public_repos, followers } = profile._json;
+
+          // create new user in db
+          const {
+            id,
+            login,
+            avatar_url,
+            html_url,
+            name,
+            email,
+            public_repos,
+            followers
+          } = profile._json;
           const newUser = new User({
             github_id: id,
             github_access_token: accessToken,
@@ -51,10 +64,10 @@ passport.use(
             github_public_repos: public_repos,
             github_followers: followers,
             name,
-            email,
+            email
           });
-          newUser.save(err => {
-            if (err) return done(err);
+          return newUser.save(err2 => {
+            if (err2) return done(err2);
             return done(null, newUser);
           });
         });
@@ -85,10 +98,8 @@ router.get("/profile", (req, res) => {
 
 router.get("/auth/github", passport.authenticate("github"));
 
-router.get(
-  "/auth/github/callback",
-  passport.authenticate("github", { failureRedirect: "/api/login" }),
-  function(req, res) {
+router.get("/auth/github/callback",
+  passport.authenticate("github"), (req, res) => {
     // Successful authentication, redirect home.
     res.redirect("/");
   }
