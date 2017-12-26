@@ -1,11 +1,6 @@
 // NPM Packages
 import React from 'react';
-
 import {Row, Col, Card, Button} from 'antd';
-
-// Local Imports
-import SplashInfo from '../components/SplashInfo';
-import SplashAuth from '../components/SplashAuth';
 
 // Home component
 const Splash = () => (
