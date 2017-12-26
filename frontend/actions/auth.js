@@ -20,9 +20,9 @@ export function login() {
         // return dispatch(push('/login'));
       })
       .catch(err => {
-        console.log('pushing login.... ')
-        dispatch(push('/login')
-      }));
+        console.log('pushing login.... ');
+        dispatch(push('/login'));
+      });
   };
 }
 
