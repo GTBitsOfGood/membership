@@ -18,20 +18,20 @@ const { Header, Content, Footer } = Layout;
 
 const AppContainer = ({ logout }) => {
   return (
-
-    <Layout className="layout">
-      <Header>
-        <Navbar />
-      </Header>
-      <Content style={{ padding: "0 50px" }}>
-        <div style={{ background: "#fff", padding: 24, minHeight: "500" }}>
-          <Application />
-        </div>
-      </Content>
-      <Footer style={{ textAlign: "center" }}>
-        Ant Design ©2016 Created by Ant UED
-      </Footer>
-    </Layout>);
+    <Clean/>);
+    // <Layout className="layout">
+    //   <Header>
+    //     <Navbar />
+    //   </Header>
+    //   <Content style={{ padding: "0 50px" }}>
+    //     <div style={{ background: "#fff", padding: 24, }}>
+    //       <Application />
+    //     </div>
+    //   </Content>
+    //   <Footer style={{ textAlign: "center" }}>
+    //     Ant Design ©2016 Created by Ant UED
+    //   </Footer>
+    // </Layout>);
   // const {Header, Content, Footer} = Layout;
   // return (
   //   <Layout>
