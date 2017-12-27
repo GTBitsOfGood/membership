@@ -11,7 +11,7 @@ import {
 
 // Local Imports
 import Dashboard from "./Dashboard";
-import Clean from '../components/Clean';
+import Splash from '../components/Splash';
 import { login, logout } from "../ducks/auth";
 import PrivateRoute from '../components/PrivateRoute';
 
@@ -25,7 +25,7 @@ class AppContainer extends Component {
     this.props.authenticate();
   }
   _login() {
-    return this.props.user ? <Redirect to={"/"} /> : <Clean />;
+    return this.props.user ? <Redirect to={"/"} /> : <Splash />;
   }
 
   render() {
