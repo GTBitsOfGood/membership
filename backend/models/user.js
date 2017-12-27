@@ -58,6 +58,11 @@ const userSchema = Schema(
       type: String,
       default: "applicant",
       enum: ["applicant", "admin"]
+    },
+    application_status: {
+      type: String,
+      default: "none",
+      enum: ["none", "submitted", "rejected", "accepted"]
     }
   },
   { timestamps: true }

@@ -47,6 +47,14 @@ class Application extends Component {
     return (
     <div>
       <h1 className="center">Join Bits of Good!</h1>
+      <p className="application-intro">
+        Thanks for your interest in joining Bits of Good!
+        We are excited you want to join our family and build
+        your skills while also serving the Atlanta community!
+        This Application is for us to get to know you so that
+        we can try our best to match you with a project where
+        you can contribute and grow.
+        </p>
       <Form onSubmit={this.handleSubmit}>
           {/* Name */}
           <FormItem {...formItemLayout} label="Name">

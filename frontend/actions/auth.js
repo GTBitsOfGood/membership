@@ -14,6 +14,7 @@ export function login() {
       .then(({ data }) => {
         if (data.user) {
           console.log('about to successfully authenticate user');
+          dispatch(push("/"));
           return dispatch(loginGenerator(data.user));
         }
         console.log('fail to login....');
@@ -50,6 +51,7 @@ export function logout() {
     sessionStorage.removeItem('state');
     axios.get('/api/logout')
       .then(resp => dispatch(logoutGenerator()));
+    dispatch(push('/login'));
   };
 }
 

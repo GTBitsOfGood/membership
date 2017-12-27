@@ -96,7 +96,10 @@ router.get("/profile", (req, res) => {
   return res.status(401).json({ error: "Not Logged in" });
 });
 
-router.get("/auth/github", passport.authenticate("github"));
+router.get(
+  "/auth/github",
+  passport.authenticate("github", { failureRedirect: "/login" })
+);
 
 router.get("/auth/github/callback",
   passport.authenticate("github"), (req, res) => {
