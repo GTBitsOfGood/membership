@@ -27,7 +27,7 @@ const Rejected = ({ logout, user }) => {
         <div className="content">
           <Row type="flex" justify="centered">
             <Col span={12} offset={6}>
-              <Card className="font" title="Thanks for Applying!">
+              <Card className="font" title="We Appreciate Your Application">
                 <p className="font">
                   Thank you for applying to join a Bits of Good
                   Project Team! Unfortunately we are unable to place you on a

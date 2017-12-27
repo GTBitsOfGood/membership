@@ -4,7 +4,7 @@ import propTypes from "prop-types";
 import React from "react";
 
 // Local Imports & Constants
-import Application from "../../components/Application";
+import Application from "../../../components/Application";
 import { ToggleButton } from "react-bootstrap";
 const { Header, Content, Footer } = Layout;
 
@@ -27,6 +27,9 @@ const Admin = ({ logout, user }) => {
           onClick={navigate}
         >
           <Menu.Item key="home">Home</Menu.Item>
+          <Menu.Item key="applicants">Applicants</Menu.Item>
+          <Menu.Item key="projects">Projects</Menu.Item>
+          <Menu.Item key="selection">Selection</Menu.Item>
           <Menu.Item key="logout">Logout</Menu.Item>
         </Menu>
       </Header>

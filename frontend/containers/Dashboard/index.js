@@ -22,8 +22,7 @@ const Dashboard = ({ user, ...rest }) => {
     case "rejected":
       return <Rejected user={user} {...rest} />;
     default:
-      // return <Visitor user={user} {...rest} />;
-      return <Rejected user={user} {...rest} />;
+      return <Visitor user={user} {...rest} />;
   }
 };
 

@@ -26,7 +26,7 @@ const Submitted = ({ logout, user }) => {
         <div className="content">
           <Row type="flex" justify="centered">
             <Col span={12} offset={6}>
-              <Card className="font" title="Application Pending">
+              <Card className="font" title="Thanks for Applying!">
                 <p className="font">
                   Thank you so much for applying to join a Bits of Good
                   Project Team! We look forward to reviewing your application
