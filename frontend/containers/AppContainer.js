@@ -1,100 +1,53 @@
-import PropTypes from 'prop-types';
+// NPM Imports
+import propTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Route, Switch } from 'react-router-dom';
-import { withRouter } from "react-router";
+import {
+  Route,
+  Switch,
+  Redirect,
+  withRouter
+} from "react-router-dom";
 
-import Splash from './Splash';
-
-import Navbar from '../components/Navbar';
+// Local Imports
+import Dashboard from "./Dashboard";
 import Clean from '../components/Clean';
-import MemberDash from "./MemberDash";
-import Application from "../components/Application";
-import MainContainer from './MainContainer';
+import { login, logout } from "../ducks/auth";
 import PrivateRoute from '../components/PrivateRoute';
 
-import * as actions from '../actions/auth';
-
-import { Layout, Menu, Breadcrumb } from "antd";
-const { Header, Content, Footer } = Layout;
-
-
-// const AppContainer = ({ logout }) => {
-//   return (
-//     <Clean/>);
-//     // <Layout className="layout">
-//     //   <Header>
-//     //     <Navbar />
-//     //   </Header>
-//     //   <Content style={{ padding: "0 50px" }}>
-//     //     <div style={{ background: "#fff", padding: 24, }}>
-//     //       <Application />
-//     //     </div>
-//     //   </Content>
-//     //   <Footer style={{ textAlign: "center" }}>
-//     //     Ant Design ©2016 Created by Ant UED
-//     //   </Footer>
-//     // </Layout>);
-//   // const {Header, Content, Footer} = Layout;
-//   // return (
-//   //   <Layout>
-//   //     <Header>
-//   //       <Navbar logoutAction={ logout } />
-//   //     </Header>
-//   //     <Content style={{padding: '0 50px'}}>
-//   //       <Splash />
-//   //     </Content>
-//   //   </Layout>
-
-//   // );
-// };
-// const AppContainer = ({ logout, status }) => {
-
-// import * as actions from '../actions/auth';
 
 class AppContainer extends Component {
+  constructor(props) {
+    super(props);
+    this._login = this._login.bind(this);
+  }
   componentWillMount() {
-    console.log('about to authenticate');
     this.props.authenticate();
   }
-  componentWillUpdate(nextProps) {
-
+  _login() {
+    return this.props.user ? <Redirect to={"/"} /> : <Clean />;
   }
 
   render() {
-    return (
-      <Switch>
-        <Route path="/login" component={Clean} />
-        <PrivateRoute path="/" authenticated={this.props.status} component={MainContainer} />
-      </Switch>
-    );
+    return (<Switch>
+        <Route path="/login" render={this._login} />
+        <PrivateRoute path="/*" user={this.props.user} component={Dashboard} logout={this.props.logout} authenticated={!!this.props.user} />
+      </Switch>);
   }
-
 }
 
 AppContainer.propTypes = {
-  logout: PropTypes.func,
-  status: PropTypes.bool,
-  authenticate: PropTypes.func
+  user: propTypes.object,
+  authenticate: propTypes.func,
+  logout: propTypes.func
 };
 
 function mapStateToProps(state) {
-  return {
-    status: !!state.auth.user,
-
-  };
+  return { user: state.auth.user };
 }
 
 function mapDispatchToProps(dispatch) {
-  // return bindActionCreators(actions, dispatch);
-  return {
-    authenticate: () => dispatch(actions.login()),
-    logout: () => dispatch(actions.logout()),
-  };
+  return { authenticate: () => dispatch(login()), logout: () => dispatch(logout()) };
 }
 
-export default withRouter(connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(AppContainer));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AppContainer));

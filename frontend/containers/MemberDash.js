@@ -8,7 +8,7 @@ import Splash from "./Splash";
 import Navbar from "../components/Navbar";
 import Clean from "../components/Clean";
 
-import * as actions from "../actions/auth";
+import * as actions from "../ducks/auth";
 
 import { Layout, Menu, Breadcrumb } from "antd";
 const { Header, Content, Footer } = Layout;
@@ -43,7 +43,8 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(actions, dispatch);
+  return {};
+  // return bindActionCreators(actions, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MemberDash);

@@ -98,7 +98,7 @@ router.get("/profile", (req, res) => {
 
 router.get(
   "/auth/github",
-  passport.authenticate("github", { failureRedirect: "/login" })
+  passport.authenticate("github", { failureRedirect: "/login2" })
 );
 
 router.get("/auth/github/callback",

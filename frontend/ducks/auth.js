@@ -5,22 +5,15 @@ import { push } from 'react-router-redux';
 // Actions
 const LOGOUT = Symbol("app/auth/logout");
 const LOGIN = Symbol("app/auth/login");
-const LOGIN_FAILED = Symbol("LOGIN_FAILED");
-const LOGIN_SUCCESS = Symbol("LOGIN_SUCCESS");
-const REGISTRATION_FAILED = Symbol("REGISTRATION_FAILED");
-const REGISTRATION_SUCCESS = Symbol("REGISTRATION_SUCCESS");
 
 // State Reducer
 const initialState = {
-  email: '',
-  first_name: '',
-  last_name: '',
-  user: null,
+  user: undefined,
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case LOGIN_SUCCESS:
+    case LOGIN:
       return {
         user: action.user
       };
@@ -32,31 +25,26 @@ export default function reducer(state = initialState, action) {
 }
 
 // Action Creators
-
 export function login() {
   return dispatch => {
     axios
       .get("/api/profile")
       .then(({ data }) => {
-        if (data.user) {
-          console.log("about to successfully authenticate user");
-          dispatch(loginGenerator(data.user));
+        const { user } = data;
+        if (user) {
+          dispatch(loginGenerator(user));
           return dispatch(push("/"));
         }
-        console.log("fail to login....");
         return dispatch(push('/login'));
       })
-      .catch(err => {
-        console.log("pushing login.... ");
-        dispatch(push("/login"));
-      });
+      .catch(() => dispatch(push("/login")));
   };
 }
 
 export function logout() {
   return dispatch => {
     sessionStorage.removeItem("state");
-    axios.get("/api/logout").then(resp => dispatch(logoutGenerator()));
+    axios.get("/api/logout").then(() => dispatch(logoutGenerator()));
     return dispatch(push("/login"));
   };
 }
@@ -64,10 +52,9 @@ export function logout() {
  // Helper Action Creator Generators
 function loginGenerator(user) {
   return user
-    ? { type: LOGIN_SUCCESS, user }
-    : { type: LOGIN_FAILED };
+    ? { type: LOGIN, user }
+    : { type: LOGIN };
 }
-
 
 function logoutGenerator() {
   return { type: LOGOUT };

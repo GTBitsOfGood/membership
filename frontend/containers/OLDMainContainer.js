@@ -1,26 +1,22 @@
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { Route, Switch, Link } from "react-router-dom";
-import { withRouter } from "react-router";
+import { Route, Switch} from "react-router-dom";
 
 
 import Splash from "./Splash";
 
-import Navbar from "../components/Navbar";
+// import Navbar from "../components/Navbar";
 import Clean from "../components/Clean";
 import MemberDash from "./MemberDash";
 import Application from "../components/Application";
 
 import Template from "../components/Template";
 
-import * as actions from "../ducks/auth";
 
 import { Layout, Menu, Breadcrumb } from "antd";
 const { Header, Content, Footer } = Layout;
 
-const MainContainer = ({ logout }) => {
+const MainContainer = ({ logout, user }) => {
   return (<Layout className="layout">
       <Header>
         <Navbar logout={logout} />
@@ -40,25 +36,8 @@ const MainContainer = ({ logout }) => {
 };
 
 MainContainer.propTypes = {
-  logout: PropTypes.func,
-  status: PropTypes.bool,
-  authenticate: PropTypes.func
+  logout: propTypes.func,
+  user: propTypes.object
 };
 
-function mapStateToProps(state) {
-  return {
-    status: !!state.auth.user
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  // return bindActionCreators(actions, dispatch);
-  return {
-    authenticate: () => dispatch(actions.login()),
-    logout: () => dispatch(actions.logout())
-  };
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(
-  MainContainer
-));
+export default MainContainer;
