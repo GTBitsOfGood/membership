@@ -1,8 +1,9 @@
 // NPM Imports
 import { Layout, Menu, Row, Col, Card, InputNumber } from "antd";
 import propTypes from "prop-types";
-import React from "react";
-import { Route, Switch, Link} from "react-router-dom";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Route, Switch, Link, withRouter} from "react-router-dom";
 
 // Local Imports & Constants
 import Applicants from "./Applicants";
@@ -11,17 +12,22 @@ import Selection from "./Selection";
 import Projects from "./Projects";
 const { Header, Content, Footer } = Layout;
 
-const Admin = ({ logout, user }) => {
+const Admin = ({ logout, user, match }) => {
   const navigate = ({ key }) => {
     if (key === "logout") {
       logout();
     }
   };
 
+  const currentKey = () => {
+    const toReturn =  [];
+    toReturn.push(match.url === "/" ? "home" : match.url.split('/')[1] );
+    return toReturn;
+  };
   return (<Layout className="layout">
       <Header>
         <div className="menu-title">GT Bits of Good</div>
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["home"]} style={{ lineHeight: "64px" }} onClick={navigate}>
+        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={currentKey()} style={{ lineHeight: "64px" }} onClick={navigate}>
           <Menu.Item key="home">
             <Link to="/">Home</Link>
           </Menu.Item>
@@ -61,4 +67,13 @@ Admin.propTypes = {
   user: propTypes.object
 };
 
-export default Admin;
+function mapStateToProps(state) {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {};
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Admin));
+

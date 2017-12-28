@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 
 // Local Imports
+import Table from "./table";
 // import Dashboard from "./Dashboard";
 // import Splash from "../components/Splash";
 // import { login, logout } from "../ducks/auth";
@@ -14,12 +15,15 @@ class Projects extends Component {
   constructor(props) {
     super(props);
   }
-  componentWillMount() {}
+  componentWillMount() {
+
+  }
 
   render() {
     return (
       <div>
         <h1>Projects Table</h1>
+        <Table />
       </div>
     );
   }

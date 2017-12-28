@@ -32,8 +32,7 @@ export function login() {
       .then(({ data }) => {
         const { user } = data;
         if (user) {
-          dispatch(loginGenerator(user));
-          return dispatch(push("/"));
+          return dispatch(loginGenerator(user));
         }
         return dispatch(push('/login'));
       })
