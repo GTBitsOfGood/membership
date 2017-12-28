@@ -34,6 +34,7 @@ const projectSchema = Schema(
       }
     },
     project_manager: {
+      default: "N/A",
       type: Schema.Types.ObjectId,
       required: false
     },

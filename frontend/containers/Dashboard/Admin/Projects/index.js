@@ -38,6 +38,7 @@ function pagination(data) {
 }
 const Table = ({ data, update}) => (
   <div>
+    <h1 className="center">Bits of Good Projects</h1>
     <ReactTable
       data={data}
       columns={columns}
