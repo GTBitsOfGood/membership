@@ -1,42 +1,63 @@
-// NPM Imports
+import React from "react";
 import propTypes from "prop-types";
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Route, Switch, Redirect, withRouter } from "react-router-dom";
+import ReactTable from "react-table";
+import { Icon, Button, Avatar} from 'antd';
 
-// Local Imports
-import Table from "./table";
-// import Dashboard from "./Dashboard";
-// import Splash from "../components/Splash";
-// import { login, logout } from "../ducks/auth";
-// import PrivateRoute from "../components/PrivateRoute";
+import "react-table/react-table.css";
 
-class Projects extends Component {
-  constructor(props) {
-    super(props);
+const columns = [
+  {
+    Header: "Organization",
+    accessor: "organization",
+  },
+  {
+    Header: "Contact Name",
+    accessor: "contact.name"
+  },
+  {
+    Header: "Contact Phone",
+    accessor: "contact.phone"
+  },
+  {
+    Header: "Contact Email",
+    accessor: "contact.email"
+  },
+  {
+    Header: "Project Manager",
+    accessor: "project_manager.name"
+  },
+  {
+    Header: "Team Members",
+    id: "project_members",
+    accessor: d => d.project_members.length
   }
-  componentWillMount() {
+];
 
-  }
-
-  render() {
-    return (
-      <div>
-        <h1>Projects Table</h1>
-        <Table />
-      </div>
-    );
-  }
+function pagination(data) {
+  return data.length > 10;
 }
+const Table = ({ data, update}) => (
+  <div>
+    <ReactTable
+      data={data}
+      columns={columns}
+      defaultPageSize={10}
+      showPageSizeOptions={false}
+      showPagination={pagination(data)}
+      className="-striped -highlight"
+      getTdProps={(state, rowInfo, column, instance) => {
+        return {
+          onClick: e => update(rowInfo.original._id)
+        };
+      }}
+    />
+  </div>
+);
 
-Projects.propTypes = {};
+Table.propTypes = {
+  dataSet: propTypes.array,
+  update: propTypes.func,
 
-function mapStateToProps(state) {
-  return {};
-}
+};
 
-function mapDispatchToProps(dispatch) {
-  return {};
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Projects);
+export default Table;

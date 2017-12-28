@@ -13,25 +13,28 @@ import {
 import Dashboard from "./Dashboard";
 import Splash from '../components/Splash';
 import { login, logout } from "../ducks/auth";
-import PrivateRoute from '../components/PrivateRoute';
 
 
 class AppContainer extends Component {
   constructor(props) {
     super(props);
     this._login = this._login.bind(this);
+    this._authenticate = this._authenticate.bind(this);
   }
   componentWillMount() {
     this.props.authenticate();
   }
   _login() {
-    return this.props.user ? <Redirect to={"/"} /> : <Splash />;
+    return this.props.user ? <Redirect to="/" /> : <Splash />;
+  }
+  _authenticate() {
+    return this.props.user ? <Dashboard user={this.props.user} logout={this.props.logout}/> : <Redirect to="/login"/>;
   }
 
   render() {
     return (<Switch>
         <Route path="/login" render={this._login} />
-        <PrivateRoute path="/*" user={this.props.user} component={Dashboard} logout={this.props.logout} authenticated={!!this.props.user} />
+        <Route path="/*" render={this._authenticate} />
       </Switch>);
   }
 }
