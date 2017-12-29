@@ -1,4 +1,4 @@
-export const adminData = [{
+export const projectData = [{
   _id: "1",
   organization: "Habitat for Hummanity",
   description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
@@ -359,3 +359,56 @@ export const adminData = [{
     phone: "123.123.1234"
   }]
 }];
+
+export const applicantData = [
+  {
+    _id: "1",
+    name: "Applicant 1",
+    email: "applicant1@gmail.com",
+    phone: "111-111-1111",
+    github_username: "applicant1",
+    github_profile_url: "https://github.com/ahijaouy",
+    credit_hours: 12,
+    score: 30
+  },
+  {
+    _id: "2",
+    name: "Applicant 2",
+    email: "applicant2@gmail.com",
+    phone: "222-222-2222",
+    github_username: "applicant2",
+    github_profile_url: "https://github.com/ahijaouy",
+    credit_hours: 14,
+    score: 35
+  },
+  {
+    _id: "3",
+    name: "Applicant 3",
+    email: "applicant3@gmail.com",
+    phone: "333-333-3333",
+    github_username: "applicant3",
+    github_profile_url: "https://github.com/ahijaouy",
+    credit_hours: 15,
+    score: 25
+  },
+  {
+    _id: "4",
+    name: "Applicant 4",
+    email: "applicant4@gmail.com",
+    phone: "444-444-4444",
+    github_username: "applicant4",
+    github_profile_url: "https://github.com/ahijaouy",
+    credit_hours: 12,
+    score: 31
+  },
+  {
+    _id: "5",
+    name: "Applicant 5",
+    email: "applicant5@gmail.com",
+    phone: "555-555-5555",
+    github_username: "applicant5",
+    github_profile_url: "https://github.com/ahijaouy",
+    credit_hours: 16,
+    score: 37
+  },
+];

@@ -11,7 +11,7 @@ import Applicants from "./Applicants";
 import Home from "./Home";
 import Selection from "./Selection";
 import Projects from "./Projects";
-import Profile from "./Projects/profile";
+import ProjectProfile from "./Projects/profile";
 import * as actions from "../../../ducks/admin";
 
 const { Header, Content, Footer } = Layout;
@@ -25,6 +25,7 @@ class Admin extends Component {
   }
   componentWillMount() {
     this.props.loadProjects();
+    this.props.loadApplicants();
     const url = this.props.match.url.split('/');
     if (url.length === 3) {
       this.props.updateCurrentProject(url[2]);
@@ -64,9 +65,9 @@ class Admin extends Component {
           <div className="content">
             <Switch>
               <Route exact path="/applicants/:id" component={Applicants} />
-              <Route exact path="/projects/:id" render={props => <Profile {...props} data={this.props.currentProject} />} />
+              <Route exact path="/projects/:id" render={props => <ProjectProfile {...props} data={this.props.currentProject} />} />
               <Route exact path="/selection/:id" component={Selection} />
-              <Route exact path="/applicants" component={Applicants} />
+              <Route exact path="/applicants" render={() => <Applicants data={this.props.applicants} update={this.props.updateCurrentApplicant} />} />
               <Route exact path="/projects" render={() => <Projects data={this.props.projects} update={this.props.updateCurrentProject} />} />
               <Route exact path="/selection" component={Selection} />
               <Route exact path="/" component={Home} />
@@ -84,16 +85,21 @@ class Admin extends Component {
 Admin.propTypes = {
   logout: propTypes.func,
   projects: propTypes.array,
+  applicants: propTypes.array,
   currentProject: propTypes.object,
   match: propTypes.object,
   updateCurrentProject: propTypes.func,
-  loadProjects: propTypes.func
+  updateCurrentApplicant: propTypes.func,
+  loadProjects: propTypes.func,
+  loadApplicants: propTypes.func
 };
 
 function mapStateToProps(state) {
   return {
     projects: state.admin.projects,
+    applicants: state.admin.applicants,
     currentProject: state.admin.currentProject,
+    currentApplicant: state.admin.currentApplicant,
   };
 }
 

@@ -27,3 +27,23 @@ export const projectColumns = (updateCurrentProject) => [
     render: item => <span style={{ textAlign: "center" }}> {item.length} </span>
   }
 ];
+
+export const teamColumns = () => [
+  {
+    title: "Name",
+    dataIndex: "name",
+    render: (text, record ) => <a> {text} </a>
+  },
+  {
+    title: "Github Username",
+    dataIndex: "github_username"
+  },
+  {
+    title: "Phone Number",
+    dataIndex: "phone"
+  },
+  {
+    title: "Email",
+    dataIndex: "email"
+  },
+];
