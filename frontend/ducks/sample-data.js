@@ -390,9 +390,9 @@ export const applicantData = [
   {
     _id: "2",
     name: "Test User",
-    email: "hijaouya@gmail.com",
-    phone: "111-111-1111",
-    github_username: "ahijaouy",
+    email: "testuser@gmail.com",
+    phone: "111-123-1341",
+    github_username: "tester",
     github_profile_url: "https://github.com/ahijaouy",
     github_avatar_url: "https://avatars0.githubusercontent.com/u/14722764?v=4",
     github_public_repos: 5,
