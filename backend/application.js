@@ -35,17 +35,16 @@ passport.use(
       callbackURL: process.env.GITHUB_CALLBACK_URL
     },
     (accessToken, refreshToken, profile, done) => {
-      process.nextTick(() => {
-        // try to find the user based on their google id
-        User.findOne({ github_id: profile.id }, (err, user) => {
+        // try to find the user based on their github id
+      User.findOne({ github_id: profile.id }, (err, user) => {
           // check for error
-          if (err) return done(err);
+        if (err) return done(err, null);
 
           // return user if exists in db
-          if (user) return done(null, user);
+        if (user) return done(null, user);
 
           // create new user in db
-          const {
+        const {
             id,
             login,
             avatar_url,
@@ -55,21 +54,20 @@ passport.use(
             public_repos,
             followers
           } = profile._json;
-          const newUser = new User({
-            github_id: id,
-            github_access_token: accessToken,
-            github_username: login,
-            github_avatar_url: avatar_url,
-            github_profile_url: html_url,
-            github_public_repos: public_repos,
-            github_followers: followers,
-            name,
-            email
-          });
-          return newUser.save(err2 => {
-            if (err2) return done(err2);
-            return done(null, newUser);
-          });
+        const newUser = new User({
+          github_id: id,
+          github_access_token: accessToken,
+          github_username: login,
+          github_avatar_url: avatar_url,
+          github_profile_url: html_url,
+          github_public_repos: public_repos,
+          github_followers: followers,
+          name,
+          email
+        });
+        return newUser.save(err2 => {
+          if (err2) return done(err2, null);
+          return done(null, newUser);
         });
       });
     }
