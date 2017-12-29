@@ -1,44 +1,53 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+// NPM Imports
+import propTypes from 'prop-types';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import {
+  Route,
+  Switch,
+  Redirect,
+  withRouter
+} from "react-router-dom";
 
-import Splash from './Splash';
+// Local Imports
+import Dashboard from "./Dashboard";
+import Splash from '../components/Splash';
+import { login, logout } from "../ducks/auth";
+import PrivateRoute from '../components/PrivateRoute';
 
-import Navbar from '../components/Navbar';
 
-import * as actions from '../actions/auth';
+class AppContainer extends Component {
+  constructor(props) {
+    super(props);
+    this._login = this._login.bind(this);
+  }
+  componentWillMount() {
+    this.props.authenticate();
+  }
+  _login() {
+    return this.props.user ? <Redirect to={"/"} /> : <Splash />;
+  }
 
-import {Layout} from 'antd';
-
-const AppContainer = ({ logout }) => {
-  const {Header, Content, Footer} = Layout;
-  return (
-    <Layout>
-      <Header>
-        <Navbar logoutAction={ logout } />
-      </Header>
-      <Content style={{padding: '0 50px'}}>
-        <Splash />
-      </Content>
-    </Layout>
-
-  );
-};
+  render() {
+    return (<Switch>
+        <Route path="/login" render={this._login} />
+        <PrivateRoute path="/*" user={this.props.user} component={Dashboard} logout={this.props.logout} authenticated={!!this.props.user} />
+      </Switch>);
+  }
+}
 
 AppContainer.propTypes = {
-  logout: PropTypes.func
+  user: propTypes.object,
+  authenticate: propTypes.func,
+  logout: propTypes.func
 };
 
 function mapStateToProps(state) {
-  return {};
+  return { user: state.auth.user };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(actions, dispatch);
+  return { authenticate: () => dispatch(login()), logout: () => dispatch(logout()) };
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(AppContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AppContainer));

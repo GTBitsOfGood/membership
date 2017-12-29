@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 
 // Local Imports & Constants
 import DevTools from '../containers/DevTools';
-import rootReducer from '../reducers/index';
+import rootReducer from '../reducer';
 import { loadState } from './sessionStorage';
 const persistedState = loadState();
 

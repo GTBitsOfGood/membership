@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const LocalStrategy = require('passport-local').Strategy;
+const GitHubStrategy = require("passport-github").Strategy;
 const router = express.Router();
 
 require('./db');
@@ -27,18 +27,52 @@ router.use(passport.session());
 
 
 // Passport Config
-passport.use(new LocalStrategy({
-  usernameField: 'email',
-},
-  function(email, password, done) {
-    User.findOne({ email }, function(err, user) {
-      if (err) return done(err);
-      if (!user || !user.verifyPassword(password)) {
-        return done(null, false, { message: 'Login Error.' });
-      }
-      return done(null, user);
-    });
-  }));
+passport.use(
+  new GitHubStrategy(
+    {
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: process.env.GITHUB_CALLBACK_URL
+    },
+    (accessToken, refreshToken, profile, done) => {
+        // try to find the user based on their github id
+      User.findOne({ github_id: profile.id }, (err, user) => {
+          // check for error
+        if (err) return done(err, null);
+
+          // return user if exists in db
+        if (user) return done(null, user);
+
+          // create new user in db
+        const {
+            id,
+            login,
+            avatar_url,
+            html_url,
+            name,
+            email,
+            public_repos,
+            followers
+          } = profile._json;
+        const newUser = new User({
+          github_id: id,
+          github_access_token: accessToken,
+          github_username: login,
+          github_avatar_url: avatar_url,
+          github_profile_url: html_url,
+          github_public_repos: public_repos,
+          github_followers: followers,
+          name,
+          email
+        });
+        return newUser.save(err2 => {
+          if (err2) return done(err2, null);
+          return done(null, newUser);
+        });
+      });
+    }
+  )
+);
 
 passport.serializeUser((user, done) => {
   return done(null, user.id);
@@ -53,24 +87,47 @@ passport.deserializeUser((id, done) => {
 const routes = require('./routes');
 router.use('/', routes);
 
+router.get("/profile", (req, res) => {
+  if (req.user) {
+    return res.status(200).json({ user: req.user });
+  }
+  return res.status(401).json({ error: "Not Logged in" });
+});
+
+router.get(
+  "/auth/github",
+  passport.authenticate("github", { failureRedirect: "/login2" })
+);
+
+router.get("/auth/github/callback",
+  passport.authenticate("github"), (req, res) => {
+    // Successful authentication, redirect home.
+    res.redirect("/");
+  }
+);
+// Logout Route
+router.get('/logout', (req, res) => {
+  req.logout();
+  return res.status(200).json({ logout: 'success' });
+});
+
 router.use('/', (req, res, next) => {
   if (res.locals.data) {
-    let response = Object.assign({}, res.locals.data, {
+    const response = Object.assign({}, res.locals.data, {
       'status': 'ok'
     });
     return res.status(200).json(response);
   } else if (res.locals.error) {
-    let statusCode = res.locals.error.status || 500;
-    let response = Object.assign({}, res.locals.error, {
+    const statusCode = res.locals.error.status || 500;
+    const response = Object.assign({}, res.locals.error, {
       'status': 'error'
     });
     return res.status(statusCode).json(response);
-  } else {
-    return res.status(500).json({
-      'status': 'error',
-      'msg': 'Internal Server Error'
-    });
   }
+  return res.status(500).json({
+    'status': 'error',
+    'msg': 'Internal Server Error'
+  });
 });
 
 //* ************* LOGIN WALL *******************
