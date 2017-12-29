@@ -39,7 +39,7 @@ passport.use(
         // try to find the user based on their google id
         User.findOne({ github_id: profile.id }, (err, user) => {
           // check for error
-          if (err) return done(err);
+          if (err) return done(err, null);
 
           // return user if exists in db
           if (user) return done(null, user);
@@ -67,7 +67,7 @@ passport.use(
             email
           });
           return newUser.save(err2 => {
-            if (err2) return done(err2);
+            if (err2) return done(err2, null);
             return done(null, newUser);
           });
         });
