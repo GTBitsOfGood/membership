@@ -49,7 +49,7 @@ export function updateCurrentApplicant(id) {
   return (dispatch, getState) => {
     const { applicants } = getState().admin;
     const applicant = applicants.find(element => element._id === id);
-    dispatch(push(`/applicant/${id}`));
+    dispatch(push(`/applicants/${id}`));
     return dispatch({ type: UPDATE_CURRENT_APPLICANT, applicant });
   };
 }

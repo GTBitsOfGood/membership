@@ -37,7 +37,7 @@ const userSchema = Schema(
     },
     phone: {
       type: String,
-      required: false,
+      required: false
     },
     title: {
       type: String,
@@ -48,7 +48,26 @@ const userSchema = Schema(
       required: true
     },
     graduation_date: Date,
+    expected_graduation: String,
     languages: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Language"
+      }
+    ],
+    web_technologies: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Language"
+      }
+    ],
+    databases: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Language"
+      }
+    ],
+    deployment: [
       {
         type: Schema.Types.ObjectId,
         ref: "Language"
@@ -56,7 +75,11 @@ const userSchema = Schema(
     ],
     websites: [String],
     credit_hours: Number,
-    free_response: Array,
+    bg_interest: String,
+    team_experience: String,
+    project_experience: String,
+    other_commitments: String,
+    project_preference: String,
     score: Number,
     role: {
       type: String,

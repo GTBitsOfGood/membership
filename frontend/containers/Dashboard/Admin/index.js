@@ -12,6 +12,7 @@ import Home from "./Home";
 import Selection from "./Selection";
 import Projects from "./Projects";
 import ProjectProfile from "./Projects/profile";
+import ApplicantProfile from "./Applicants/profile";
 import * as actions from "../../../ducks/admin";
 
 const { Header, Content, Footer } = Layout;
@@ -28,7 +29,11 @@ class Admin extends Component {
     this.props.loadApplicants();
     const url = this.props.match.url.split('/');
     if (url.length === 3) {
-      this.props.updateCurrentProject(url[2]);
+      if (url[1] === "projects") {
+        this.props.updateCurrentProject(url[2]);
+      } else if (url[1] === "applicants") {
+        this.props.updateCurrentApplicant(url[2]);
+      }
     }
   }
   navigate({ key }) {
@@ -64,7 +69,7 @@ class Admin extends Component {
         <Content className="content-container">
           <div className="content">
             <Switch>
-              <Route exact path="/applicants/:id" component={Applicants} />
+              <Route exact path="/applicants/:id" render={props => <ApplicantProfile {...props} data={this.props.currentApplicant} />} />
               <Route exact path="/projects/:id" render={props => <ProjectProfile {...props} data={this.props.currentProject} />} />
               <Route exact path="/selection/:id" component={Selection} />
               <Route exact path="/applicants" render={() => <Applicants data={this.props.applicants} update={this.props.updateCurrentApplicant} />} />
@@ -84,14 +89,16 @@ class Admin extends Component {
 
 Admin.propTypes = {
   logout: propTypes.func,
+  match: propTypes.object,
   projects: propTypes.array,
   applicants: propTypes.array,
+  loadProjects: propTypes.func,
+  loadApplicants: propTypes.func,
   currentProject: propTypes.object,
-  match: propTypes.object,
+  currentApplicant: propTypes.object,
   updateCurrentProject: propTypes.func,
   updateCurrentApplicant: propTypes.func,
-  loadProjects: propTypes.func,
-  loadApplicants: propTypes.func
+
 };
 
 function mapStateToProps(state) {
