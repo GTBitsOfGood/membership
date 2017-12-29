@@ -3,19 +3,11 @@ var expect = require('chai').expect;
 var User = require('../../backend/models/user');
  
 describe('Model - User', function() {
-    it('should be invalid if first_name is empty', function(done) {
+    it('should be invalid if name is empty', function(done) {
         var m = new User();
  
         m.validate(function(err) {
-            expect(err.errors.first_name).to.exist;
-            done();
-        });
-    });
-    it('should be invalid if last_name is empty', function(done) {
-        var m = new User();
-    
-        m.validate(function(err) {
-            expect(err.errors.last_name).to.exist;
+            expect(err.errors.name).to.exist;
             done();
         });
     });
@@ -37,23 +29,13 @@ describe('Model - User', function() {
             done();
         });
     });
-    it('should be invalid if first_name is not a string', function(done) {
+    it('should be invalid if name is not a string', function(done) {
         var m = new User({
-            first_name: {}
+            name: {}
         });
     
         m.validate(function(err) {
-            expect(err.errors.first_name).to.exist;
-            done();
-        });
-    });
-    it('should be invalid if last_name is not a string', function(done) {
-        var m = new User({
-            last_name: {}
-        });
-    
-        m.validate(function(err) {
-            expect(err.errors.last_name).to.exist;
+            expect(err.errors.name).to.exist;
             done();
         });
     });
@@ -104,6 +86,62 @@ describe('Model - User', function() {
  
         m.validate(function(err) {
             expect(err.errors.role).to.exist;
+            done();
+        });
+    });
+    it('should be invalid if github_id is empty', function(done) {
+        var m = new User();
+ 
+        m.validate(function(err) {
+            expect(err.errors.github_id).to.exist;
+            done();
+        });
+    });
+    it('should be invalid if github_username is empty', function(done) {
+        var m = new User();
+ 
+        m.validate(function(err) {
+            expect(err.errors.github_username).to.exist;
+            done();
+        });
+    });
+    it('should be invalid if github_access_token is empty', function(done) {
+        var m = new User();
+ 
+        m.validate(function(err) {
+            expect(err.errors.github_access_token).to.exist;
+            done();
+        });
+    });
+    it('should be invalid if github_avatar_url is empty', function(done) {
+        var m = new User();
+ 
+        m.validate(function(err) {
+            expect(err.errors.github_avatar_url).to.exist;
+            done();
+        });
+    });
+    it('should be invalid if github_profile_url is empty', function(done) {
+        var m = new User();
+ 
+        m.validate(function(err) {
+            expect(err.errors.github_profile_url).to.exist;
+            done();
+        });
+    });
+    it('should be invalid if github_public_repos is empty', function(done) {
+        var m = new User();
+ 
+        m.validate(function(err) {
+            expect(err.errors.github_public_repos).to.exist;
+            done();
+        });
+    });
+    it('should be invalid if github_followers is empty', function(done) {
+        var m = new User();
+ 
+        m.validate(function(err) {
+            expect(err.errors.github_followers).to.exist;
             done();
         });
     });
