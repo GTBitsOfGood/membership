@@ -32,14 +32,22 @@ module.exports.get = (req, res, next) => {
 
 module.exports.store = (req, res, next) => {
 	User.create({
-		first_name: req.body.first_name,
-		last_name: req.body.last_name,
+		name: req.body.name,
 		email: req.body.email,
 		title: req.body.title,
 		credit_hours: req.body.credit_hours,
 		graduation_date: req.body.graduation_date ? new Date(req.body.graduation_date) : null,
 		score: 0,
-		role: req.body.role || 'applicant'
+		github_id: req.body.github_id,
+		github_username: req.body.github_username,
+		github_access_token: req.body.github_access_token,
+		github_avatar_url: req.body.github_avatar_url,
+		github_profile_url: req.body.github_profile_url,
+		github_public_repos: req.body.github_public_repos,
+		github_followers: req.body.github_followers,
+		role: req.body.role || 'applicant',
+		websites: JSON.stringify(req.body.websites ? req.body.websites : []),
+		free_response: JSON.stringify(req.body.free_response ? req.body.free_response : [])
 	}, (err, usr) => {
 		if (err) {
 			console.error(err);
@@ -62,14 +70,20 @@ module.exports.update = (req, res, next) => {
 			return next();
 		}
 
-		user.first_name = req.body.first_name ? req.body.first_name : user.first_name;
-		user.last_name = req.body.last_name ? req.body.last_name : user.last_name;
+		user.name = req.body.name ? req.body.name : user.name;
 		user.email = req.body.email ? req.body.email : user.email;
 		user.title = req.body.title ? req.body.title : user.title;
 		user.credit_hours = req.body.credit_hours ? req.body.credit_hours : user.credit_hours;
 		user.graduation_date = req.body.graduation_date ? new Date(req.body.graduation_date) : user.graduation_date;
 		user.score = req.body.score ? req.body.score : user.score;
 		user.role = req.body.role ? req.body.role : user.role;
+		user.github_id = req.body.github_id ? req.body.github_id : user.github_id;
+		user.github_username = req.body.github_username ? req.body.github_username : user.github_username;
+		user.github_access_token = req.body.github_access_token ? req.body.github_access_token : user.github_access_token;
+		user.github_avatar_url = req.body.github_avatar_url ? req.body.github_avatar_url : user.github_avatar_url;
+		user.github_profile_url = req.body.github_profile_url ? req.body.github_profile_url : user.github_profile_url;
+		user.github_public_repos = req.body.github_public_repos ? req.body.github_public_repos : user.github_public_repos;
+		user.github_followers = req.body.github_followers ? req.body.github_followers : user.github_followers;
 
 		user.save((err, updated) => {
 			if (err) {
