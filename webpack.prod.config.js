@@ -5,11 +5,9 @@ const path = require('path');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  entry: [
-    './frontend/index'
-  ],
+  entry: ["./frontend/index"],
   module: {
-    rules: [   
+    rules: [
       {
         test: /\.js?$/,
         loader: "babel-loader",
@@ -39,16 +37,17 @@ module.exports = {
     extensions: ['.js', '.less', '.css']
   },
   output: {
-    path: path.join(__dirname, '/public'),
-    publicPath: '/',
-    filename: 'bundle.js'
+    path: path.join(__dirname, "/public"),
+    publicPath: "/",
+    filename: "bundle.js"
   },
-  devtool: 'cheap-eval-source-map',
+  devtool: "cheap-eval-source-map",
   devServer: {
-    contentBase: './public',
-    hot: false
+    contentBase: "./public",
+    hot: true
   },
   plugins: [
+    new Dotenv({ path: "./.env.frontend" }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),

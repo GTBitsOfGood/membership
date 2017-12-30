@@ -33,7 +33,7 @@ const userSchema = Schema(
     },
     name: {
       type: String,
-      required: true
+      required: false
     },
     title: {
       type: String,
@@ -41,7 +41,7 @@ const userSchema = Schema(
     },
     email: {
       type: String,
-      required: true
+      required: false
     },
     graduation_date: Date,
     languages: [
