@@ -44,18 +44,16 @@ class Application extends Component {
       labelCol: { span: 8 },
       wrapperCol: { span: 10 }
     };
-    return (
-    <div>
-      <h1 className="center">Join Bits of Good!</h1>
-      <p className="application-intro">
-        Thanks for your interest in joining Bits of Good!
-        We are excited you want to join our family and build
-        your skills while also serving the Atlanta community!
-        This Application is for us to get to know you so that
-        we can try our best to match you with a project where
-        you can contribute and grow.
+    return (<div>
+        <h1 className="center">Join Bits of Good!</h1>
+        <p className="application-intro">
+          Thanks for your interest in joining Bits of Good! We are excited
+          you want to join our family and build your skills while also
+          serving the Atlanta community! This Application is for us to get
+          to know you so that we can try our best to match you with a
+          project where you can contribute and grow.
         </p>
-      <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit}>
           {/* Name */}
           <FormItem {...formItemLayout} label="Name">
             {getFieldDecorator("name", {
@@ -89,7 +87,10 @@ class Application extends Component {
           <FormItem {...formItemLayout} label="Phone Number">
             {getFieldDecorator("phone", {
               rules: [
-                { required: true, message: "Please input your phone number!" }
+                {
+                  required: true,
+                  message: "Please input your phone number!"
+                }
               ]
             })(<Input style={{ width: "100%" }} />)}
           </FormItem>
@@ -109,7 +110,7 @@ class Application extends Component {
           </FormItem>
 
           {/* Graduation Date */}
-          <FormItem {...formItemLayout} label="Graduation Date">
+          {/* <FormItem {...formItemLayout} label="Graduation Date">
             {getFieldDecorator("graduation-date", {
               rules: [
                 {
@@ -119,6 +120,20 @@ class Application extends Component {
                 }
               ]
             })(<DatePicker />)}
+          </FormItem> */}
+
+          <FormItem {...formItemLayout} label="Graduation Date" hasFeedback>
+            {getFieldDecorator("graduation-date", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please select graduation date!"
+                }
+              ]
+            })(<Select placeholder="Select a graduation date">
+                <Option value="china">China</Option>
+                <Option value="use">U.S.A</Option>
+              </Select>)}
           </FormItem>
 
           {/* Programming Languages */}
