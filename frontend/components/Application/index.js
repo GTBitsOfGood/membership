@@ -113,18 +113,6 @@ class Application extends Component {
         </FormItem>
 
         {/* Graduation Date */}
-        {/* <FormItem {...formItemLayout} label="Graduation Date">
-            {getFieldDecorator("graduation-date", {
-              rules: [
-                {
-                  type: "object",
-                  required: true,
-                  message: "Please select graduation date!"
-                }
-              ]
-            })(<DatePicker />)}
-          </FormItem> */}
-
         <FormItem {...formItemLayout} label="Graduation Date" hasFeedback>
           {getFieldDecorator("graduation-date", {
             rules: [

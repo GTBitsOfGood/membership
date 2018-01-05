@@ -5,6 +5,7 @@ import { push } from 'react-router-redux';
 // Actions
 const LOGOUT = Symbol("app/auth/logout");
 const LOGIN = Symbol("app/auth/login");
+const REGISTER = Symbol("app/auth/register")
 
 // State Reducer
 const initialState = {
@@ -41,6 +42,22 @@ export function login() {
   };
 }
 
+export function register(formData) {
+  return dispatch => {
+    axios
+      .post("/api/users", { application_status: "submitted", ...formData })
+      .then(({ data }) => {
+        const { user } = data;
+        if (user) {
+          dispatch(loginGenerator(user));
+          return dispatch(push("/"));
+        }
+        return dispatch(push('/login'));
+      })
+      .catch(() => dispatch(push("/login")));
+  };
+}
+
 export function logout() {
   return dispatch => {
     sessionStorage.removeItem("state");
@@ -49,7 +66,7 @@ export function logout() {
   };
 }
 
- // Helper Action Creator Generators
+// Helper Action Creator Generators
 function loginGenerator(user) {
   return user
     ? { type: LOGIN, user }
