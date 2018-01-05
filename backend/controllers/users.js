@@ -47,7 +47,7 @@ module.exports.store = (req, res, next) => {
 		github_followers: req.body.github_followers,
 		role: req.body.role || 'applicant',
 		websites: JSON.stringify(req.body.websites ? req.body.websites : []),
-		free_response: JSON.stringify(req.body.free_response ? req.body.free_response : [])
+		free_response: JSON.stringify(req.body.free_response ? req.body.free_response : {})
 	}, (err, usr) => {
 		if (err) {
 			console.error(err);
@@ -84,6 +84,7 @@ module.exports.update = (req, res, next) => {
 		user.github_profile_url = req.body.github_profile_url ? req.body.github_profile_url : user.github_profile_url;
 		user.github_public_repos = req.body.github_public_repos ? req.body.github_public_repos : user.github_public_repos;
 		user.github_followers = req.body.github_followers ? req.body.github_followers : user.github_followers;
+		user.free_response = req.body.free_response ? JSON.stringify(req.body.free_response) : user.free_response;
 
 		user.save((err, updated) => {
 			if (err) {

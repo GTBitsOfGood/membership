@@ -50,3 +50,19 @@ export const deployment = [
   "Azure",
   "AWS"
 ];
+
+export const frontEndFamiliarity = [
+  'Never worked with it',
+  'A little experience',
+  'Some experience',
+  'A lot of experience',
+  'Can teach it'
+];
+
+export const backEndFamiliarity = [
+  'Never worked with it',
+  'A little experience',
+  'Some experience',
+  'A lot of experience',
+  'Can teach it'
+];
