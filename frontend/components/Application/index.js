@@ -19,7 +19,9 @@ import {
   programmingLanguages,
   webTechnologies,
   deployment,
-  databases
+  databases,
+  frontEndFamiliarity,
+  backEndFamiliarity
 } from "./questions";
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -169,26 +171,32 @@ class Application extends Component {
           <FormItem {...formItemLayout} label="Frontend Experience">
             {getFieldDecorator("frontend-experience", {
               rules: [
-                {
-                  required: true,
-                  message:
-                    "Please select how comfortable you are with frontend development."
-                }
-              ]
-            })(<Rate />)}
+              {
+                required: true
+              }]
+            })(<Select placeholder="Select frontend proficiency">
+                {frontEndFamiliarity.map((item, index) => (
+                  <Option key={`${item + index}`} value={item}>
+                    {item}
+                  </Option>
+                ))}
+              </Select>)}
           </FormItem>
 
           {/* Backend Experience */}
           <FormItem {...formItemLayout} label="Backend Experience">
             {getFieldDecorator("backend-experience", {
               rules: [
-                {
-                  required: true,
-                  message:
-                    "Please select how comfortable you are with backend development."
-                }
-              ]
-            })(<Rate />)}
+              {
+                required: true
+              }]
+            })(<Select placeholder="Select backend proficiency">
+                {backEndFamiliarity.map((item, index) => (
+                  <Option key={`${item + index}`} value={item}>
+                    {item}
+                  </Option>
+                ))}
+              </Select>)}
           </FormItem>
 
           {/* BG interest */}
