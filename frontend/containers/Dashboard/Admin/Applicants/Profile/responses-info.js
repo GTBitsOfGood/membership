@@ -7,41 +7,41 @@ const ResponsesInfo = ({ data }) => {
   const dataSource = [
     {
       title: "Bits of Good Interest",
-      data: data.bg_interest,
+      data: data.free_response.bg_interest,
       icon: "question"
     },
     {
       title: "Team Experience",
-      data: data.team_experience,
+      data: data.free_response.team_experience,
       icon: "team"
     },
     {
       title: "Project Experience",
-      data: data.project_experience,
+      data: data.free_response.project_experience,
       icon: "laptop"
     },
     {
       title: "Other Commitments",
-      data: data.other_commitments,
+      data: data.free_response.other_commitments,
       icon: "share-alt"
     },
     {
       title: "Project Preference",
-      data: data.project_preference,
+      data: data.free_response.project_preference,
       icon: "switcher"
     }
   ];
   return (
     <List
-      itemLayout="horizontal"
+      itemLayout="vertical"
       dataSource={dataSource}
       renderItem={item => (
         <List.Item>
           <List.Item.Meta
             avatar={<Avatar icon={item.icon} />}
             title={<a href="https://ant.design">{item.title}</a>}
-            description={item.data}
           />
+          <p>{item.data ? item.data : (<i>Not set</i>)}</p>
         </List.Item>
       )}
     />
