@@ -12,7 +12,7 @@
     "test": "mocha --compilers js:babel-core/register ./test/**/*.js --require ignore-styles",
     "seed": "node ./backend/seeds/index.js",
     "seeder": "npm run seed",
-    "prestart": "node ./deploy/downloadEnv.js",
+    "prestart": "node ./deploy/downloadEnv.js && npm run build",
     "deploy": "gcloud app deploy"
   },
   "engines": {

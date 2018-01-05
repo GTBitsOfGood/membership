@@ -41,11 +41,6 @@ module.exports = {
     publicPath: "/",
     filename: "bundle.js"
   },
-  devtool: "cheap-eval-source-map",
-  devServer: {
-    contentBase: "./public",
-    hot: true
-  },
   plugins: [
     new Dotenv({ path: "./.env.frontend" }),
     new webpack.optimize.OccurrenceOrderPlugin(),
