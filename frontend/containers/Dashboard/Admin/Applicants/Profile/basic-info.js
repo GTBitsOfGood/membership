@@ -7,23 +7,50 @@ const BasicInfo = ({data}) => {
   const dataSource = [
     {
       title: "Contact Info",
-      data: `Phone: ${data.phone} | Email: ${data.email}`,
+      data: [
+        {
+          label: 'Phone',
+          value: data.phone
+        },
+        {
+          label: 'Email',
+          value: data.email
+        }
+      ],
       icon: "idcard"
     },
     {
       title: "Buzzport",
-      data: `Credit hours: ${data.credit_hours} | Graduation: ${data.expected_graduation}`,
+      data: [
+        {
+          label: 'Credit Hours',
+          value: data.credit_hours 
+        },
+        {
+          label: 'Graduation',
+          value: data.expected_graduation
+        }
+      ],
       icon: "book"
     },
     {
       title: "Github Stats",
-      data: `Public Repos: ${data.github_public_repos} | Followers: ${data.github_followers}`,
+      data: [
+        {
+          label: 'Public Repos',
+          value: data.github_public_repos
+        },
+        {
+          label: 'Followers',
+          value: data.github_followers
+        }
+      ],
       icon: "github"
-    },
+    }
   ];
   return (
   <List
-    itemLayout="horizontal"
+    itemLayout="vertical"
     dataSource={dataSource}
     renderItem={item => (
       <List.Item>
@@ -32,8 +59,14 @@ const BasicInfo = ({data}) => {
             <Avatar icon={item.icon} />
           }
           title={<a href="https://ant.design">{item.title}</a>}
-          description={item.data}
         />
+        {item.data.map(e => {
+          if (e.value) {
+            return (<p key={e.label}><b>{e.label}</b>: {e.value}</p>)
+          } else {
+            return (<p key={e.label}><b>{e.label}</b>: <i>Not Set</i></p>) 
+          }
+        })}
       </List.Item>
     )}
   />
