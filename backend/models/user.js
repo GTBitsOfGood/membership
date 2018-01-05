@@ -52,7 +52,13 @@ const userSchema = Schema(
     ],
     websites: [String],
     credit_hours: Number,
-    free_response: Array,
+    free_response: {
+      bg_interest: String,
+      team_experience: String,
+      project_experience: String,
+      other_commitments: String,
+      project_preference: String,
+    },
     score: Number,
     role: {
       type: String,
