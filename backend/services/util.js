@@ -15,8 +15,6 @@ async function getAllLanguages() {
 
 async function strsToLangs(strings, category) {
     // if languages aren't loaded load them from DB;
-    // console.log('cache');
-    // console.log(cache);
     if (!cache) {
         cache = await getAllLanguages();
     }

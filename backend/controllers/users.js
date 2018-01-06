@@ -38,6 +38,13 @@ module.exports.get = (req, res, next) => {
 
 module.exports.store = (req, res, next) => {
 
+  // protect application_status  and role changes
+  const appStatus = 'none';
+  const role = 'applicant';
+  if (req.user.role === "admin") {
+    appStatus = req.body.application_status ? req.body.application_status : appStatus;
+    role = req.body.role ? req.body.role : role;
+  }
 
   User.create({
     name: req.body.name,
@@ -50,7 +57,8 @@ module.exports.store = (req, res, next) => {
     pm_interest: req.body.pm_interest,
     graduation_date: req.body.graduation_date ? req.body.graduation_date : null,
     score: 0,
-    role: req.body.role || 'applicant',
+    role: role,
+    application_status: appStatus,
     websites: req.body.websites ? req.body.websites : [],
     languages: req.body.languages ? req.body.languages : [],
     web_technologies: req.body.web_technologies ? req.body.web_technologies : [],
@@ -87,7 +95,6 @@ module.exports.update = (req, res, next) => {
     user.pm_interest = req.body.pm_interest ? req.body.pm_interest : user.pm_interest;
     user.credit_hours = req.body.credit_hours ? req.body.credit_hours : user.credit_hours;
     user.graduation_date = req.body.graduation_date ? req.body.graduation_date : user.graduation_date;
-    // user.score = req.body.score ? req.body.score : user.score;
     user.role = req.body.role ? req.body.role : user.role;
     user.frontend_experience = req.body.frontend_experience ? req.body.frontend_experience : user.frontend_experience;
     user.backend_experience = req.body.backend_experience ? req.body.backend_experience : user.backend_experience;
