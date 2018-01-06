@@ -114,7 +114,7 @@ class Application extends Component {
 
         {/* Graduation Date */}
         <FormItem {...formItemLayout} label="Graduation Date" hasFeedback>
-          {getFieldDecorator("graduation-date", {
+          {getFieldDecorator("graduation_date", {
             rules: [
               {
                 required: true,

@@ -5,6 +5,7 @@ import { push } from 'react-router-redux';
 // Actions
 const LOGOUT = Symbol("app/auth/logout");
 const LOGIN = Symbol("app/auth/login");
+const LOAD_USER = Symbol("app/auth/load_user");
 const REGISTER = Symbol("app/auth/register")
 
 // State Reducer
@@ -14,7 +15,7 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case LOGIN:
+    case LOAD_USER:
       return {
         user: action.user
       };
@@ -33,7 +34,7 @@ export function login() {
       .then(({ data }) => {
         const { user } = data;
         if (user) {
-          dispatch(loginGenerator(user));
+          dispatch(loadUser(user));
           return dispatch(push("/"));
         }
         return dispatch(push('/login'));
@@ -43,16 +44,12 @@ export function login() {
 }
 
 export function register(formData) {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const { user } = getState().auth
     axios
-      .post("/api/users", { application_status: "submitted", ...formData })
+      .put(`/api/users/${user.id}`, { ...user, application_status: "submitted", ...formData })
       .then(({ data }) => {
-        const { user } = data;
-        if (user) {
-          dispatch(loginGenerator(user));
-          return dispatch(push("/"));
-        }
-        return dispatch(push('/login'));
+        dispatch(loadUser(data.user));
       })
       .catch(() => dispatch(push("/login")));
   };
@@ -67,10 +64,10 @@ export function logout() {
 }
 
 // Helper Action Creator Generators
-function loginGenerator(user) {
+function loadUser(user) {
   return user
-    ? { type: LOGIN, user }
-    : { type: LOGIN };
+    ? { type: LOAD_USER, user }
+    : {};
 }
 
 function logoutGenerator() {
