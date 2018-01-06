@@ -6,10 +6,12 @@ const userSchema = Schema(
     name: String,
     title: String,
     email: String,
+    phone: String,
     score: Number,
     credit_hours: Number,
     websites: [String],
     graduation_date: String,
+    pm_interest: Boolean,
     github: {
       id: {
         type: String,
@@ -46,6 +48,40 @@ const userSchema = Schema(
         ref: "Language"
       }
     ],
+    web_technologies: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Language"
+      }
+    ],
+    databases: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Language"
+      }
+    ],
+    deployment: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Language"
+      }
+    ],
+    frontend_experience: {
+      type: String,
+      enum: ["Never worked with it",
+        "A little experience",
+        "Some experience",
+        "A lot of experience",
+        "Can teach it"]
+    },
+    backend_experience: {
+      type: String,
+      enum: ["Never worked with it",
+        "A little experience",
+        "Some experience",
+        "A lot of experience",
+        "Can teach it"]
+    },
     free_response: {
       bg_interest: String,
       team_experience: String,

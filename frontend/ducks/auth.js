@@ -44,10 +44,11 @@ export function login() {
 }
 
 export function register(formData) {
+  console.log('inside register');
   return (dispatch, getState) => {
-    const { user } = getState().auth
+    const { user } = getState().auth;
     axios
-      .put(`/api/users/${user.id}`, { ...user, application_status: "submitted", ...formData })
+      .put(`/api/users/${user._id}`, { application_status: "submitted", ...formData })
       .then(({ data }) => {
         dispatch(loadUser(data.user));
       })

@@ -1,5 +1,6 @@
 const User = require('mongoose').model('User');
 
+const strsToLangs = require('../services/util').convertStringsToLanguages;
 module.exports.index = (req, res, next) => {
   User.find({}, (err, users) => {
     if (err) {
@@ -16,39 +17,47 @@ module.exports.index = (req, res, next) => {
 }
 
 module.exports.get = (req, res, next) => {
-  User.findById(req.params.id, (err, usr) => {
-    if (err) {
-      console.error(err);
-      res.locals.error = err;
-      return next();
-    }
+  User.findById(req.params.id)
+    .populate('languages')
+    .populate('web_technologies')
+    .populate('databases')
+    .populate('deployment')
+    .exec((err, usr) => {
+      if (err) {
+        console.error(err);
+        res.locals.error = err;
+        return next();
+      }
 
-    res.locals.data = {
-      user: usr
-    };
-    return next();
-  });
+      res.locals.data = {
+        user: usr
+      };
+      return next();
+    });
 }
 
 module.exports.store = (req, res, next) => {
+
+
   User.create({
     name: req.body.name,
     email: req.body.email,
+    phone: req.body.phone,
     title: req.body.title,
     credit_hours: req.body.credit_hours,
-    graduation_date: req.body.graduation_date ? new Date(req.body.graduation_date) : null,
+    frontend_experience: req.body.frontend_experience,
+    backend_experience: req.body.backend_experience,
+    pm_interest: req.body.pm_interest,
+    graduation_date: req.body.graduation_date ? req.body.graduation_date : null,
     score: 0,
-    // github_id: req.body.github_id,
-    // github_username: req.body.github_username,
-    // github_access_token: req.body.github_access_token,
-    // github_avatar_url: req.body.github_avatar_url,
-    // github_profile_url: req.body.github_profile_url,
-    // github_public_repos: req.body.github_public_repos,
-    // github_followers: req.body.github_followers,
     role: req.body.role || 'applicant',
-    websites: JSON.stringify(req.body.websites ? req.body.websites : []),
-    free_response: JSON.stringify(req.body.free_response ? req.body.free_response : {}),
-    github: JSON.stringify(req.body.github ? req.body.github : {})
+    websites: req.body.websites ? req.body.websites : [],
+    languages: req.body.languages ? req.body.languages : [],
+    web_technologies: req.body.web_technologies ? req.body.web_technologies : [],
+    databases: req.body.databases ? req.body.databases : [],
+    deployment: req.body.deployment ? req.body.deployment : [],
+    free_response: req.body.free_response ? req.body.free_response : {},
+    github: req.body.github ? req.body.github : {}
   }, (err, usr) => {
     if (err) {
       console.error(err);
@@ -64,7 +73,7 @@ module.exports.store = (req, res, next) => {
 }
 
 module.exports.update = (req, res, next) => {
-  User.findById(req.params.id, (err, user) => {
+  User.findById(req.params.id, async (err, user) => {
     if (err) {
       console.error(err);
       res.locals.error = err;
@@ -73,20 +82,32 @@ module.exports.update = (req, res, next) => {
 
     user.name = req.body.name ? req.body.name : user.name;
     user.email = req.body.email ? req.body.email : user.email;
+    user.phone = req.body.phone ? req.body.phone : user.phone;
     user.title = req.body.title ? req.body.title : user.title;
+    user.pm_interest = req.body.pm_interest ? req.body.pm_interest : user.pm_interest;
     user.credit_hours = req.body.credit_hours ? req.body.credit_hours : user.credit_hours;
-    user.graduation_date = req.body.graduation_date ? new Date(req.body.graduation_date) : user.graduation_date;
+    user.graduation_date = req.body.graduation_date ? req.body.graduation_date : user.graduation_date;
     user.score = req.body.score ? req.body.score : user.score;
     user.role = req.body.role ? req.body.role : user.role;
-    // user.github_id = req.body.github_id ? req.body.github_id : user.github_id;
-    // user.github_username = req.body.github_username ? req.body.github_username : user.github_username;
-    // user.github_access_token = req.body.github_access_token ? req.body.github_access_token : user.github_access_token;
-    // user.github_avatar_url = req.body.github_avatar_url ? req.body.github_avatar_url : user.github_avatar_url;
-    // user.github_profile_url = req.body.github_profile_url ? req.body.github_profile_url : user.github_profile_url;
-    // user.github_public_repos = req.body.github_public_repos ? req.body.github_public_repos : user.github_public_repos;
-    // user.github_followers = req.body.github_followers ? req.body.github_followers : user.github_followers;
-    user.free_response = req.body.free_response ? JSON.stringify(req.body.free_response) : user.free_response;
-    user.github = req.body.github ? JSON.stringify(req.body.github) : user.github;
+    user.frontend_experience = req.body.frontend_experience ? req.body.frontend_experience : user.frontend_experience;
+    user.backend_experience = req.body.backend_experience ? req.body.backend_experience : user.backend_experience;
+    user.free_response = req.body.free_response ? req.body.free_response : user.free_response;
+    user.websites = req.body.websites ? req.body.websites : user.websites;
+    user.languages = req.body.languages ? await strsToLangs(req.body.languages, "languages") : [];
+    user.web_technologies = req.body.web_technologies ? await strsToLangs(req.body.web_technologies, "web_technologies") : [];
+    user.databases = req.body.databases ? await strsToLangs(req.body.databases, "databases") : [];
+    user.deployment = req.body.deployment ? await strsToLangs(req.body.deployment, "deployment") : [];
+    user.github = req.body.github ? req.body.github : user.github;
+
+    // protect application_status changes
+    if ((req.body.application_status) && (req.body.application_status === "submitted" || req.user.role === "admin")) {
+      user.application_status = req.body.application_status ? req.body.application_status : user.application_status;
+    }
+
+    // protect role changes
+    if (req.body.role && req.user.role === "admin") {
+      user.role = req.body.role ? req.body.role : user.role;
+    }
 
 
     user.save((err, updated) => {

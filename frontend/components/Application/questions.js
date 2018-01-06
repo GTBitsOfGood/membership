@@ -37,7 +37,17 @@ export const databases = [
   "MongoDB",
   "Redis",
   "PostgreSQL",
-  "Oracle SQL"
+  "Oracle SQL",
+  "Cassandra",
+  "MariaDB",
+  "CouchDB",
+  "Neo4j",
+  "Elasticsearch",
+  "Amazon SimpleDB",
+  "Firebase",
+  "Apache Spark",
+  "Hadoop",
+  "CockroachDB"
 ];
 
 export const deployment = [

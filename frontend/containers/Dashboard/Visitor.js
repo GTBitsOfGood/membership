@@ -8,7 +8,7 @@ import Application from "../../components/Application";
 const { Header, Content, Footer } = Layout;
 
 
-const Visitor = ({ logout, user }) => {
+const Visitor = ({ logout, register, user }) => {
   const navigate = ({ key }) => {
     if (key === "logout") {
       logout();
@@ -16,24 +16,25 @@ const Visitor = ({ logout, user }) => {
   };
 
   return (<Layout className="layout">
-      <Header>
-        <div className="menu-title">GT Bits of Good</div>
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["application"]} style={{ lineHeight: "64px" }} onClick={navigate}>
-          <Menu.Item key="application">Application</Menu.Item>
-          <Menu.Item key="logout">Logout</Menu.Item>
-        </Menu>
-      </Header>
-      <Content className="content-container">
-        <div className="content">
-          <Application />
-        </div>
-      </Content>
-      <Footer className="center">Made with &#9829; by Bits of Good ©2018</Footer>
-    </Layout>);
+    <Header>
+      <div className="menu-title">GT Bits of Good</div>
+      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["application"]} style={{ lineHeight: "64px" }} onClick={navigate}>
+        <Menu.Item key="application">Application</Menu.Item>
+        <Menu.Item key="logout">Logout</Menu.Item>
+      </Menu>
+    </Header>
+    <Content className="content-container">
+      <div className="content">
+        <Application register={register} />
+      </div>
+    </Content>
+    <Footer className="center">Made with &#9829; by Bits of Good ©2018</Footer>
+  </Layout>);
 };
 
 Visitor.propTypes = {
   logout: propTypes.func,
+  register: propTypes.func,
   user: propTypes.object
 };
 

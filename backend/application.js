@@ -36,10 +36,12 @@ passport.use(
     },
     (access_token, refreshToken, profile, done) => {
       // try to find the user based on their github id
-      User.findOne({ github_id: profile.id }, (err, user) => {
+      User.findOne({ 'github.id': profile.id }, (err, user) => {
         // check for error
         if (err) return done(err, null);
 
+        console.log('inside auth');
+        console.log(user);
         // return user if exists in db
         if (user) return done(null, user);
 
@@ -52,7 +54,7 @@ passport.use(
           profile_url: profile._json.html_url,
           public_repos: profile._json.public_repos,
           followers: profile._json.followers
-        }
+        };
         const newUser = new User({
           github,
           name: profile._json.name,
@@ -72,9 +74,14 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    return done(err, user);
-  });
+  User.findById(id)
+    .populate('languages')
+    .populate('web_technologies')
+    .populate('databases')
+    .populate('deployment')
+    .exec((err, user) => {
+      return done(err, user);
+    });
 });
 
 const routes = require('./routes');

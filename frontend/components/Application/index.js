@@ -38,6 +38,8 @@ class Application extends Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log("Received values of form: ", values);
+        console.log(this.props.register);
+        this.props.register(values);
       }
     });
   }
@@ -100,7 +102,7 @@ class Application extends Component {
 
         {/* Credit Hours */}
         <FormItem {...formItemLayout} label="Credit Hours">
-          {getFieldDecorator("credit-hours", {
+          {getFieldDecorator("credit_hours", {
             initialValue: 14,
             rules: [
               {
@@ -128,7 +130,7 @@ class Application extends Component {
 
         {/* Programming Languages */}
         <FormItem {...formItemLayout} label="Programming Languages">
-          {getFieldDecorator("programming-language")(<Select mode="multiple" placeholder="Select Proficient Languages">
+          {getFieldDecorator("languages")(<Select mode="multiple" placeholder="Select Proficient Languages">
             {programmingLanguages.map((item, index) => (
               <Option key={`${item + index}`} value={item}>
                 {item}
@@ -139,7 +141,7 @@ class Application extends Component {
 
         {/* Web Technologies */}
         <FormItem {...formItemLayout} label="Web Technologies">
-          {getFieldDecorator("web-technology")(<Select mode="multiple" placeholder="Select Proficient Web Technologies">
+          {getFieldDecorator("web_technologies")(<Select mode="multiple" placeholder="Select Proficient Web Technologies">
             {webTechnologies.map((item, index) => (
               <Option key={`${item + index}`} value={item}>
                 {item}
@@ -150,7 +152,7 @@ class Application extends Component {
 
         {/* Database Technology */}
         <FormItem {...formItemLayout} label="Database Technologies">
-          {getFieldDecorator("database-technology")(<Select mode="multiple" placeholder="Select Proficient Database Technologies">
+          {getFieldDecorator("databases")(<Select mode="multiple" placeholder="Select Proficient Database Technologies">
             {databases.map((item, index) => (
               <Option key={`${item + index}`} value={item}>
                 {item}
@@ -161,7 +163,7 @@ class Application extends Component {
 
         {/* Deployment Technology */}
         <FormItem {...formItemLayout} label="Deployment Technologies">
-          {getFieldDecorator("deployment-technology")(<Select mode="multiple" placeholder="Select Proficient Deployment Technologies">
+          {getFieldDecorator("deployment")(<Select mode="multiple" placeholder="Select Proficient Deployment Technologies">
             {deployment.map((item, index) => (
               <Option key={`${item + index}`} value={item}>
                 {item}
@@ -172,7 +174,7 @@ class Application extends Component {
 
         {/* Frontend Experience */}
         <FormItem {...formItemLayout} label="Frontend Experience">
-          {getFieldDecorator("frontend-experience", {
+          {getFieldDecorator("frontend_experience", {
             rules: [
               {
                 required: true
@@ -188,7 +190,7 @@ class Application extends Component {
 
         {/* Backend Experience */}
         <FormItem {...formItemLayout} label="Backend Experience">
-          {getFieldDecorator("backend-experience", {
+          {getFieldDecorator("backend_experience", {
             rules: [
               {
                 required: true
@@ -204,7 +206,7 @@ class Application extends Component {
 
         {/* BG interest */}
         <FormItem {...formItemLayout} label="Bits of Good Interest">
-          {getFieldDecorator("bg-interest", {
+          {getFieldDecorator("free_response.bg_interest", {
             rules: [
               {
                 required: true,
@@ -217,7 +219,7 @@ class Application extends Component {
 
         {/* Teamwork */}
         <FormItem {...formItemLayout} label="Teamwork Experience">
-          {getFieldDecorator("teamwork-experience", {
+          {getFieldDecorator("free_response.team_experience", {
             rules: [
               {
                 required: true,
@@ -230,7 +232,7 @@ class Application extends Component {
 
         {/* Project */}
         <FormItem {...formItemLayout} label="Project Experience">
-          {getFieldDecorator("project-experience", {
+          {getFieldDecorator("free_response.project_experience", {
             rules: [
               {
                 required: true,
@@ -243,7 +245,7 @@ class Application extends Component {
 
         {/* Commitments */}
         <FormItem {...formItemLayout} label="Other Commitments">
-          {getFieldDecorator("other-commitments", {
+          {getFieldDecorator("free_response.other_commitments", {
             rules: [
               {
                 required: true,
@@ -265,7 +267,7 @@ class Application extends Component {
             <Icon type="question-circle-o" />
           </Tooltip>
         </span>}>
-          {getFieldDecorator("project-preference", {
+          {getFieldDecorator("free_response.project_preference", {
             rules: [
               {
                 required: true,
@@ -283,7 +285,7 @@ class Application extends Component {
             <Icon type="question-circle-o" />
           </Tooltip>
         </span>}>
-          {getFieldDecorator("pm-interest", {
+          {getFieldDecorator("pm_interest", {
             valuePropName: "checked"
           })(<Switch />)}
         </FormItem>
