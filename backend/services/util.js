@@ -13,7 +13,7 @@ async function getAllLanguages() {
         );
 }
 
-async function convertStringsToLanguages(strings, category) {
+async function strsToLangs(strings, category) {
     // if languages aren't loaded load them from DB;
     // console.log('cache');
     // console.log(cache);
@@ -26,7 +26,38 @@ async function convertStringsToLanguages(strings, category) {
     return strings.map(string => cache[category].find(match(string)))
 }
 
+function generateScore(user) {
+    let score = 0;
+    // github stats
+    score += user.github.public_repos + user.github.followers;
 
+    // credit hours
+    score += 14 - user.credit_hours;
+    // graduation dates
+    const currYear = new Date().getFullYear();
+    const gradYear = parseInt(user.graduation_date.split(' ')[1], 10);
+    score += gradYear - currYear;
+
+    // programming languages
+    user.languages.forEach(curr => score += curr.value);
+
+    // Web Tech
+    user.web_technologies.forEach(curr => score += curr.value);
+
+    // Databases
+    user.databases.forEach(curr => score += curr.value);
+
+    // Deployment
+    user.deployment.forEach(curr => score += curr.value);
+
+    // pm interest
+    if (user.pm_interest) {
+        score += 1;
+    }
+
+    return score;
+}
 module.exports = {
-    convertStringsToLanguages,
+    strsToLangs,
+    generateScore
 };
