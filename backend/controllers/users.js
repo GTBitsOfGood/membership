@@ -1,19 +1,99 @@
 const User = require('mongoose').model('User');
 
 const util = require('../services/util');
-module.exports.index = (req, res, next) => {
-  User.find({}, (err, users) => {
-    if (err) {
-      console.error(err);
-      res.locals.error = err;
-      return next();
-    }
 
-    res.locals.data = {
-      users: users
-    };
-    return next();
-  });
+module.exports.index = (req, res, next) => {
+  if (req.query.count) {
+    switch (req.query.count) {
+      case 'submitted': {
+        User.count({ application_status: "submitted" }, (err, submitted) => {
+          if (err) {
+            console.log(err);
+            res.locals.error = err;
+            return next();
+          }
+
+          res.locals.data = {
+            submitted,
+          };
+          return next();
+        });
+        break;
+      }
+      case 'accepted': {
+        User.count({ application_status: "accepted" }, (err, accepted) => {
+          if (err) {
+            console.log(err);
+            res.locals.error = err;
+            return next();
+          }
+
+          res.locals.data = {
+            accepted,
+          };
+          return next();
+        });
+        break;
+      }
+      case 'rejected': {
+        User.count({ application_status: "rejected" }, (err, rejected) => {
+          if (err) {
+            console.log(err);
+            res.locals.error = err;
+            return next();
+          }
+
+          res.locals.data = {
+            rejected,
+          };
+          return next();
+        });
+        break;
+      }
+      case 'pm_interest': {
+        User.count({ pm_interest: true }, (err, pm_interest) => {
+          if (err) {
+            console.log(err);
+            res.locals.error = err;
+            return next();
+          }
+
+          res.locals.data = {
+            pm_interest,
+          };
+          return next();
+        });
+        break;
+      }
+      default: {
+        return next();
+      }
+    }
+  } else {
+    //pagination settings
+    const skip = req.query.skip || 0;
+    const limit = req.query.limit || 25;
+    User.find({}, )
+      .skip(skip)
+      .limit(limit)
+      .populate('languages')
+      .populate('web_technologies')
+      .populate('databases')
+      .populate('deployment')
+      .exec((err, users) => {
+        if (err) {
+          console.error(err);
+          res.locals.error = err;
+          return next();
+        }
+
+        res.locals.data = {
+          users,
+        };
+        return next();
+      });
+  }
+
 };
 
 module.exports.get = (req, res, next) => {

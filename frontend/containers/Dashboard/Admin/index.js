@@ -3,7 +3,7 @@ import { Layout, Menu, Row, Col, Card, InputNumber } from "antd";
 import propTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Route, Switch, Link, withRouter} from "react-router-dom";
+import { Route, Switch, Link, withRouter } from "react-router-dom";
 import { bindActionCreators } from 'redux';
 
 // Local Imports & Constants
@@ -25,6 +25,7 @@ class Admin extends Component {
     this.currentKey = this.currentKey.bind(this);
   }
   componentWillMount() {
+    this.props.loadNums();
     this.props.loadProjects();
     this.props.loadApplicants();
     const url = this.props.match.url.split('/');
@@ -48,41 +49,41 @@ class Admin extends Component {
   }
   render() {
     return (<Layout className="layout">
-        <Header>
-          <div className="menu-title">GT Bits of Good</div>
-          <Menu theme="dark" mode="horizontal" defaultSelectedKeys={this.currentKey()} style={{ lineHeight: "64px" }} onClick={this.navigate}>
-            <Menu.Item key="home">
-              <Link to="/">Home</Link>
-            </Menu.Item>
-            <Menu.Item key="applicants">
-              <Link to="/applicants">Applicants</Link>
-            </Menu.Item>
-            <Menu.Item key="projects">
-              <Link to="/projects">Projects</Link>
-            </Menu.Item>
-            <Menu.Item key="selection">
-              <Link to="/selection">Selection</Link>
-            </Menu.Item>
-            <Menu.Item key="logout">Logout</Menu.Item>
-          </Menu>
-        </Header>
-        <Content className="content-container">
-          <div className="content">
-            <Switch>
-              <Route exact path="/applicants/:id" render={props => <ApplicantProfile {...props} data={this.props.currentApplicant} />} />
-              <Route exact path="/projects/:id" render={props => <ProjectProfile {...props} data={this.props.currentProject} />} />
-              <Route exact path="/selection/:id" component={Selection} />
-              <Route exact path="/applicants" render={() => <Applicants data={this.props.applicants} update={this.props.updateCurrentApplicant} />} />
-              <Route exact path="/projects" render={() => <Projects data={this.props.projects} update={this.props.updateCurrentProject} />} />
-              <Route exact path="/selection" component={Selection} />
-              <Route exact path="/" component={Home} />
-            </Switch>
-          </div>
-        </Content>
-        <Footer className="center">
-          Made with &#9829; by Bits of Good ©2018
+      <Header>
+        <div className="menu-title">GT Bits of Good</div>
+        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={this.currentKey()} style={{ lineHeight: "64px" }} onClick={this.navigate}>
+          <Menu.Item key="home">
+            <Link to="/">Home</Link>
+          </Menu.Item>
+          <Menu.Item key="applicants">
+            <Link to="/applicants">Applicants</Link>
+          </Menu.Item>
+          <Menu.Item key="projects">
+            <Link to="/projects">Projects</Link>
+          </Menu.Item>
+          <Menu.Item key="selection">
+            <Link to="/selection">Selection</Link>
+          </Menu.Item>
+          <Menu.Item key="logout">Logout</Menu.Item>
+        </Menu>
+      </Header>
+      <Content className="content-container">
+        <div className="content">
+          <Switch>
+            <Route exact path="/applicants/:id" render={props => <ApplicantProfile {...props} data={this.props.currentApplicant} />} />
+            <Route exact path="/projects/:id" render={props => <ProjectProfile {...props} data={this.props.currentProject} />} />
+            <Route exact path="/selection/:id" component={Selection} />
+            <Route exact path="/applicants" render={() => <Applicants data={this.props.applicants} update={this.props.updateCurrentApplicant} />} />
+            <Route exact path="/projects" render={() => <Projects data={this.props.projects} update={this.props.updateCurrentProject} />} />
+            <Route exact path="/selection" component={Selection} />
+            <Route exact path="/" render={props => <Home {...props} />} />
+          </Switch>
+        </div>
+      </Content>
+      <Footer className="center">
+        Made with &#9829; by Bits of Good ©2018
         </Footer>
-      </Layout>);
+    </Layout>);
   }
 }
 
@@ -98,6 +99,11 @@ Admin.propTypes = {
   currentApplicant: propTypes.object,
   updateCurrentProject: propTypes.func,
   updateCurrentApplicant: propTypes.func,
+  loadNums: propTypes.func,
+  numAppsSubmitted: propTypes.number,
+  numAppsRejected: propTypes.number,
+  numAppsAccepted: propTypes.number,
+  numPMInterest: propTypes.number,
 
 };
 
@@ -107,6 +113,10 @@ function mapStateToProps(state) {
     applicants: state.admin.applicants,
     currentProject: state.admin.currentProject,
     currentApplicant: state.admin.currentApplicant,
+    numAppsSubmitted: state.admin.numAppsSubmitted,
+    numAppsRejected: state.admin.numAppsRejected,
+    numAppsAccepted: state.admin.numAppsAccepted,
+    numPMInterest: state.admin.numPMInterest,
   };
 }
 

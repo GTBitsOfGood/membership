@@ -13,7 +13,6 @@ import {
 import Dashboard from "./Dashboard";
 import Splash from '../components/Splash';
 import { login, logout, register } from "../ducks/auth";
-// import PrivateRoute from '../components/PrivateRoute';
 
 
 class AppContainer extends Component {
@@ -37,16 +36,6 @@ class AppContainer extends Component {
       <Route path="/login" render={this._login} />
       <Route path="/*" render={this._authenticate} />
     </Switch>);
-    //   <Route path="/login" render={this._login} />
-    //   <PrivateRoute
-    //     path="/*"
-    //     user={this.props.user}
-    //     component={Dashboard}
-    //     logout={this.props.logout}
-    //     register={this.props.register}
-    //     authenticated={!!this.props.user}
-    //   />
-    // </Switch>);
   }
 }
 

@@ -11,7 +11,7 @@ import {
 
 
 import "react-table/react-table.css";
-import {applicantColumns} from './columns';
+import { applicantColumns } from './columns';
 import SearchBar from './SearchBar';
 
 
@@ -32,7 +32,7 @@ class Applicants extends Component {
       keys: [
         "name",
         "phone",
-        "github_username",
+        "github.username",
         "credit_hours",
         "score",
         "email"
@@ -44,7 +44,7 @@ class Applicants extends Component {
 
   componentWillReceiveProps(props) {
     this.fuse = new Fuse(props.data, this.fuseOptions);
-    this.setState({dataList: props.data});
+    this.setState({ dataList: props.data });
   }
 
   fuzzySearch(search) {
@@ -60,7 +60,7 @@ class Applicants extends Component {
     return (
       <div className="center">
         <h1 className="center">Bits of Good Applicants</h1>
-        <SearchBar fuzzy={this.fuzzySearch} style={{paddingBottom: "20px"}}/>
+        <SearchBar fuzzy={this.fuzzySearch} style={{ paddingBottom: "20px" }} />
         <Table
           columns={applicantColumns(this.props.update)}
           dataSource={this.state.dataList}

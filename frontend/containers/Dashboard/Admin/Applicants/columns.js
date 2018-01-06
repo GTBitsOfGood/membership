@@ -5,12 +5,12 @@ export const applicantColumns = (updateCurrentProject) => [
     title: "Name",
     dataIndex: "name",
     // render: (text, record) => <Link to={`/applicants/${record._id}`}>{text}</Link>
-    render: (text, record ) => <a onClick={() => updateCurrentProject(record._id)}> {text} </a>
+    render: (text, record) => <a onClick={() => updateCurrentProject(record._id)}> {text} </a>
   },
   {
     title: "Github",
-    dataIndex: "github_username",
-    render: (text, record ) => <a target="_blank" href={record.github_profile_url}> {text} </a>
+    dataIndex: "github.username",
+    render: (text, record) => <a target="_blank" href={record.github.profile_url}> {text} </a>
   },
   {
     title: "Phone",
@@ -34,11 +34,11 @@ export const teamColumns = () => [
   {
     title: "Name",
     dataIndex: "name",
-    render: (text, record ) => <a> {text} </a>
+    render: (text, record) => <a> {text} </a>
   },
   {
     title: "Github Username",
-    dataIndex: "github_username"
+    dataIndex: "github.username"
   },
   {
     title: "Phone Number",

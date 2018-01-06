@@ -4,9 +4,7 @@ import { push } from 'react-router-redux';
 
 // Actions
 const LOGOUT = Symbol("app/auth/logout");
-const LOGIN = Symbol("app/auth/login");
 const LOAD_USER = Symbol("app/auth/load_user");
-const REGISTER = Symbol("app/auth/register")
 
 // State Reducer
 const initialState = {
@@ -35,7 +33,6 @@ export function login() {
         const { user } = data;
         if (user) {
           return dispatch(loadUser(user));
-          // return dispatch(push("/"));
         }
         return dispatch(push('/login'));
       })

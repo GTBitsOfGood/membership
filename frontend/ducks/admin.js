@@ -10,6 +10,10 @@ const LOAD_PROJECTS = Symbol("app/admin/LOAD_PROJECTS");
 const LOAD_APPLICANTS = Symbol("app/admin/LOAD_APPLICANTS");
 const UPDATE_CURRENT_PROJECT = Symbol("app/admin/UPDATE_CURRENT_PROJECT");
 const UPDATE_CURRENT_APPLICANT = Symbol("app/admin/UPDATE_CURRENT_APPLICANT");
+const LOAD_NUM_APPS_SUBMITTED = Symbol("app/admin/LOAD_NUM_APPS_SUBMITTED");
+const LOAD_NUM_APPS_REJECTED = Symbol("app/admin/LOAD_NUM_APPS_REJECTED");
+const LOAD_NUM_APPS_ACCEPTED = Symbol("app/admin/LOAD_NUM_APPS_ACCEPTED");
+const LOAD_NUM_PM_INTEREST = Symbol("app/admin/LOAD_NUM_PM_INTEREST");
 
 
 // State Reducer
@@ -17,7 +21,11 @@ const initialState = {
   applicants: [],
   currentApplicant: null,
   projects: [],
-  currentProject: null
+  currentProject: null,
+  numAppsSubmitted: 0,
+  numAppsRejected: 0,
+  numAppsAccepted: 0,
+  numPMInterest: 0,
 };
 
 export default function reducer(state = initialState, action) {
@@ -30,6 +38,14 @@ export default function reducer(state = initialState, action) {
       return { ...state, currentProject: action.project };
     case UPDATE_CURRENT_APPLICANT:
       return { ...state, currentApplicant: action.applicant };
+    case LOAD_NUM_APPS_ACCEPTED:
+      return { ...state, numAppsAccepted: action.accepted };
+    case LOAD_NUM_APPS_SUBMITTED:
+      return { ...state, numAppsSubmitted: action.submitted };
+    case LOAD_NUM_APPS_REJECTED:
+      return { ...state, numAppsRejected: action.rejected };
+    case LOAD_NUM_PM_INTEREST:
+      return { ...state, numPMInterest: action.pm_interest };
     default:
       return state;
   }
@@ -62,9 +78,32 @@ export function loadProjects() {
 
 export function loadApplicants() {
   return (dispatch) => {
-    // this should be updated with an API CALL
-    return dispatch({ type: LOAD_APPLICANTS, applicants: applicantData });
+    axios.get('/api/users')
+      .then(({ data }) => {
+        dispatch({ type: LOAD_APPLICANTS, applicants: data.users });
+      });
+    // return dispatch({ type: LOAD_APPLICANTS, applicants: applicantData });
   };
 }
 
+export function loadNums() {
+  return (dispatch) => {
+    axios.get('/api/users?count=submitted')
+      .then(({ data }) => {
+        dispatch({ type: LOAD_NUM_APPS_SUBMITTED, submitted: data.submitted });
+      });
+    axios.get('/api/users?count=accepted')
+      .then(({ data }) => {
+        dispatch({ type: LOAD_NUM_APPS_ACCEPTED, accepted: data.accepted });
+      });
+    axios.get('/api/users?count=rejected')
+      .then(({ data }) => {
+        dispatch({ type: LOAD_NUM_APPS_REJECTED, rejected: data.rejected });
+      });
+    axios.get('/api/users?count=pm_interest')
+      .then(({ data }) => {
+        dispatch({ type: LOAD_NUM_PM_INTEREST, pm_interest: data.pm_interest });
+      });
+  };
+}
 
