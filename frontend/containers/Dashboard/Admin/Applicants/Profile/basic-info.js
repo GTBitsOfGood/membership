@@ -50,7 +50,7 @@ const BasicInfo = ({ data }) => {
   ];
   return (
     <List
-      itemLayout="vertical"
+      itemLayout="horizontal"
       dataSource={dataSource}
       renderItem={item => (
         <List.Item>
