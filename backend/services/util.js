@@ -1,7 +1,7 @@
 "use strict";
 
 const Language = require('mongoose').model('Language');
-let cache = null;
+
 async function getAllLanguages() {
     return await Promise.all([
         Language.find({ category: 'languages' }),
@@ -15,13 +15,11 @@ async function getAllLanguages() {
 
 async function strsToLangs(strings, category) {
     // if languages aren't loaded load them from DB;
-    if (!cache) {
-        cache = await getAllLanguages();
-    }
+    const languages = await getAllLanguages();
 
     const match = string1 => (element => string1 === element.name);
 
-    return strings.map(string => cache[category].find(match(string)))
+    return strings.map(string => languages[category].find(match(string)));
 }
 
 function generateScore(user) {
