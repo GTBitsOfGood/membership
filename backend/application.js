@@ -34,36 +34,28 @@ passport.use(
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
       callbackURL: process.env.GITHUB_CALLBACK_URL
     },
-    (accessToken, refreshToken, profile, done) => {
-        // try to find the user based on their github id
-      User.findOne({ github_id: profile.id }, (err, user) => {
-          // check for error
+    (access_token, refreshToken, profile, done) => {
+      // try to find the user based on their github id
+      User.findOne({ 'github.id': profile.id }, (err, user) => {
+        // check for error
         if (err) return done(err, null);
-
-          // return user if exists in db
+        // return user if exists in db
         if (user) return done(null, user);
 
-          // create new user in db
-        const {
-            id,
-            login,
-            avatar_url,
-            html_url,
-            name,
-            email,
-            public_repos,
-            followers
-          } = profile._json;
+        // create new user in db
+        const github = {
+          access_token,
+          id: profile._json.id,
+          username: profile._json.login,
+          avatar_url: profile._json.avatar_url,
+          profile_url: profile._json.html_url,
+          public_repos: profile._json.public_repos,
+          followers: profile._json.followers
+        };
         const newUser = new User({
-          github_id: id,
-          github_access_token: accessToken,
-          github_username: login,
-          github_avatar_url: avatar_url,
-          github_profile_url: html_url,
-          github_public_repos: public_repos,
-          github_followers: followers,
-          name,
-          email
+          github,
+          name: profile._json.name,
+          email: profile._json.email
         });
         return newUser.save(err2 => {
           if (err2) return done(err2, null);
@@ -79,9 +71,12 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    return done(err, user);
-  });
+  User.findById(id)
+    .populate('languages')
+    .populate('web_technologies')
+    .populate('databases')
+    .populate('deployment')
+    .exec(done);
 });
 
 const routes = require('./routes');

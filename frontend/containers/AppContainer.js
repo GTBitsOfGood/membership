@@ -12,7 +12,7 @@ import {
 // Local Imports
 import Dashboard from "./Dashboard";
 import Splash from '../components/Splash';
-import { login, logout } from "../ducks/auth";
+import { login, logout, register } from "../ducks/auth";
 import PrivateRoute from '../components/PrivateRoute';
 
 
@@ -30,16 +30,24 @@ class AppContainer extends Component {
 
   render() {
     return (<Switch>
-        <Route path="/login" render={this._login} />
-        <PrivateRoute path="/*" user={this.props.user} component={Dashboard} logout={this.props.logout} authenticated={!!this.props.user} />
-      </Switch>);
+      <Route path="/login" render={this._login} />
+      <PrivateRoute
+        path="/*"
+        user={this.props.user}
+        component={Dashboard}
+        logout={this.props.logout}
+        register={this.props.register}
+        authenticated={!!this.props.user}
+      />
+    </Switch>);
   }
 }
 
 AppContainer.propTypes = {
   user: propTypes.object,
   authenticate: propTypes.func,
-  logout: propTypes.func
+  logout: propTypes.func,
+  register: propTypes.func
 };
 
 function mapStateToProps(state) {
@@ -47,7 +55,11 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return { authenticate: () => dispatch(login()), logout: () => dispatch(logout()) };
+  return {
+    authenticate: () => dispatch(login()),
+    logout: () => dispatch(logout()),
+    register: (data) => dispatch(register(data))
+  };
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AppContainer));
