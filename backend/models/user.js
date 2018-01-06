@@ -33,7 +33,7 @@ const userSchema = Schema(
     },
     name: {
       type: String,
-      required: true
+      required: false
     },
     phone: {
       type: String,
@@ -45,7 +45,7 @@ const userSchema = Schema(
     },
     email: {
       type: String,
-      required: true
+      required: false
     },
     graduation_date: Date,
     expected_graduation: String,
@@ -75,11 +75,13 @@ const userSchema = Schema(
     ],
     websites: [String],
     credit_hours: Number,
-    bg_interest: String,
-    team_experience: String,
-    project_experience: String,
-    other_commitments: String,
-    project_preference: String,
+    free_response: {
+      bg_interest: String,
+      team_experience: String,
+      project_experience: String,
+      other_commitments: String,
+      project_preference: String,
+    },
     score: Number,
     role: {
       type: String,
