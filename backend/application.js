@@ -39,9 +39,6 @@ passport.use(
       User.findOne({ 'github.id': profile.id }, (err, user) => {
         // check for error
         if (err) return done(err, null);
-
-        console.log('inside auth');
-        console.log(user);
         // return user if exists in db
         if (user) return done(null, user);
 
@@ -79,9 +76,7 @@ passport.deserializeUser((id, done) => {
     .populate('web_technologies')
     .populate('databases')
     .populate('deployment')
-    .exec((err, user) => {
-      return done(err, user);
-    });
+    .exec(done);
 });
 
 const routes = require('./routes');

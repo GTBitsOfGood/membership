@@ -14,7 +14,7 @@ module.exports.index = (req, res, next) => {
     };
     return next();
   });
-}
+};
 
 module.exports.get = (req, res, next) => {
   User.findById(req.params.id)
@@ -34,13 +34,12 @@ module.exports.get = (req, res, next) => {
       };
       return next();
     });
-}
+};
 
 module.exports.store = (req, res, next) => {
-
   // protect application_status  and role changes
-  const appStatus = 'none';
-  const role = 'applicant';
+  let appStatus = 'none';
+  let role = 'applicant';
   if (req.user.role === "admin") {
     appStatus = req.body.application_status ? req.body.application_status : appStatus;
     role = req.body.role ? req.body.role : role;
@@ -78,7 +77,7 @@ module.exports.store = (req, res, next) => {
     };
     return next();
   });
-}
+};
 
 module.exports.update = (req, res, next) => {
   User.findById(req.params.id, async (err, user) => {
@@ -130,7 +129,7 @@ module.exports.update = (req, res, next) => {
       return next();
     });
   });
-}
+};
 
 module.exports.delete = (req, res, next) => {
   User.remove({
@@ -146,4 +145,4 @@ module.exports.delete = (req, res, next) => {
     };
     return next();
   });
-}
+};
