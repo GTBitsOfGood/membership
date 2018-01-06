@@ -40,6 +40,7 @@ module.exports.update = (req, res, next) => {
 
     language.name = req.body.name ? req.body.name : language.name;
     language.value = req.body.value ? req.body.value : language.value;
+    language.category = req.body.category ? req.body.category : language.category;
 
     language.save((err, updatedLanguage) => {
       res.locals.data = {
@@ -53,7 +54,8 @@ module.exports.update = (req, res, next) => {
 module.exports.store = (req, res, next) => {
   Language.create({
     name: req.body.name,
-    value: req.body.value
+    value: req.body.value,
+    category: req.body.category
   }, (err, language) => {
     if (err) {
       console.error(err);

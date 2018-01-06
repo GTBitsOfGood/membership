@@ -37,7 +37,17 @@ export const databases = [
   "MongoDB",
   "Redis",
   "PostgreSQL",
-  "Oracle SQL"
+  "Oracle SQL",
+  "Cassandra",
+  "MariaDB",
+  "CouchDB",
+  "Neo4j",
+  "Elasticsearch",
+  "Amazon SimpleDB",
+  "Firebase",
+  "Apache Spark",
+  "Hadoop",
+  "CockroachDB"
 ];
 
 export const deployment = [
@@ -66,3 +76,15 @@ export const backEndFamiliarity = [
   'A lot of experience',
   'Can teach it'
 ];
+
+export const graduation_dates = () => {
+  let year = new Date().getFullYear();
+  const dates = [];
+  for (let i = 0; i < 6; i++) {
+    dates.push(`Fall ${year}`);
+    dates.push(`Spring ${++year}`);
+  }
+  const month = new Date().getMonth() + 1;
+  const isSpringSemester = (month < 5) || (month > 10);
+  return isSpringSemester ? dates.slice(1) : dates;
+};
