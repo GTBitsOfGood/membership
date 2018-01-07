@@ -4,14 +4,19 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "precommit": "lint-staged",
     "build": "webpack --config webpack.prod.config.js",
     "dev": "concurrently -k \"npm run frontend\" \"npm run backend\"",
     "frontend": "webpack -d --watch",
     "backend": "nodemon server.js",
     "start": "npm run build && NODE_ENV=production node server.js",
-    "test": "mocha --compilers js:babel-core/register ./test/**/*.js --require ignore-styles",
+    "test":
+      "mocha --compilers js:babel-core/register ./test/**/*.js --require ignore-styles",
     "seed": "node ./backend/seeds/index.js",
     "seeder": "npm run seed"
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": ["prettier --write", "git add"]
   },
   "repository": {
     "type": "git",
@@ -88,8 +93,11 @@
     "eslint-plugin-react": "^7.4.0",
     "eslint-watch": "^3.1.0",
     "file-loader": "^1.1.6",
+    "husky": "^0.14.3",
     "ignore-styles": "^5.0.1",
+    "lint-staged": "^6.0.0",
     "nodemon": "^1.11.0",
+    "prettier": "^1.9.2",
     "react-addons-test-utils": "^15.5.1",
     "react-test-renderer": "^15.5.4",
     "url-loader": "^0.6.2",
