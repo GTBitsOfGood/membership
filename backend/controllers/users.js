@@ -70,12 +70,13 @@ module.exports.index = (req, res, next) => {
       }
     }
   } else {
-    //pagination settings
+    // pagination settings
     const skip = req.query.skip || 0;
     const limit = req.query.limit || 25;
-    User.find({}, )
+    User.find({ role: 'applicant' }, )
       .skip(skip)
       .limit(limit)
+      .sort('-updatedAt')
       .populate('languages')
       .populate('web_technologies')
       .populate('databases')

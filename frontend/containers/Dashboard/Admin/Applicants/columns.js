@@ -30,6 +30,32 @@ export const applicantColumns = (updateCurrentProject) => [
   },
 ];
 
+export const applicantDashColumns = (updateCurrentProject) => [
+  {
+    title: "Name",
+    dataIndex: "name",
+    // render: (text, record) => <Link to={`/applicants/${record._id}`}>{text}</Link>
+    render: (text, record) => <a onClick={() => updateCurrentProject(record._id)}> {text} </a>
+  },
+  {
+    title: "Github",
+    dataIndex: "github.username",
+    render: (text, record) => <a target="_blank" href={record.github.profile_url}> {text} </a>
+  },
+  {
+    title: "Phone",
+    dataIndex: "phone"
+  },
+  {
+    title: "Email",
+    dataIndex: "email"
+  },
+  {
+    title: "Score",
+    dataIndex: "score"
+  },
+];
+
 export const teamColumns = () => [
   {
     title: "Name",
