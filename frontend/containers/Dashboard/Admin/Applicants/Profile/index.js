@@ -45,7 +45,7 @@ class Profile extends Component {
     return !this.props.data ? <NotFound /> : <div>
       <Row gutter={16}>
         <Col span={8}>
-          <Card cover={<img alt="example" src={this.props.data.github.avatar_url} />} actions={[<Icon type="edit" onClick={() => alert("clicked")} />, <Icon type="delete" />]}>
+          <Card cover={<img alt="example" src={this.props.data.github.avatar_url} />} actions={[<Icon type="edit" onClick={() => alert("clicked")} />, <Icon type="delete" />, <Icon type="usergroup-add" />]}>
             <Card.Meta title={this.props.data.name} description={<div>
               <p>Application Status: {this.props.data.application_status.toUpperCase()}</p>
               <a target="_blank" href={this.props.data.github.profile_url}>

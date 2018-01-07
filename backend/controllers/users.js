@@ -51,7 +51,7 @@ module.exports.index = (req, res, next) => {
         break;
       }
       case 'pm_interest': {
-        User.count({ pm_interest: true }, (err, pm_interest) => {
+        User.count({ pm_interest: true }, (err, pmInterest) => {
           if (err) {
             console.log(err);
             res.locals.error = err;
@@ -59,7 +59,7 @@ module.exports.index = (req, res, next) => {
           }
 
           res.locals.data = {
-            pm_interest,
+            pm_interest: pmInterest,
           };
           return next();
         });
@@ -70,12 +70,13 @@ module.exports.index = (req, res, next) => {
       }
     }
   } else {
-    //pagination settings
+    // pagination settings
     const skip = req.query.skip || 0;
     const limit = req.query.limit || 25;
-    User.find({}, )
+    User.find({ role: 'applicant' }, )
       .skip(skip)
       .limit(limit)
+      .sort('-updatedAt')
       .populate('languages')
       .populate('web_technologies')
       .populate('databases')

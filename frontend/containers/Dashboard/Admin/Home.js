@@ -3,12 +3,13 @@ import propTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
-import { Card, Col, Row } from 'antd';
+import { Card, Col, Row, Table } from 'antd';
 import { bindActionCreators } from 'redux';
 import * as actions from "../../../ducks/admin";
 
 
 // Local Imports
+import { applicantDashColumns } from './Applicants/columns';
 // import Dashboard from "./Dashboard";
 // import Splash from "../components/Splash";
 // import { login, logout } from "../ducks/auth";
@@ -28,29 +29,21 @@ class Home extends Component {
             <Col span={6}>
               <Card title={<h3 className="center">Applications</h3>} >
                 <h2 className="center">
-                  {
-                    this.props.numAppsAccepted +
-                    this.props.numAppsRejected +
-                    this.props.numAppsSubmitted
-                  }
+                  {this.props.numAppsAccepted + this.props.numAppsRejected + this.props.numAppsSubmitted}
                 </h2>
               </Card>
             </Col>
             <Col span={6}>
               <Card title={<h3 className="center">PM Interest</h3>} >
                 <h2 className="center">
-                  {
-                    this.props.numPMInterest
-                  }
+                  {this.props.numPMInterest}
                 </h2>
               </Card>
             </Col>
             <Col span={6}>
               <Card title={<h3 className="center">Accepted</h3>} >
                 <h2 className="center">
-                  {
-                    this.props.numAppsAccepted
-                  }
+                  {this.props.numAppsAccepted}
                 </h2>
               </Card>
             </Col>
@@ -65,7 +58,14 @@ class Home extends Component {
         </div>
         <Row gutter={16}>
           <Col span={16}>
-            <Card title={<h3 className="center">Newest Applications</h3>} bordered={false}>Card content</Card>
+            <Card title={<h3 className="center">Newest Applications</h3>} bordered={false}>
+              <Table
+                columns={applicantDashColumns(this.props.updateCurrentApplicant)}
+                dataSource={this.props.newApplicants}
+                rowKey={record => record._id}
+                pagination={false}
+              />
+            </Card>
           </Col>
           <Col span={8}>
             <Card title={<h3 className="center">Admin Actions</h3>} bordered={false}>
@@ -95,6 +95,7 @@ function mapStateToProps(state) {
     numAppsRejected: state.admin.numAppsRejected,
     numAppsAccepted: state.admin.numAppsAccepted,
     numPMInterest: state.admin.numPMInterest,
+    newApplicants: state.admin.applicants.slice(0, 5),
   };
 }
 
