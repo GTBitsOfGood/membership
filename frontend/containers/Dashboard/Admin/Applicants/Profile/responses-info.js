@@ -48,4 +48,7 @@ const ResponsesInfo = ({ data }) => {
   );
 };
 
+ResponsesInfo.propTypes = {
+  data: propTypes.object,
+}
 export default ResponsesInfo;

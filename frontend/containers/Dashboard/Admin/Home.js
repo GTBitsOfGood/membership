@@ -60,6 +60,7 @@ class Home extends Component {
           <Col span={16}>
             <Card title={<h3 className="center">Newest Applications</h3>} bordered={false}>
               <Table
+                loading={!this.props.newApplicants.length}
                 columns={applicantDashColumns(this.props.updateCurrentApplicant)}
                 dataSource={this.props.newApplicants}
                 rowKey={record => record._id}

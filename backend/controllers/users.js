@@ -66,35 +66,34 @@ module.exports.index = (req, res, next) => {
         break;
       }
       default: {
+        console.log('this should not be hit...');
+        console.log(req.query);
         return next();
       }
     }
   } else {
     // pagination settings
-    const skip = req.query.skip || 0;
-    const limit = req.query.limit || 25;
-    User.find({ role: 'applicant' }, )
-      .skip(skip)
-      .limit(limit)
-      .sort('-updatedAt')
-      .populate('languages')
-      .populate('web_technologies')
-      .populate('databases')
-      .populate('deployment')
-      .exec((err, users) => {
-        if (err) {
-          console.error(err);
-          res.locals.error = err;
-          return next();
-        }
+    const limit = req.query.limit || 10;
+    const skip = (req.query.page - 1 || 0) * limit;
 
-        res.locals.data = {
-          users,
-        };
+    Promise.all([
+      User.find({ role: 'applicant' }).sort('-updatedAt')
+        .limit(limit).skip(skip).populate('languages').populate('databases')
+        .populate('web_technologies').populate('deployment').exec(),
+      User.count({ role: 'applicant' }).exec()
+    ]).then(([users, count]) => {
+      res.locals.data = {
+        users,
+        count
+      };
+      return next();
+    })
+      .catch(err => {
+        console.error(err);
+        res.locals.errors = err;
         return next();
       });
   }
-
 };
 
 module.exports.get = (req, res, next) => {

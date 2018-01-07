@@ -29,12 +29,13 @@ const projectSchema = Schema(
         required: true
       },
       phone: {
-        type: Number,
+        type: String,
         required: true
       }
     },
     project_manager: {
       type: Schema.Types.ObjectId,
+      ref: "User",
       required: false
     },
     project_members: [
