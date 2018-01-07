@@ -13,7 +13,8 @@
     "test":
       "mocha --compilers js:babel-core/register ./test/**/*.js --require ignore-styles",
     "seed": "node ./backend/seeds/index.js",
-    "seeder": "npm run seed"
+    "seeder": "npm run seed",
+    "format": "prettier --single-quote --trailing-comma es5 --write '**/*.js'"
   },
   "lint-staged": {
     "*.{js,json,css,md}": ["prettier --single-quote --write", "git add"]
