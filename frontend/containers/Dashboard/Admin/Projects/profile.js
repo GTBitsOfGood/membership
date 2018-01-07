@@ -1,37 +1,37 @@
-import React, { Component } from "react";
-import propTypes from "prop-types";
-import { Icon, Card, Row, Col, Table } from "antd";
+import React, { Component } from 'react';
+import propTypes from 'prop-types';
+import { Icon, Card, Row, Col, Table } from 'antd';
 
-import NotFound from "../../../../components/NotFound";
+import NotFound from '../../../../components/NotFound';
 
-import { teamColumns } from "./columns";
+import { teamColumns } from './columns';
 const tabTitles = [
   {
-    key: "description",
-    tab: "Description"
+    key: 'description',
+    tab: 'Description'
   },
   {
-    key: "team",
-    tab: "Project Team"
+    key: 'team',
+    tab: 'Project Team'
   }
 ];
 
 const columns = [
   {
-    Header: "Name",
-    accessor: "name"
+    Header: 'Name',
+    accessor: 'name'
   },
   {
-    Header: "Github",
-    accessor: "github_username"
+    Header: 'Github',
+    accessor: 'github_username'
   },
   {
-    Header: "Email",
-    accessor: "email"
+    Header: 'Email',
+    accessor: 'email'
   },
   {
-    Header: "Phone",
-    accessor: "phone"
+    Header: 'Phone',
+    accessor: 'phone'
   }
 ];
 
@@ -40,7 +40,7 @@ class Profile extends Component {
     super(props);
 
     this.state = {
-      titleKey: "description",
+      titleKey: 'description',
       loading: true,
       timer: null
     };
@@ -73,7 +73,7 @@ class Profile extends Component {
             <Card
               cover={<img alt="example" src={this.props.data.photo_url} />}
               actions={[
-                <Icon type="edit" onClick={() => alert("clicked")} />,
+                <Icon type="edit" onClick={() => alert('clicked')} />,
                 <Icon type="delete" />
               ]}
             >
@@ -89,14 +89,14 @@ class Profile extends Component {
           </Col>
           <Col span={16}>
             <Card
-              style={{ width: "100%" }}
+              style={{ width: '100%' }}
               tabList={tabTitles}
               onTabChange={key => this.onTabChange(key)}
             >
-              {this.state.titleKey === "description" && (
+              {this.state.titleKey === 'description' && (
                 <p className="font">{this.props.data.description}</p>
               )}
-              {this.state.titleKey === "team" && (
+              {this.state.titleKey === 'team' && (
                 <Table
                   columns={teamColumns()}
                   dataSource={this.props.data.project_members}

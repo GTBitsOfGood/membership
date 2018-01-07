@@ -1,13 +1,13 @@
-"use strict";
+'use strict';
 
-const Language = require("mongoose").model("Language");
+const Language = require('mongoose').model('Language');
 
 async function getAllLanguages() {
   return await Promise.all([
-    Language.find({ category: "languages" }),
-    Language.find({ category: "databases" }),
-    Language.find({ category: "deployment" }),
-    Language.find({ category: "web_technologies" })
+    Language.find({ category: 'languages' }),
+    Language.find({ category: 'databases' }),
+    Language.find({ category: 'deployment' }),
+    Language.find({ category: 'web_technologies' })
   ]).then(([languages, databases, deployment, web_technologies]) => ({
     languages,
     databases,
@@ -34,7 +34,7 @@ function generateScore(user) {
   score += 14 - user.credit_hours;
   // graduation dates
   const currYear = new Date().getFullYear();
-  const gradYear = parseInt(user.graduation_date.split(" ")[1], 10);
+  const gradYear = parseInt(user.graduation_date.split(' ')[1], 10);
   score += gradYear - currYear;
 
   // programming languages

@@ -10,9 +10,9 @@ import {
   Input,
   DatePicker,
   Tooltip
-} from "antd";
-import React, { Component } from "react";
-import propTypes from "prop-types";
+} from 'antd';
+import React, { Component } from 'react';
+import propTypes from 'prop-types';
 
 // Local Imports and Constants
 import {
@@ -23,7 +23,7 @@ import {
   frontEndFamiliarity,
   backEndFamiliarity,
   graduation_dates
-} from "./questions";
+} from './questions';
 const FormItem = Form.Item;
 const Option = Select.Option;
 const { TextArea } = Input;
@@ -37,7 +37,7 @@ class Application extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
+        console.log('Received values of form: ', values);
         console.log(this.props.register);
         this.props.register(values);
       }
@@ -62,11 +62,11 @@ class Application extends Component {
         <Form onSubmit={this.handleSubmit}>
           {/* Name */}
           <FormItem {...formItemLayout} label="Name">
-            {getFieldDecorator("name", {
+            {getFieldDecorator('name', {
               rules: [
                 {
                   required: true,
-                  message: "Please input your name!",
+                  message: 'Please input your name!',
                   whitespace: true
                 }
               ]
@@ -75,15 +75,15 @@ class Application extends Component {
 
           {/* Email */}
           <FormItem {...formItemLayout} label="E-mail">
-            {getFieldDecorator("email", {
+            {getFieldDecorator('email', {
               rules: [
                 {
-                  type: "email",
-                  message: "The input is not valid E-mail!"
+                  type: 'email',
+                  message: 'The input is not valid E-mail!'
                 },
                 {
                   required: true,
-                  message: "Please input your E-mail!"
+                  message: 'Please input your E-mail!'
                 }
               ]
             })(<Input />)}
@@ -91,25 +91,25 @@ class Application extends Component {
 
           {/* Cell Phone */}
           <FormItem {...formItemLayout} label="Phone Number">
-            {getFieldDecorator("phone", {
+            {getFieldDecorator('phone', {
               rules: [
                 {
                   required: true,
-                  message: "Please input your phone number!"
+                  message: 'Please input your phone number!'
                 }
               ]
-            })(<Input style={{ width: "100%" }} />)}
+            })(<Input style={{ width: '100%' }} />)}
           </FormItem>
 
           {/* Credit Hours */}
           <FormItem {...formItemLayout} label="Credit Hours">
-            {getFieldDecorator("credit_hours", {
+            {getFieldDecorator('credit_hours', {
               initialValue: 14,
               rules: [
                 {
                   required: true,
                   message:
-                    "Please input the number of credit hours you are taking this semester!"
+                    'Please input the number of credit hours you are taking this semester!'
                 }
               ]
             })(<InputNumber min={12} max={20} />)}
@@ -117,19 +117,19 @@ class Application extends Component {
 
           {/* Graduation Date */}
           <FormItem {...formItemLayout} label="Graduation Date" hasFeedback>
-            {getFieldDecorator("graduation_date", {
+            {getFieldDecorator('graduation_date', {
               rules: [
                 {
                   required: true,
-                  message: "Please select graduation date!"
+                  message: 'Please select graduation date!'
                 }
               ]
             })(
               <Select placeholder="Select Graduation Date">
                 {graduation_dates().map((date, index) => (
                   <Option key={date} value={date}>
-                    {" "}
-                    {date}{" "}
+                    {' '}
+                    {date}{' '}
                   </Option>
                 ))}
               </Select>
@@ -138,7 +138,7 @@ class Application extends Component {
 
           {/* Programming Languages */}
           <FormItem {...formItemLayout} label="Programming Languages">
-            {getFieldDecorator("languages")(
+            {getFieldDecorator('languages')(
               <Select mode="multiple" placeholder="Select Proficient Languages">
                 {programmingLanguages.map((item, index) => (
                   <Option key={`${item + index}`} value={item}>
@@ -151,7 +151,7 @@ class Application extends Component {
 
           {/* Web Technologies */}
           <FormItem {...formItemLayout} label="Web Technologies">
-            {getFieldDecorator("web_technologies")(
+            {getFieldDecorator('web_technologies')(
               <Select
                 mode="multiple"
                 placeholder="Select Proficient Web Technologies"
@@ -167,7 +167,7 @@ class Application extends Component {
 
           {/* Database Technology */}
           <FormItem {...formItemLayout} label="Database Technologies">
-            {getFieldDecorator("databases")(
+            {getFieldDecorator('databases')(
               <Select
                 mode="multiple"
                 placeholder="Select Proficient Database Technologies"
@@ -183,7 +183,7 @@ class Application extends Component {
 
           {/* Deployment Technology */}
           <FormItem {...formItemLayout} label="Deployment Technologies">
-            {getFieldDecorator("deployment")(
+            {getFieldDecorator('deployment')(
               <Select
                 mode="multiple"
                 placeholder="Select Proficient Deployment Technologies"
@@ -199,7 +199,7 @@ class Application extends Component {
 
           {/* Frontend Experience */}
           <FormItem {...formItemLayout} label="Frontend Experience">
-            {getFieldDecorator("frontend_experience", {
+            {getFieldDecorator('frontend_experience', {
               rules: [
                 {
                   required: true
@@ -218,7 +218,7 @@ class Application extends Component {
 
           {/* Backend Experience */}
           <FormItem {...formItemLayout} label="Backend Experience">
-            {getFieldDecorator("backend_experience", {
+            {getFieldDecorator('backend_experience', {
               rules: [
                 {
                   required: true
@@ -237,11 +237,11 @@ class Application extends Component {
 
           {/* BG interest */}
           <FormItem {...formItemLayout} label="Bits of Good Interest">
-            {getFieldDecorator("free_response.bg_interest", {
+            {getFieldDecorator('free_response.bg_interest', {
               rules: [
                 {
                   required: true,
-                  message: "Please answer the question!",
+                  message: 'Please answer the question!',
                   whitespace: true
                 }
               ]
@@ -255,11 +255,11 @@ class Application extends Component {
 
           {/* Teamwork */}
           <FormItem {...formItemLayout} label="Teamwork Experience">
-            {getFieldDecorator("free_response.team_experience", {
+            {getFieldDecorator('free_response.team_experience', {
               rules: [
                 {
                   required: true,
-                  message: "Please answer the question!",
+                  message: 'Please answer the question!',
                   whitespace: true
                 }
               ]
@@ -273,11 +273,11 @@ class Application extends Component {
 
           {/* Project */}
           <FormItem {...formItemLayout} label="Project Experience">
-            {getFieldDecorator("free_response.project_experience", {
+            {getFieldDecorator('free_response.project_experience', {
               rules: [
                 {
                   required: true,
-                  message: "Please answer the question!",
+                  message: 'Please answer the question!',
                   whitespace: true
                 }
               ]
@@ -291,11 +291,11 @@ class Application extends Component {
 
           {/* Commitments */}
           <FormItem {...formItemLayout} label="Other Commitments">
-            {getFieldDecorator("free_response.other_commitments", {
+            {getFieldDecorator('free_response.other_commitments', {
               rules: [
                 {
                   required: true,
-                  message: "Please answer the question!",
+                  message: 'Please answer the question!',
                   whitespace: true
                 }
               ]
@@ -316,7 +316,7 @@ class Application extends Component {
                 <Tooltip
                   title={
                     <span>
-                      Click to{" "}
+                      Click to{' '}
                       <a href="https://bitsofgood.org" target="_blank">
                         view projects
                       </a>
@@ -328,11 +328,11 @@ class Application extends Component {
               </span>
             }
           >
-            {getFieldDecorator("free_response.project_preference", {
+            {getFieldDecorator('free_response.project_preference', {
               rules: [
                 {
                   required: true,
-                  message: "Please answer the question!",
+                  message: 'Please answer the question!',
                   whitespace: true
                 }
               ]
@@ -356,8 +356,8 @@ class Application extends Component {
               </span>
             }
           >
-            {getFieldDecorator("pm_interest", {
-              valuePropName: "checked"
+            {getFieldDecorator('pm_interest', {
+              valuePropName: 'checked'
             })(<Switch />)}
           </FormItem>
 

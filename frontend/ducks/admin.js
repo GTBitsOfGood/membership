@@ -1,19 +1,19 @@
 // NPM Import
-import axios from "axios";
-import { push } from "react-router-redux";
+import axios from 'axios';
+import { push } from 'react-router-redux';
 
 // Actions
 
-const LOAD_PROJECTS = Symbol("app/admin/LOAD_PROJECTS");
-const LOAD_MORE_PROJECTS = Symbol("app/admin/LOAD_MORE_PROJECTS");
-const LOAD_APPLICANTS = Symbol("app/admin/LOAD_APPLICANTS");
-const LOAD_MORE_APPLICANTS = Symbol("app/admin/LOAD_MORE_APPLICANTS");
-const UPDATE_CURRENT_PROJECT = Symbol("app/admin/UPDATE_CURRENT_PROJECT");
-const UPDATE_CURRENT_APPLICANT = Symbol("app/admin/UPDATE_CURRENT_APPLICANT");
-const LOAD_NUM_APPS_SUBMITTED = Symbol("app/admin/LOAD_NUM_APPS_SUBMITTED");
-const LOAD_NUM_APPS_REJECTED = Symbol("app/admin/LOAD_NUM_APPS_REJECTED");
-const LOAD_NUM_APPS_ACCEPTED = Symbol("app/admin/LOAD_NUM_APPS_ACCEPTED");
-const LOAD_NUM_PM_INTEREST = Symbol("app/admin/LOAD_NUM_PM_INTEREST");
+const LOAD_PROJECTS = Symbol('app/admin/LOAD_PROJECTS');
+const LOAD_MORE_PROJECTS = Symbol('app/admin/LOAD_MORE_PROJECTS');
+const LOAD_APPLICANTS = Symbol('app/admin/LOAD_APPLICANTS');
+const LOAD_MORE_APPLICANTS = Symbol('app/admin/LOAD_MORE_APPLICANTS');
+const UPDATE_CURRENT_PROJECT = Symbol('app/admin/UPDATE_CURRENT_PROJECT');
+const UPDATE_CURRENT_APPLICANT = Symbol('app/admin/UPDATE_CURRENT_APPLICANT');
+const LOAD_NUM_APPS_SUBMITTED = Symbol('app/admin/LOAD_NUM_APPS_SUBMITTED');
+const LOAD_NUM_APPS_REJECTED = Symbol('app/admin/LOAD_NUM_APPS_REJECTED');
+const LOAD_NUM_APPS_ACCEPTED = Symbol('app/admin/LOAD_NUM_APPS_ACCEPTED');
+const LOAD_NUM_PM_INTEREST = Symbol('app/admin/LOAD_NUM_PM_INTEREST');
 
 // State Reducer
 const initialState = {
@@ -101,7 +101,7 @@ export function updateCurrentApplicant(id) {
 
 export function loadProjects() {
   return dispatch => {
-    axios.get("/api/projects").then(({ data }) => {
+    axios.get('/api/projects').then(({ data }) => {
       dispatch({
         type: LOAD_PROJECTS,
         projects: data.projects,
@@ -129,7 +129,7 @@ export function loadMoreProjects(page, pageSize = 10) {
 
 export function loadApplicants() {
   return dispatch => {
-    axios.get("/api/users").then(({ data }) => {
+    axios.get('/api/users').then(({ data }) => {
       dispatch({
         type: LOAD_APPLICANTS,
         applicants: data.users,
@@ -157,16 +157,16 @@ export function loadMoreApplicants(page, pageSize = 10) {
 
 export function loadDashboard() {
   return dispatch => {
-    axios.get("/api/users?count=submitted").then(({ data }) => {
+    axios.get('/api/users?count=submitted').then(({ data }) => {
       dispatch({ type: LOAD_NUM_APPS_SUBMITTED, submitted: data.submitted });
     });
-    axios.get("/api/users?count=accepted").then(({ data }) => {
+    axios.get('/api/users?count=accepted').then(({ data }) => {
       dispatch({ type: LOAD_NUM_APPS_ACCEPTED, accepted: data.accepted });
     });
-    axios.get("/api/users?count=rejected").then(({ data }) => {
+    axios.get('/api/users?count=rejected').then(({ data }) => {
       dispatch({ type: LOAD_NUM_APPS_REJECTED, rejected: data.rejected });
     });
-    axios.get("/api/users?count=pm_interest").then(({ data }) => {
+    axios.get('/api/users?count=pm_interest').then(({ data }) => {
       dispatch({ type: LOAD_NUM_PM_INTEREST, pm_interest: data.pm_interest });
     });
   };

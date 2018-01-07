@@ -1,4 +1,4 @@
-const Language = require("mongoose").model("Language");
+const Language = require('mongoose').model('Language');
 
 module.exports.index = (req, res, next) => {
   Language.find({}, (err, languages) => {

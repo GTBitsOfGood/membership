@@ -1,4 +1,4 @@
-const Project = require("mongoose").model("Project");
+const Project = require('mongoose').model('Project');
 
 module.exports.index = (req, res, next) => {
   // pagination settings
@@ -9,8 +9,8 @@ module.exports.index = (req, res, next) => {
     Project.find()
       .limit(limit)
       .skip(skip)
-      .populate("project_manger")
-      .populate("project_members")
+      .populate('project_manger')
+      .populate('project_members')
       .exec(),
     Project.count().exec()
   ])
@@ -30,8 +30,8 @@ module.exports.index = (req, res, next) => {
 
 module.exports.get = (req, res, next) => {
   Project.findById(req.params.id)
-    .populate("project_manger")
-    .populate("project_members")
+    .populate('project_manger')
+    .populate('project_members')
     .exec((err, project) => {
       if (err) {
         console.error(err);

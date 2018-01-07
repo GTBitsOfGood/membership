@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Provider } from "react-redux";
-import { ConnectedRouter } from "react-router-redux";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'react-router-redux';
 
-import AppContainer from "./AppContainer.js";
-import DevTools from "./DevTools";
+import AppContainer from './AppContainer.js';
+import DevTools from './DevTools';
 
 export default function Root({ store, history }) {
   return (

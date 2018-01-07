@@ -1,10 +1,10 @@
 // NPM Import
-import axios from "axios";
-import { push } from "react-router-redux";
+import axios from 'axios';
+import { push } from 'react-router-redux';
 
 // Actions
-const LOGOUT = Symbol("app/auth/logout");
-const LOAD_USER = Symbol("app/auth/load_user");
+const LOGOUT = Symbol('app/auth/logout');
+const LOAD_USER = Symbol('app/auth/load_user');
 
 // State Reducer
 const initialState = {
@@ -28,15 +28,15 @@ export default function reducer(state = initialState, action) {
 export function login() {
   return dispatch => {
     axios
-      .get("/api/profile")
+      .get('/api/profile')
       .then(({ data }) => {
         const { user } = data;
         if (user) {
           return dispatch(loadUser(user));
         }
-        return dispatch(push("/login"));
+        return dispatch(push('/login'));
       })
-      .catch(() => dispatch(push("/login")));
+      .catch(() => dispatch(push('/login')));
   };
 }
 
@@ -45,21 +45,21 @@ export function register(formData) {
     const { user } = getState().auth;
     axios
       .put(`/api/users/${user._id}`, {
-        application_status: "submitted",
+        application_status: 'submitted',
         ...formData
       })
       .then(({ data }) => {
         dispatch(loadUser(data.user));
       })
-      .catch(() => dispatch(push("/login")));
+      .catch(() => dispatch(push('/login')));
   };
 }
 
 export function logout() {
   return dispatch => {
-    sessionStorage.removeItem("state");
-    axios.get("/api/logout").then(() => dispatch(logoutGenerator()));
-    return dispatch(push("/login"));
+    sessionStorage.removeItem('state');
+    axios.get('/api/logout').then(() => dispatch(logoutGenerator()));
+    return dispatch(push('/login'));
   };
 }
 

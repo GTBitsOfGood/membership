@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = Schema(
@@ -45,45 +45,45 @@ const userSchema = Schema(
     languages: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Language"
+        ref: 'Language'
       }
     ],
     web_technologies: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Language"
+        ref: 'Language'
       }
     ],
     databases: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Language"
+        ref: 'Language'
       }
     ],
     deployment: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Language"
+        ref: 'Language'
       }
     ],
     frontend_experience: {
       type: String,
       enum: [
-        "Never worked with it",
-        "A little experience",
-        "Some experience",
-        "A lot of experience",
-        "Can teach it"
+        'Never worked with it',
+        'A little experience',
+        'Some experience',
+        'A lot of experience',
+        'Can teach it'
       ]
     },
     backend_experience: {
       type: String,
       enum: [
-        "Never worked with it",
-        "A little experience",
-        "Some experience",
-        "A lot of experience",
-        "Can teach it"
+        'Never worked with it',
+        'A little experience',
+        'Some experience',
+        'A lot of experience',
+        'Can teach it'
       ]
     },
     free_response: {
@@ -95,17 +95,17 @@ const userSchema = Schema(
     },
     role: {
       type: String,
-      default: "applicant",
-      enum: ["applicant", "admin"]
+      default: 'applicant',
+      enum: ['applicant', 'admin']
     },
     application_status: {
       type: String,
-      default: "none",
-      enum: ["none", "submitted", "rejected", "accepted"]
+      default: 'none',
+      enum: ['none', 'submitted', 'rejected', 'accepted']
     }
   },
   { timestamps: true }
 );
 
 // export user model to app
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model('User', userSchema);

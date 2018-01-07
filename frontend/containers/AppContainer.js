@@ -1,13 +1,13 @@
 // NPM Imports
-import propTypes from "prop-types";
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Route, Switch, Redirect, withRouter } from "react-router-dom";
+import propTypes from 'prop-types';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 
 // Local Imports
-import Dashboard from "./Dashboard";
-import Splash from "../components/Splash";
-import { login, logout, register } from "../ducks/auth";
+import Dashboard from './Dashboard';
+import Splash from '../components/Splash';
+import { login, logout, register } from '../ducks/auth';
 
 class AppContainer extends Component {
   constructor(props) {

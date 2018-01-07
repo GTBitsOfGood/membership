@@ -1,28 +1,28 @@
-import React from "react";
-import propTypes from "prop-types";
-import { List, Avatar } from "antd";
+import React from 'react';
+import propTypes from 'prop-types';
+import { List, Avatar } from 'antd';
 
 const BasicInfo = ({ data }) => {
   const dataSource = [
     {
-      title: "Programming Languages",
-      data: data.languages.map(item => item.name).join(", "),
-      icon: "code-o"
+      title: 'Programming Languages',
+      data: data.languages.map(item => item.name).join(', '),
+      icon: 'code-o'
     },
     {
-      title: "Web Technology",
-      data: data.web_technologies.map(item => item.name).join(", "),
-      icon: "desktop"
+      title: 'Web Technology',
+      data: data.web_technologies.map(item => item.name).join(', '),
+      icon: 'desktop'
     },
     {
-      title: "Databases",
-      data: data.databases.map(item => item.name).join(", "),
-      icon: "database"
+      title: 'Databases',
+      data: data.databases.map(item => item.name).join(', '),
+      icon: 'database'
     },
     {
-      title: "Deployment Technology",
-      data: data.deployment.map(item => item.name).join(", "),
-      icon: "cloud-upload-o"
+      title: 'Deployment Technology',
+      data: data.deployment.map(item => item.name).join(', '),
+      icon: 'cloud-upload-o'
     }
   ];
   return (

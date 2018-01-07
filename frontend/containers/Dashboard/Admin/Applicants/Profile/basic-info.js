@@ -1,50 +1,50 @@
-import React from "react";
-import propTypes from "prop-types";
-import { List, Avatar } from "antd";
+import React from 'react';
+import propTypes from 'prop-types';
+import { List, Avatar } from 'antd';
 
 const BasicInfo = ({ data }) => {
   const dataSource = [
     {
-      title: "Contact Info",
+      title: 'Contact Info',
       data: [
         {
-          label: "Phone",
+          label: 'Phone',
           value: data.phone
         },
         {
-          label: "Email",
+          label: 'Email',
           value: data.email
         }
       ],
-      icon: "idcard"
+      icon: 'idcard'
     },
     {
-      title: "Buzzport",
+      title: 'Buzzport',
       data: [
         {
-          label: "Credit Hours",
+          label: 'Credit Hours',
           value: data.credit_hours
         },
         {
-          label: "Graduation",
+          label: 'Graduation',
           value: data.graduation_date
         }
       ],
-      icon: "book"
+      icon: 'book'
     },
     {
-      title: "Github Stats",
+      title: 'Github Stats',
       data: [
         {
-          label: "Public Repos",
+          label: 'Public Repos',
           value: data.github.public_repos
         },
         {
-          label: "Followers",
+          label: 'Followers',
           value: data.github.followers
         }
       ],
-      icon: "github"
+      icon: 'github'
     }
   ];
   return (

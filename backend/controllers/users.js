@@ -1,12 +1,12 @@
-const User = require("mongoose").model("User");
+const User = require('mongoose').model('User');
 
-const util = require("../services/util");
+const util = require('../services/util');
 
 module.exports.index = (req, res, next) => {
   if (req.query.count) {
     switch (req.query.count) {
-      case "submitted": {
-        User.count({ application_status: "submitted" }, (err, submitted) => {
+      case 'submitted': {
+        User.count({ application_status: 'submitted' }, (err, submitted) => {
           if (err) {
             console.log(err);
             res.locals.error = err;
@@ -20,8 +20,8 @@ module.exports.index = (req, res, next) => {
         });
         break;
       }
-      case "accepted": {
-        User.count({ application_status: "accepted" }, (err, accepted) => {
+      case 'accepted': {
+        User.count({ application_status: 'accepted' }, (err, accepted) => {
           if (err) {
             console.log(err);
             res.locals.error = err;
@@ -35,8 +35,8 @@ module.exports.index = (req, res, next) => {
         });
         break;
       }
-      case "rejected": {
-        User.count({ application_status: "rejected" }, (err, rejected) => {
+      case 'rejected': {
+        User.count({ application_status: 'rejected' }, (err, rejected) => {
           if (err) {
             console.log(err);
             res.locals.error = err;
@@ -50,7 +50,7 @@ module.exports.index = (req, res, next) => {
         });
         break;
       }
-      case "pm_interest": {
+      case 'pm_interest': {
         User.count({ pm_interest: true }, (err, pmInterest) => {
           if (err) {
             console.log(err);
@@ -66,7 +66,7 @@ module.exports.index = (req, res, next) => {
         break;
       }
       default: {
-        console.log("this should not be hit...");
+        console.log('this should not be hit...');
         console.log(req.query);
         return next();
       }
@@ -77,16 +77,16 @@ module.exports.index = (req, res, next) => {
     const skip = (req.query.page - 1 || 0) * limit;
 
     Promise.all([
-      User.find({ role: "applicant" })
-        .sort("-updatedAt")
+      User.find({ role: 'applicant' })
+        .sort('-updatedAt')
         .limit(limit)
         .skip(skip)
-        .populate("languages")
-        .populate("databases")
-        .populate("web_technologies")
-        .populate("deployment")
+        .populate('languages')
+        .populate('databases')
+        .populate('web_technologies')
+        .populate('deployment')
         .exec(),
-      User.count({ role: "applicant" }).exec()
+      User.count({ role: 'applicant' }).exec()
     ])
       .then(([users, count]) => {
         res.locals.data = {
@@ -105,10 +105,10 @@ module.exports.index = (req, res, next) => {
 
 module.exports.get = (req, res, next) => {
   User.findById(req.params.id)
-    .populate("languages")
-    .populate("web_technologies")
-    .populate("databases")
-    .populate("deployment")
+    .populate('languages')
+    .populate('web_technologies')
+    .populate('databases')
+    .populate('deployment')
     .exec((err, usr) => {
       if (err) {
         console.error(err);
@@ -125,9 +125,9 @@ module.exports.get = (req, res, next) => {
 
 module.exports.store = (req, res, next) => {
   // protect application_status  and role changes
-  let appStatus = "none";
-  let role = "applicant";
-  if (req.user.role === "admin") {
+  let appStatus = 'none';
+  let role = 'applicant';
+  if (req.user.role === 'admin') {
     appStatus = req.body.application_status
       ? req.body.application_status
       : appStatus;
@@ -208,23 +208,23 @@ module.exports.update = (req, res, next) => {
       : user.free_response;
     user.websites = req.body.websites ? req.body.websites : user.websites;
     user.languages = req.body.languages
-      ? await util.strsToLangs(req.body.languages, "languages")
+      ? await util.strsToLangs(req.body.languages, 'languages')
       : [];
     user.web_technologies = req.body.web_technologies
-      ? await util.strsToLangs(req.body.web_technologies, "web_technologies")
+      ? await util.strsToLangs(req.body.web_technologies, 'web_technologies')
       : [];
     user.databases = req.body.databases
-      ? await util.strsToLangs(req.body.databases, "databases")
+      ? await util.strsToLangs(req.body.databases, 'databases')
       : [];
     user.deployment = req.body.deployment
-      ? await util.strsToLangs(req.body.deployment, "deployment")
+      ? await util.strsToLangs(req.body.deployment, 'deployment')
       : [];
     user.github = req.body.github ? req.body.github : user.github;
     user.score = util.generateScore(user);
     // protect application_status changes
     if (
       req.body.application_status &&
-      (req.body.application_status === "submitted" || req.user.role === "admin")
+      (req.body.application_status === 'submitted' || req.user.role === 'admin')
     ) {
       user.application_status = req.body.application_status
         ? req.body.application_status
@@ -232,7 +232,7 @@ module.exports.update = (req, res, next) => {
     }
 
     // protect role changes
-    if (req.body.role && req.user.role === "admin") {
+    if (req.body.role && req.user.role === 'admin') {
       user.role = req.body.role ? req.body.role : user.role;
     }
 

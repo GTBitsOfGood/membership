@@ -1,9 +1,9 @@
-var expect = require("chai").expect;
+var expect = require('chai').expect;
 
-var Language = require("../../backend/models/language");
+var Language = require('../../backend/models/language');
 
-describe("Model - Language", function() {
-  it("should be invalid if name is empty", function(done) {
+describe('Model - Language', function() {
+  it('should be invalid if name is empty', function(done) {
     var m = new Language();
 
     m.validate(function(err) {
@@ -11,7 +11,7 @@ describe("Model - Language", function() {
       done();
     });
   });
-  it("should be invalid if name is not a string", function(done) {
+  it('should be invalid if name is not a string', function(done) {
     var m = new Language({
       name: {}
     });
@@ -21,7 +21,7 @@ describe("Model - Language", function() {
       done();
     });
   });
-  it("should be invalid if value is empty", function(done) {
+  it('should be invalid if value is empty', function(done) {
     var m = new Language();
 
     m.validate(function(err) {
@@ -29,7 +29,7 @@ describe("Model - Language", function() {
       done();
     });
   });
-  it("should be invalid if value is not a number", function(done) {
+  it('should be invalid if value is not a number', function(done) {
     var m = new Language({
       value: {}
     });
@@ -39,11 +39,11 @@ describe("Model - Language", function() {
       done();
     });
   });
-  it("should be valid given proper data", function(done) {
+  it('should be valid given proper data', function(done) {
     var m = new Language({
-      name: "Node.js",
+      name: 'Node.js',
       value: 2,
-      category: "test"
+      category: 'test'
     });
 
     m.validate(function(err) {

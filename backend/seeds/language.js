@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
-const async = require("async");
-const Language = require("mongoose").model("Language");
-const languages = require("./support/languages");
+const mongoose = require('mongoose');
+const async = require('async');
+const Language = require('mongoose').model('Language');
+const languages = require('./support/languages');
 
 function seed(exit) {
   async.each(

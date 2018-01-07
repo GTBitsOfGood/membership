@@ -1,8 +1,8 @@
 // NPM Imports
-import propTypes from "prop-types";
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Route, Switch, Redirect, withRouter } from "react-router-dom";
+import propTypes from 'prop-types';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 
 // Local Imports
 // import Dashboard from "./Dashboard";

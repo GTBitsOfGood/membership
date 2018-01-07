@@ -1,8 +1,8 @@
-var expect = require("chai").expect;
+var expect = require('chai').expect;
 
-var User = require("../../backend/models/user");
+var User = require('../../backend/models/user');
 
-describe("Model - User", function() {
+describe('Model - User', function() {
   // it('should be invalid if name is empty', function(done) {
   //     var m = new User();
 
@@ -19,9 +19,9 @@ describe("Model - User", function() {
   //         done();
   //     });
   // });
-  it("should be invalid if score is not a number", function(done) {
+  it('should be invalid if score is not a number', function(done) {
     var m = new User({
-      score: "TEST"
+      score: 'TEST'
     });
 
     m.validate(function(err) {
@@ -29,7 +29,7 @@ describe("Model - User", function() {
       done();
     });
   });
-  it("should be invalid if name is not a string", function(done) {
+  it('should be invalid if name is not a string', function(done) {
     var m = new User({
       name: {}
     });
@@ -39,7 +39,7 @@ describe("Model - User", function() {
       done();
     });
   });
-  it("should be invalid if email is not a string", function(done) {
+  it('should be invalid if email is not a string', function(done) {
     var m = new User({
       email: {}
     });
@@ -49,9 +49,9 @@ describe("Model - User", function() {
       done();
     });
   });
-  it("should be invalid if credit_hours is not a number", function(done) {
+  it('should be invalid if credit_hours is not a number', function(done) {
     var m = new User({
-      credit_hours: "TEST"
+      credit_hours: 'TEST'
     });
 
     m.validate(function(err) {
@@ -59,7 +59,7 @@ describe("Model - User", function() {
       done();
     });
   });
-  it("should be invalid if websites is not an array", function(done) {
+  it('should be invalid if websites is not an array', function(done) {
     var m = new User({
       websites: {}
     });
@@ -69,7 +69,7 @@ describe("Model - User", function() {
       done();
     });
   });
-  it("should be invalid if websites is not an array of strings", function(done) {
+  it('should be invalid if websites is not an array of strings', function(done) {
     var m = new User({
       websites: [{}, {}]
     });
@@ -79,9 +79,9 @@ describe("Model - User", function() {
       done();
     });
   });
-  it("should be invalid if role is not a valid value", function(done) {
+  it('should be invalid if role is not a valid value', function(done) {
     var m = new User({
-      role: "Mr. Peanut Butter"
+      role: 'Mr. Peanut Butter'
     });
 
     m.validate(function(err) {

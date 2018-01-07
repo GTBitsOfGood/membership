@@ -1,15 +1,15 @@
 // NPM Imports
-import { Layout, Menu, Breadcrumb } from "antd";
-import propTypes from "prop-types";
-import React from "react";
+import { Layout, Menu, Breadcrumb } from 'antd';
+import propTypes from 'prop-types';
+import React from 'react';
 
 // Local Imports & Constants
-import Application from "../../components/Application";
+import Application from '../../components/Application';
 const { Header, Content, Footer } = Layout;
 
 const Visitor = ({ logout, register, user }) => {
   const navigate = ({ key }) => {
-    if (key === "logout") {
+    if (key === 'logout') {
       logout();
     }
   };
@@ -21,8 +21,8 @@ const Visitor = ({ logout, register, user }) => {
         <Menu
           theme="dark"
           mode="horizontal"
-          defaultSelectedKeys={["application"]}
-          style={{ lineHeight: "64px" }}
+          defaultSelectedKeys={['application']}
+          style={{ lineHeight: '64px' }}
           onClick={navigate}
         >
           <Menu.Item key="application">Application</Menu.Item>

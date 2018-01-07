@@ -1,14 +1,14 @@
 // NPM Imports
-import propTypes from "prop-types";
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Route, Switch, Redirect, withRouter } from "react-router-dom";
-import { Card, Col, Row, Table } from "antd";
-import { bindActionCreators } from "redux";
-import * as actions from "../../../ducks/admin";
+import propTypes from 'prop-types';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
+import { Card, Col, Row, Table } from 'antd';
+import { bindActionCreators } from 'redux';
+import * as actions from '../../../ducks/admin';
 
 // Local Imports
-import { applicantDashColumns } from "./Applicants/columns";
+import { applicantDashColumns } from './Applicants/columns';
 
 class Home extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <div style={{ background: "#edf6ff", padding: "30px" }}>
+        <div style={{ background: '#edf6ff', padding: '30px' }}>
           <Row gutter={16}>
             <Col span={6}>
               <Card title={<h3 className="center">Applications</h3>}>

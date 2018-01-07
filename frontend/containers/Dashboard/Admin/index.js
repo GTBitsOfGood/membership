@@ -1,19 +1,19 @@
 // NPM Imports
-import { Layout, Menu } from "antd";
-import propTypes from "prop-types";
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Route, Switch, Link, withRouter } from "react-router-dom";
-import { bindActionCreators } from "redux";
+import { Layout, Menu } from 'antd';
+import propTypes from 'prop-types';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Route, Switch, Link, withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 
 // Local Imports & Constants
-import Applicants from "./Applicants";
-import Home from "./Home";
-import Selection from "./Selection";
-import Projects from "./Projects";
-import ProjectProfile from "./Projects/profile";
-import ApplicantProfile from "./Applicants/profile";
-import * as actions from "../../../ducks/admin";
+import Applicants from './Applicants';
+import Home from './Home';
+import Selection from './Selection';
+import Projects from './Projects';
+import ProjectProfile from './Projects/profile';
+import ApplicantProfile from './Applicants/profile';
+import * as actions from '../../../ducks/admin';
 
 class Admin extends Component {
   constructor(props) {
@@ -26,9 +26,9 @@ class Admin extends Component {
     this.props.loadProjects();
     this.props.loadApplicants();
     // check current url for applicant/project route
-    const url = this.props.match.url.split("/");
-    const currentProjectId = url[1] === "projects" ? url[2] : undefined;
-    const currentApplicantId = url[1] === "applicants" ? url[2] : undefined;
+    const url = this.props.match.url.split('/');
+    const currentProjectId = url[1] === 'projects' ? url[2] : undefined;
+    const currentApplicantId = url[1] === 'applicants' ? url[2] : undefined;
     if (currentProjectId) {
       this.props.updateCurrentProject(currentProjectId);
     }
@@ -38,14 +38,14 @@ class Admin extends Component {
   }
 
   navigate({ key }) {
-    if (key === "logout") {
+    if (key === 'logout') {
       this.props.logout();
     }
   }
 
   currentKey() {
     return [
-      this.props.match.url === "/" ? "home" : this.props.match.url.split("/")[1]
+      this.props.match.url === '/' ? 'home' : this.props.match.url.split('/')[1]
     ];
   }
 
@@ -58,7 +58,7 @@ class Admin extends Component {
             theme="dark"
             mode="horizontal"
             defaultSelectedKeys={this.currentKey()}
-            style={{ lineHeight: "64px" }}
+            style={{ lineHeight: '64px' }}
             onClick={this.navigate}
           >
             <Menu.Item key="home">

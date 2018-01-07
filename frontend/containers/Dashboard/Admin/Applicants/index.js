@@ -1,11 +1,11 @@
-import React from "react";
-import propTypes from "prop-types";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { Table } from "antd";
+import React from 'react';
+import propTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Table } from 'antd';
 
-import * as actions from "../../../../ducks/admin";
-import { applicantColumns } from "./columns";
+import * as actions from '../../../../ducks/admin';
+import { applicantColumns } from './columns';
 
 const Applicants = ({
   data,

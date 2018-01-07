@@ -1,24 +1,24 @@
-import React, { Component } from "react";
-import propTypes from "prop-types";
-import { Icon, Card, Row, Col } from "antd";
+import React, { Component } from 'react';
+import propTypes from 'prop-types';
+import { Icon, Card, Row, Col } from 'antd';
 
-import NotFound from "../../../../../components/NotFound";
+import NotFound from '../../../../../components/NotFound';
 
-import BasicInfo from "./basic-info";
-import CodingInfo from "./coding-info";
-import ResponsesInfo from "./responses-info";
+import BasicInfo from './basic-info';
+import CodingInfo from './coding-info';
+import ResponsesInfo from './responses-info';
 const tabTitles = [
   {
-    key: "basic",
-    tab: "Basic Info"
+    key: 'basic',
+    tab: 'Basic Info'
   },
   {
-    key: "coding",
-    tab: "Coding Experience"
+    key: 'coding',
+    tab: 'Coding Experience'
   },
   {
-    key: "responses",
-    tab: "Free Responses"
+    key: 'responses',
+    tab: 'Free Responses'
   }
 ];
 
@@ -27,7 +27,7 @@ class Profile extends Component {
     super(props);
 
     this.state = {
-      titleKey: "basic",
+      titleKey: 'basic',
       loading: true,
       timer: null
     };
@@ -65,7 +65,7 @@ class Profile extends Component {
                 <img alt="example" src={this.props.data.github.avatar_url} />
               }
               actions={[
-                <Icon type="edit" onClick={() => alert("clicked")} />,
+                <Icon type="edit" onClick={() => alert('clicked')} />,
                 <Icon type="delete" />,
                 <Icon type="usergroup-add" />
               ]}
@@ -75,7 +75,7 @@ class Profile extends Component {
                 description={
                   <div>
                     <p>
-                      Application Status:{" "}
+                      Application Status:{' '}
                       {this.props.data.application_status.toUpperCase()}
                     </p>
                     <a
@@ -91,17 +91,17 @@ class Profile extends Component {
           </Col>
           <Col span={16}>
             <Card
-              style={{ width: "100%" }}
+              style={{ width: '100%' }}
               tabList={tabTitles}
               onTabChange={key => this.onTabChange(key)}
             >
-              {this.state.titleKey === "basic" && (
+              {this.state.titleKey === 'basic' && (
                 <BasicInfo data={this.props.data} />
               )}
-              {this.state.titleKey === "coding" && (
+              {this.state.titleKey === 'coding' && (
                 <CodingInfo data={this.props.data} />
               )}
-              {this.state.titleKey === "responses" && (
+              {this.state.titleKey === 'responses' && (
                 <ResponsesInfo data={this.props.data} />
               )}
             </Card>

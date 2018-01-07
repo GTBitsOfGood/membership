@@ -1,9 +1,9 @@
-var expect = require("chai").expect;
+var expect = require('chai').expect;
 
-var Project = require("../../backend/models/project");
+var Project = require('../../backend/models/project');
 
-describe("Model - Project", function() {
-  it("should be invalid if description is empty", function(done) {
+describe('Model - Project', function() {
+  it('should be invalid if description is empty', function(done) {
     var m = new Project();
 
     m.validate(function(err) {
@@ -11,7 +11,7 @@ describe("Model - Project", function() {
       done();
     });
   });
-  it("should be invalid if organization is empty", function(done) {
+  it('should be invalid if organization is empty', function(done) {
     var m = new Project();
 
     m.validate(function(err) {
@@ -19,7 +19,7 @@ describe("Model - Project", function() {
       done();
     });
   });
-  it("should be invalid if description is not a string", function(done) {
+  it('should be invalid if description is not a string', function(done) {
     var m = new Project({
       description: {}
     });
@@ -29,7 +29,7 @@ describe("Model - Project", function() {
       done();
     });
   });
-  it("should be invalid if organization is not a string", function(done) {
+  it('should be invalid if organization is not a string', function(done) {
     var m = new Project({
       organization: {}
     });

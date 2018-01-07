@@ -1,8 +1,8 @@
 // NPM Imports
-import { Row, Col, Card } from "antd";
-import propTypes from "prop-types";
-import React, { Component } from "react";
-import ReactLoading from "react-loading";
+import { Row, Col, Card } from 'antd';
+import propTypes from 'prop-types';
+import React, { Component } from 'react';
+import ReactLoading from 'react-loading';
 
 class NotFound extends Component {
   constructor() {
@@ -32,8 +32,8 @@ class NotFound extends Component {
     return (
       <Row type="flex" justify="centered">
         {this.state.loading ? (
-          <Col offset={12} style={{ paddingTop: "150px" }}>
-            <ReactLoading type={"spin"} color={"#3a85ff"} delay={0} />
+          <Col offset={12} style={{ paddingTop: '150px' }}>
+            <ReactLoading type={'spin'} color={'#3a85ff'} delay={0} />
           </Col>
         ) : (
           <Col span={12} offset={6}>

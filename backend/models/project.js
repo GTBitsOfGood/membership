@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const projectSchema = Schema(
@@ -35,17 +35,17 @@ const projectSchema = Schema(
     },
     project_manager: {
       type: Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: false
     },
     project_members: [
       {
         type: Schema.Types.ObjectId,
-        ref: "User"
+        ref: 'User'
       }
     ]
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Project", projectSchema);
+module.exports = mongoose.model('Project', projectSchema);

@@ -1,8 +1,8 @@
 // NPM Packages
-import React from "react";
-import { Button } from "antd";
+import React from 'react';
+import { Button } from 'antd';
 
-import logo from "../assets/official_logo.png";
+import logo from '../assets/official_logo.png';
 
 const Clean = () => (
   <div className="box">

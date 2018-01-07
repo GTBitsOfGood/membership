@@ -1,12 +1,12 @@
-require("dotenv").config();
-require("../db");
-const async = require("async");
-const normalizedPath = require("path").join(__dirname);
+require('dotenv').config();
+require('../db');
+const async = require('async');
+const normalizedPath = require('path').join(__dirname);
 
-const blacklist = ["index.js", "support"];
+const blacklist = ['index.js', 'support'];
 
 async.each(
-  require("fs").readdirSync(normalizedPath),
+  require('fs').readdirSync(normalizedPath),
   (file, cb) => {
     if (blacklist.indexOf(file) === -1) {
       console.log(`--- SEEDING: ${file} ---`);
@@ -17,7 +17,7 @@ async.each(
   },
   err => {
     if (err) console.error(err);
-    console.log("--- SEEDING COMPLETE ---");
+    console.log('--- SEEDING COMPLETE ---');
     process.exit(0);
   }
 );

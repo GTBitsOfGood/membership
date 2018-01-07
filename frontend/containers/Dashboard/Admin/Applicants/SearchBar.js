@@ -1,20 +1,20 @@
-import React from "react";
-import propTypes from "prop-types";
-import { Input, Icon } from "antd";
+import React from 'react';
+import propTypes from 'prop-types';
+import { Input, Icon } from 'antd';
 
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: ""
+      search: ''
     };
 
     this.clear = this.clear.bind(this);
     this.onSearch = this.onSearch.bind(this);
   }
   clear() {
-    this.setState({ search: "" });
-    this.props.fuzzy("");
+    this.setState({ search: '' });
+    this.props.fuzzy('');
   }
   onSearch(e) {
     this.props.fuzzy(e.target.value);
@@ -27,11 +27,11 @@ class SearchBar extends React.Component {
     ) : null;
     return (
       <Input
-        prefix={<Icon type="search" style={{ color: "rgba(0,0,0,.25)" }} />}
+        prefix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }} />}
         suffix={suffix}
         value={search}
         onChange={this.onSearch}
-        style={{ width: "50%" }}
+        style={{ width: '50%' }}
       />
     );
   }
