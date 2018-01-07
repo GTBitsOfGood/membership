@@ -59,14 +59,15 @@ const BasicInfo = ({ data }) => {
               <Avatar icon={item.icon} />
             }
             title={item.title}
+            description={item.data.map(e => {
+              if (e.value) {
+                return (<p key={e.label}><b>{e.label}</b>: {e.value}</p>)
+              } else {
+                return (<p key={e.label}><b>{e.label}</b>: <i>Not Set</i></p>)
+              }
+            })}
           />
-          {item.data.map(e => {
-            if (e.value) {
-              return (<p key={e.label}><b>{e.label}</b>: {e.value}</p>)
-            } else {
-              return (<p key={e.label}><b>{e.label}</b>: <i>Not Set</i></p>)
-            }
-          })}
+
         </List.Item>
       )}
     />
