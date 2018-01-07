@@ -40,64 +40,68 @@ const userSchema = Schema(
       followers: {
         type: Number,
         required: true
-      },
+      }
     },
     languages: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Language"
+        ref: 'Language'
       }
     ],
     web_technologies: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Language"
+        ref: 'Language'
       }
     ],
     databases: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Language"
+        ref: 'Language'
       }
     ],
     deployment: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Language"
+        ref: 'Language'
       }
     ],
     frontend_experience: {
       type: String,
-      enum: ["Never worked with it",
-        "A little experience",
-        "Some experience",
-        "A lot of experience",
-        "Can teach it"]
+      enum: [
+        'Never worked with it',
+        'A little experience',
+        'Some experience',
+        'A lot of experience',
+        'Can teach it'
+      ]
     },
     backend_experience: {
       type: String,
-      enum: ["Never worked with it",
-        "A little experience",
-        "Some experience",
-        "A lot of experience",
-        "Can teach it"]
+      enum: [
+        'Never worked with it',
+        'A little experience',
+        'Some experience',
+        'A lot of experience',
+        'Can teach it'
+      ]
     },
     free_response: {
       bg_interest: String,
       team_experience: String,
       project_experience: String,
       other_commitments: String,
-      project_preference: String,
+      project_preference: String
     },
     role: {
       type: String,
-      default: "applicant",
-      enum: ["applicant", "admin"]
+      default: 'applicant',
+      enum: ['applicant', 'admin']
     },
     application_status: {
       type: String,
-      default: "none",
-      enum: ["none", "submitted", "rejected", "accepted"]
+      default: 'none',
+      enum: ['none', 'submitted', 'rejected', 'accepted']
     }
   },
   { timestamps: true }

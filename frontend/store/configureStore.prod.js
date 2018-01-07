@@ -5,7 +5,7 @@ import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 
 // Local Imports & Constants
-import rootReducer from "../reducer";
+import rootReducer from '../reducer';
 import { loadState } from './sessionStorage';
 const persistedState = loadState();
 

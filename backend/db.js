@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const mongoDB = process.env.MONGODB_URI;
 mongoose.connect(mongoDB, {
-  useMongoClient: true,
+  useMongoClient: true
 });
 
 // Get the default connection
