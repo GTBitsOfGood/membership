@@ -4,7 +4,6 @@ export const applicantColumns = updateCurrentProject => [
   {
     title: "Name",
     dataIndex: "name",
-    // render: (text, record) => <Link to={`/applicants/${record._id}`}>{text}</Link>
     render: (text, record) => (
       <a onClick={() => updateCurrentProject(record._id)}> {text} </a>
     )
@@ -41,7 +40,6 @@ export const applicantDashColumns = updateCurrentProject => [
   {
     title: "Name",
     dataIndex: "name",
-    // render: (text, record) => <Link to={`/applicants/${record._id}`}>{text}</Link>
     render: (text, record) => (
       <a onClick={() => updateCurrentProject(record._id)}> {text} </a>
     )

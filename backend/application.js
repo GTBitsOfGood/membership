@@ -102,7 +102,7 @@ router.get(
   passport.authenticate("github"),
   (req, res) => {
     // Successful authentication, redirect home.
-    res.redirect("/");
+    return res.redirect("/");
   }
 );
 // Logout Route

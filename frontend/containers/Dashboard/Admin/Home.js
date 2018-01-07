@@ -9,16 +9,11 @@ import * as actions from "../../../ducks/admin";
 
 // Local Imports
 import { applicantDashColumns } from "./Applicants/columns";
-// import Dashboard from "./Dashboard";
-// import Splash from "../components/Splash";
-// import { login, logout } from "../ducks/auth";
-// import PrivateRoute from "../components/PrivateRoute";
 
 class Home extends Component {
   constructor(props) {
     super(props);
   }
-  componentWillMount() {}
 
   render() {
     return (
