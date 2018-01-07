@@ -51,7 +51,7 @@ module.exports.index = (req, res, next) => {
         break;
       }
       case 'pm_interest': {
-        User.count({ pm_interest: true }, (err, pm_interest) => {
+        User.count({ pm_interest: true }, (err, pmInterest) => {
           if (err) {
             console.log(err);
             res.locals.error = err;
@@ -59,7 +59,7 @@ module.exports.index = (req, res, next) => {
           }
 
           res.locals.data = {
-            pm_interest,
+            pm_interest: pmInterest,
           };
           return next();
         });

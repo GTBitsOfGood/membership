@@ -33,15 +33,15 @@ const ResponsesInfo = ({ data }) => {
   ];
   return (
     <List
-      itemLayout="vertical"
       dataSource={dataSource}
       renderItem={item => (
         <List.Item>
           <List.Item.Meta
             avatar={<Avatar icon={item.icon} />}
-            title={<a href="https://ant.design">{item.title}</a>}
+            title={item.title}
+            description={<p>{item.data ? item.data : (<i>Not set</i>)}</p>}
           />
-          <p>{item.data ? item.data : (<i>Not set</i>)}</p>
+
         </List.Item>
       )}
     />
