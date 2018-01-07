@@ -19,7 +19,7 @@ class Selection extends Component {
   render() {
     return (
       <div>
-        <h1>Selection Kanban</h1>
+        <h1>Time to get this going :)</h1>
       </div>
     );
   }
