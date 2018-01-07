@@ -16,7 +16,7 @@
     "seeder": "npm run seed"
   },
   "lint-staged": {
-    "*.{js,json,css,md}": ["prettier --write", "git add"]
+    "*.{js,json,css,md}": ["prettier --single-quote --write", "git add"]
   },
   "repository": {
     "type": "git",
