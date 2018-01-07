@@ -111,7 +111,8 @@ export function loadProjects() {
 export function loadMoreProjects(page, pageSize = 10) {
   return (dispatch, getState) => {
     const numLoaded = getState().admin.projects.length;
-    if (numLoaded < (page * pageSize)) {
+    const totalCount = getState().admin.projectCount;
+    if (numLoaded < (page * pageSize) && numLoaded !== totalCount) {
       axios.get(`/api/projects?page=${page}`)
         .then(({ data }) => {
           dispatch({
@@ -140,7 +141,8 @@ export function loadApplicants() {
 export function loadMoreApplicants(page, pageSize = 10) {
   return (dispatch, getState) => {
     const numLoaded = getState().admin.applicants.length;
-    if (numLoaded < (page * pageSize)) {
+    const totalCount = getState().admin.applicantCount;
+    if (numLoaded < (page * pageSize) && numLoaded !== totalCount) {
       axios.get(`/api/projects?page=${page}`)
         .then(({ data }) => {
           dispatch({

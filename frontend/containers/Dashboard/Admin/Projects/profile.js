@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
-import ReactTable from "react-table";
 import { Icon, Card, Row, Col, Table } from "antd";
 
-
-import "react-table/react-table.css";
 import NotFound from '../../../../components/NotFound';
 
 import { teamColumns } from './columns';

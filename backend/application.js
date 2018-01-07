@@ -2,6 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
@@ -14,6 +15,7 @@ const User = mongoose.model('User');
 
 // Middleware
 router.use(morgan('dev'));
+router.use(helmet());
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(session({

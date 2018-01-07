@@ -2,7 +2,6 @@
 import React from 'react';
 import throttle from 'lodash/throttle';
 import { render } from 'react-dom';
-import 'sweetalert/dist/sweetalert.css';
 
 // Local Imports & Constants
 import { configureStore, history } from './store/configureStore';

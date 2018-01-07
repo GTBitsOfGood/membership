@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
-import ReactTable from "react-table";
-import { Icon, Card, Row, Col, Table } from "antd";
+import { Icon, Card, Row, Col } from "antd";
 
-import "react-table/react-table.css";
 import NotFound from "../../../../../components/NotFound";
 
-import { teamColumns } from "../columns";
 import BasicInfo from "./basic-info";
 import CodingInfo from "./coding-info";
 import ResponsesInfo from "./responses-info";
@@ -31,10 +28,26 @@ class Profile extends Component {
     super(props);
 
     this.state = {
-      titleKey: "basic"
+      titleKey: "basic",
+      loading: true,
+      timer: null
     };
 
     this.onTabChange = this.onTabChange.bind(this);
+    this.stopLoading = this.stopLoading.bind(this);
+  }
+
+  componentWillMount() {
+    const timer = setTimeout(this.stopLoading, 500);
+    this.setState({ timer });
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.state.timer);
+  }
+
+  stopLoading() {
+    this.setState({ loading: false });
   }
 
   onTabChange(titleKey) {
@@ -42,7 +55,7 @@ class Profile extends Component {
   }
 
   render() {
-    return !this.props.data ? <NotFound /> : <div>
+    return (!this.props.data || this.state.loading) ? <NotFound /> : <div>
       <Row gutter={16}>
         <Col span={8}>
           <Card cover={<img alt="example" src={this.props.data.github.avatar_url} />} actions={[<Icon type="edit" onClick={() => alert("clicked")} />, <Icon type="delete" />, <Icon type="usergroup-add" />]}>
