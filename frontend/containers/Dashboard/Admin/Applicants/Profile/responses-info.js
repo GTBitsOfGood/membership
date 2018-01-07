@@ -2,7 +2,6 @@ import React from "react";
 import propTypes from "prop-types";
 import { List, Avatar } from "antd";
 
-
 const ResponsesInfo = ({ data }) => {
   const dataSource = [
     {
@@ -39,9 +38,8 @@ const ResponsesInfo = ({ data }) => {
           <List.Item.Meta
             avatar={<Avatar icon={item.icon} />}
             title={item.title}
-            description={<p>{item.data ? item.data : (<i>Not set</i>)}</p>}
+            description={<p>{item.data ? item.data : <i>Not set</i>}</p>}
           />
-
         </List.Item>
       )}
     />
@@ -49,6 +47,6 @@ const ResponsesInfo = ({ data }) => {
 };
 
 ResponsesInfo.propTypes = {
-  data: propTypes.object,
-}
+  data: propTypes.object
+};
 export default ResponsesInfo;

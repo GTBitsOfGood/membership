@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = Schema(
@@ -40,7 +40,7 @@ const userSchema = Schema(
       followers: {
         type: Number,
         required: true
-      },
+      }
     },
     languages: [
       {
@@ -68,26 +68,30 @@ const userSchema = Schema(
     ],
     frontend_experience: {
       type: String,
-      enum: ["Never worked with it",
+      enum: [
+        "Never worked with it",
         "A little experience",
         "Some experience",
         "A lot of experience",
-        "Can teach it"]
+        "Can teach it"
+      ]
     },
     backend_experience: {
       type: String,
-      enum: ["Never worked with it",
+      enum: [
+        "Never worked with it",
         "A little experience",
         "Some experience",
         "A lot of experience",
-        "Can teach it"]
+        "Can teach it"
+      ]
     },
     free_response: {
       bg_interest: String,
       team_experience: String,
       project_experience: String,
       other_commitments: String,
-      project_preference: String,
+      project_preference: String
     },
     role: {
       type: String,
@@ -104,4 +108,4 @@ const userSchema = Schema(
 );
 
 // export user model to app
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("User", userSchema);

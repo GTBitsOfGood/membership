@@ -1,8 +1,8 @@
 "use strict";
 
-const webpack = require('webpack');
-const path = require('path');
-const Dotenv = require('dotenv-webpack');
+const webpack = require("webpack");
+const path = require("path");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   entry: ["./frontend/index"],
@@ -53,7 +53,7 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
       "process.env": {
-        "NODE_ENV": JSON.stringify("production")
+        NODE_ENV: JSON.stringify("production")
       }
     }),
     new webpack.optimize.UglifyJsPlugin({

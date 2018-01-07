@@ -62,19 +62,19 @@ export const deployment = [
 ];
 
 export const frontEndFamiliarity = [
-  'Never worked with it',
-  'A little experience',
-  'Some experience',
-  'A lot of experience',
-  'Can teach it'
+  "Never worked with it",
+  "A little experience",
+  "Some experience",
+  "A lot of experience",
+  "Can teach it"
 ];
 
 export const backEndFamiliarity = [
-  'Never worked with it',
-  'A little experience',
-  'Some experience',
-  'A lot of experience',
-  'Can teach it'
+  "Never worked with it",
+  "A little experience",
+  "Some experience",
+  "A lot of experience",
+  "Can teach it"
 ];
 
 export const graduation_dates = () => {
@@ -85,6 +85,6 @@ export const graduation_dates = () => {
     dates.push(`Spring ${++year}`);
   }
   const month = new Date().getMonth() + 1;
-  const isSpringSemester = (month < 5) || (month > 10);
+  const isSpringSemester = month < 5 || month > 10;
   return isSpringSemester ? dates.slice(1) : dates;
 };

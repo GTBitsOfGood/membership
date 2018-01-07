@@ -1,4 +1,3 @@
-module.exports.languages = require('./languages');
-module.exports.projects = require('./projects');
-module.exports.session = require('./session');
-module.exports.users = require('./users');
+module.exports.languages = require("./languages");
+module.exports.projects = require("./projects");
+module.exports.users = require("./users");

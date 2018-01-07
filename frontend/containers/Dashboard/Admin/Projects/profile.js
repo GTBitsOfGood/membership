@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import propTypes from "prop-types";
 import { Icon, Card, Row, Col, Table } from "antd";
 
-import NotFound from '../../../../components/NotFound';
+import NotFound from "../../../../components/NotFound";
 
-import { teamColumns } from './columns';
+import { teamColumns } from "./columns";
 const tabTitles = [
   {
     key: "description",
@@ -35,7 +35,6 @@ const columns = [
   }
 ];
 
-
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -65,36 +64,56 @@ class Profile extends Component {
   }
 
   render() {
-    return (!this.props.data || this.state.loading) ? <NotFound /> : <div>
-      <Row gutter={16}>
-        <Col span={8}>
-          <Card cover={<img alt="example" src={this.props.data.photo_url} />} actions={[<Icon type="edit" onClick={() => alert("clicked")} />, <Icon type="delete" />]}>
-            <Card.Meta title={this.props.data.organization} description={<a target="_blank" href={this.props.data.website_url}>
-              {this.props.data.website_url}
-            </a>} />
-          </Card>
-        </Col>
-        <Col span={16}>
-          <Card style={{ width: "100%" }} tabList={tabTitles} onTabChange={key => this.onTabChange(key)}>
-            {this.state.titleKey === "description" && <p className="font">
-              {this.props.data.description}
-            </p>}
-            {this.state.titleKey === "team" &&
-              <Table columns={teamColumns()} dataSource={this.props.data.project_members} rowKey={record => record._id} />
-
-            }
-          </Card>
-        </Col>
-      </Row>
-    </div>;
+    return !this.props.data || this.state.loading ? (
+      <NotFound />
+    ) : (
+      <div>
+        <Row gutter={16}>
+          <Col span={8}>
+            <Card
+              cover={<img alt="example" src={this.props.data.photo_url} />}
+              actions={[
+                <Icon type="edit" onClick={() => alert("clicked")} />,
+                <Icon type="delete" />
+              ]}
+            >
+              <Card.Meta
+                title={this.props.data.organization}
+                description={
+                  <a target="_blank" href={this.props.data.website_url}>
+                    {this.props.data.website_url}
+                  </a>
+                }
+              />
+            </Card>
+          </Col>
+          <Col span={16}>
+            <Card
+              style={{ width: "100%" }}
+              tabList={tabTitles}
+              onTabChange={key => this.onTabChange(key)}
+            >
+              {this.state.titleKey === "description" && (
+                <p className="font">{this.props.data.description}</p>
+              )}
+              {this.state.titleKey === "team" && (
+                <Table
+                  columns={teamColumns()}
+                  dataSource={this.props.data.project_members}
+                  rowKey={record => record._id}
+                />
+              )}
+            </Card>
+          </Col>
+        </Row>
+      </div>
+    );
   }
 }
 
-
 Profile.propTypes = {
   data: propTypes.object,
-  match: propTypes.object,
+  match: propTypes.object
 };
 
 export default Profile;
-

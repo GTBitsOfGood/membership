@@ -1,16 +1,23 @@
 import React from "react";
-import { Link } from 'react-router-dom';
-export const applicantColumns = (updateCurrentProject) => [
+import { Link } from "react-router-dom";
+export const applicantColumns = updateCurrentProject => [
   {
     title: "Name",
     dataIndex: "name",
     // render: (text, record) => <Link to={`/applicants/${record._id}`}>{text}</Link>
-    render: (text, record) => <a onClick={() => updateCurrentProject(record._id)}> {text} </a>
+    render: (text, record) => (
+      <a onClick={() => updateCurrentProject(record._id)}> {text} </a>
+    )
   },
   {
     title: "Github",
     dataIndex: "github.username",
-    render: (text, record) => <a target="_blank" href={record.github.profile_url}> {text} </a>
+    render: (text, record) => (
+      <a target="_blank" href={record.github.profile_url}>
+        {" "}
+        {text}{" "}
+      </a>
+    )
   },
   {
     title: "Phone",
@@ -27,20 +34,27 @@ export const applicantColumns = (updateCurrentProject) => [
   {
     title: "Score",
     dataIndex: "score"
-  },
+  }
 ];
 
-export const applicantDashColumns = (updateCurrentProject) => [
+export const applicantDashColumns = updateCurrentProject => [
   {
     title: "Name",
     dataIndex: "name",
     // render: (text, record) => <Link to={`/applicants/${record._id}`}>{text}</Link>
-    render: (text, record) => <a onClick={() => updateCurrentProject(record._id)}> {text} </a>
+    render: (text, record) => (
+      <a onClick={() => updateCurrentProject(record._id)}> {text} </a>
+    )
   },
   {
     title: "Github",
     dataIndex: "github.username",
-    render: (text, record) => <a target="_blank" href={record.github.profile_url}> {text} </a>
+    render: (text, record) => (
+      <a target="_blank" href={record.github.profile_url}>
+        {" "}
+        {text}{" "}
+      </a>
+    )
   },
   {
     title: "Phone",
@@ -53,7 +67,7 @@ export const applicantDashColumns = (updateCurrentProject) => [
   {
     title: "Score",
     dataIndex: "score"
-  },
+  }
 ];
 
 export const teamColumns = () => [
@@ -73,5 +87,5 @@ export const teamColumns = () => [
   {
     title: "Email",
     dataIndex: "email"
-  },
+  }
 ];

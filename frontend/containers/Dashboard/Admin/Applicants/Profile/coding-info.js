@@ -2,7 +2,6 @@ import React from "react";
 import propTypes from "prop-types";
 import { List, Avatar } from "antd";
 
-
 const BasicInfo = ({ data }) => {
   const dataSource = [
     {
@@ -44,7 +43,7 @@ const BasicInfo = ({ data }) => {
 };
 
 BasicInfo.propTypes = {
-  data: propTypes.object,
+  data: propTypes.object
 };
 
 export default BasicInfo;

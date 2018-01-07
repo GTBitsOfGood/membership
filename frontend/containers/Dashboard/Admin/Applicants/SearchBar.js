@@ -1,5 +1,5 @@
-import React from 'react';
-import propTypes from 'prop-types';
+import React from "react";
+import propTypes from "prop-types";
 import { Input, Icon } from "antd";
 
 class SearchBar extends React.Component {
@@ -31,13 +31,11 @@ class SearchBar extends React.Component {
         suffix={suffix}
         value={search}
         onChange={this.onSearch}
-        style={{width: "50%"}}
+        style={{ width: "50%" }}
       />
     );
   }
 }
 
-SearchBar.propTypes = {
-
-};
+SearchBar.propTypes = {};
 export default SearchBar;

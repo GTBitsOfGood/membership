@@ -1,19 +1,13 @@
 // NPM Imports
-import propTypes from 'prop-types';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import {
-  Route,
-  Switch,
-  Redirect,
-  withRouter
-} from "react-router-dom";
+import propTypes from "prop-types";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 
 // Local Imports
 import Dashboard from "./Dashboard";
-import Splash from '../components/Splash';
+import Splash from "../components/Splash";
 import { login, logout, register } from "../ducks/auth";
-
 
 class AppContainer extends Component {
   constructor(props) {
@@ -28,14 +22,24 @@ class AppContainer extends Component {
     return this.props.user ? <Redirect to="/" /> : <Splash />;
   }
   _authenticate() {
-    return this.props.user ? <Dashboard user={this.props.user} logout={this.props.logout} register={this.props.register} /> : <Redirect to="/login" />;
+    return this.props.user ? (
+      <Dashboard
+        user={this.props.user}
+        logout={this.props.logout}
+        register={this.props.register}
+      />
+    ) : (
+      <Redirect to="/login" />
+    );
   }
 
   render() {
-    return (<Switch>
-      <Route path="/login" render={this._login} />
-      <Route path="/*" render={this._authenticate} />
-    </Switch>);
+    return (
+      <Switch>
+        <Route path="/login" render={this._login} />
+        <Route path="/*" render={this._authenticate} />
+      </Switch>
+    );
   }
 }
 
@@ -54,8 +58,10 @@ function mapDispatchToProps(dispatch) {
   return {
     authenticate: () => dispatch(login()),
     logout: () => dispatch(logout()),
-    register: (data) => dispatch(register(data))
+    register: data => dispatch(register(data))
   };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AppContainer));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(AppContainer)
+);

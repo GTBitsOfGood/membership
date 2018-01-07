@@ -3,11 +3,11 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Local Imports
-import Admin from './Admin';
-import Member from './Member';
-import Rejected from './Rejected';
-import Visitor from './Visitor';
-import Submitted from './Submitted';
+import Admin from "./Admin";
+import Member from "./Member";
+import Rejected from "./Rejected";
+import Visitor from "./Visitor";
+import Submitted from "./Submitted";
 
 const Dashboard = ({ user, ...rest }) => {
   if (user.role === "admin") {

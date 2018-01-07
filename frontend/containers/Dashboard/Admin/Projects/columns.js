@@ -1,9 +1,11 @@
 import React from "react";
-export const projectColumns = (updateCurrentProject) => [
+export const projectColumns = updateCurrentProject => [
   {
     title: "Organization",
     dataIndex: "organization",
-    render: (text, record ) => <a onClick={() => updateCurrentProject(record._id)}> {text} </a>
+    render: (text, record) => (
+      <a onClick={() => updateCurrentProject(record._id)}> {text} </a>
+    )
   },
   {
     title: "Contact Name",
@@ -32,7 +34,7 @@ export const teamColumns = () => [
   {
     title: "Name",
     dataIndex: "name",
-    render: (text, record ) => <a> {text} </a>
+    render: (text, record) => <a> {text} </a>
   },
   {
     title: "Github Username",
@@ -45,5 +47,5 @@ export const teamColumns = () => [
   {
     title: "Email",
     dataIndex: "email"
-  },
+  }
 ];

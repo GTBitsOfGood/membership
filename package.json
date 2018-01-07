@@ -13,7 +13,8 @@
     "test":
       "mocha --compilers js:babel-core/register ./test/**/*.js --require ignore-styles",
     "seed": "node ./backend/seeds/index.js",
-    "seeder": "npm run seed"
+    "seeder": "npm run seed",
+    "prettier": "prettier --write '**/*.js'"
   },
   "lint-staged": {
     "*.{js,json,css,md}": ["prettier --write", "git add"]
@@ -52,6 +53,7 @@
     "express-session": "^1.15.6",
     "express-validator": "^4.2.1",
     "file-loader": "^1.1.6",
+    "g": "^2.0.1",
     "helmet": "^3.9.0",
     "history": "^4.7.2",
     "less": "^2.7.3",

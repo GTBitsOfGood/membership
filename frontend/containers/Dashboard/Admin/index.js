@@ -4,7 +4,7 @@ import propTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Route, Switch, Link, withRouter } from "react-router-dom";
-import { bindActionCreators } from 'redux';
+import { bindActionCreators } from "redux";
 
 // Local Imports & Constants
 import Applicants from "./Applicants";
@@ -14,7 +14,6 @@ import Projects from "./Projects";
 import ProjectProfile from "./Projects/profile";
 import ApplicantProfile from "./Applicants/profile";
 import * as actions from "../../../ducks/admin";
-
 
 class Admin extends Component {
   constructor(props) {
@@ -27,7 +26,7 @@ class Admin extends Component {
     this.props.loadProjects();
     this.props.loadApplicants();
     // check current url for applicant/project route
-    const url = this.props.match.url.split('/');
+    const url = this.props.match.url.split("/");
     const currentProjectId = url[1] === "projects" ? url[2] : undefined;
     const currentApplicantId = url[1] === "applicants" ? url[2] : undefined;
     if (currentProjectId) {
@@ -45,7 +44,9 @@ class Admin extends Component {
   }
 
   currentKey() {
-    return [(this.props.match.url === "/" ? "home" : this.props.match.url.split("/")[1])];
+    return [
+      this.props.match.url === "/" ? "home" : this.props.match.url.split("/")[1]
+    ];
   }
 
   render() {
@@ -53,10 +54,13 @@ class Admin extends Component {
       <Layout className="layout">
         <Layout.Header>
           <div className="menu-title">GT Bits of Good</div>
-          <Menu theme="dark" mode="horizontal"
+          <Menu
+            theme="dark"
+            mode="horizontal"
             defaultSelectedKeys={this.currentKey()}
             style={{ lineHeight: "64px" }}
-            onClick={this.navigate}>
+            onClick={this.navigate}
+          >
             <Menu.Item key="home">
               <Link to="/">Home</Link>
             </Menu.Item>
@@ -69,14 +73,31 @@ class Admin extends Component {
             <Menu.Item key="selection">
               <Link to="/selection">Selection</Link>
             </Menu.Item>
-            <Menu.Item key="logout" onClick={this.props.logout}>Logout</Menu.Item>
+            <Menu.Item key="logout" onClick={this.props.logout}>
+              Logout
+            </Menu.Item>
           </Menu>
         </Layout.Header>
         <Layout.Content className="content-container">
           <div className="content">
             <Switch>
-              <Route exact path="/applicants/:id" render={props => <ApplicantProfile {...props} data={this.props.currentApplicant} />} />
-              <Route exact path="/projects/:id" render={props => <ProjectProfile {...props} data={this.props.currentProject} />} />
+              <Route
+                exact
+                path="/applicants/:id"
+                render={props => (
+                  <ApplicantProfile
+                    {...props}
+                    data={this.props.currentApplicant}
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/projects/:id"
+                render={props => (
+                  <ProjectProfile {...props} data={this.props.currentProject} />
+                )}
+              />
               <Route exact path="/selection/:id" component={Selection} />
               <Route exact path="/applicants" component={Applicants} />
               <Route exact path="/projects" component={Projects} />
@@ -88,7 +109,8 @@ class Admin extends Component {
         <Layout.Footer className="center">
           Made with &#9829; by Bits of Good ©2018
         </Layout.Footer>
-      </Layout>);
+      </Layout>
+    );
   }
 }
 
@@ -101,13 +123,13 @@ Admin.propTypes = {
   currentProject: propTypes.object,
   currentApplicant: propTypes.object,
   updateCurrentProject: propTypes.func,
-  updateCurrentApplicant: propTypes.func,
+  updateCurrentApplicant: propTypes.func
 };
 
 function mapStateToProps(state) {
   return {
     currentProject: state.admin.currentProject,
-    currentApplicant: state.admin.currentApplicant,
+    currentApplicant: state.admin.currentApplicant
   };
 }
 

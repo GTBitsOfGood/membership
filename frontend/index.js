@@ -1,18 +1,21 @@
 // NPM Imports
-import React from 'react';
-import throttle from 'lodash/throttle';
-import { render } from 'react-dom';
+import React from "react";
+import throttle from "lodash/throttle";
+import { render } from "react-dom";
 
 // Local Imports & Constants
-import { configureStore, history } from './store/configureStore';
-import { saveState } from './store/sessionStorage';
-import './assets/stylesheets/base.less';
-import Root from './containers/Root';
+import { configureStore, history } from "./store/configureStore";
+import { saveState } from "./store/sessionStorage";
+import "./assets/stylesheets/base.less";
+import Root from "./containers/Root";
 const store = configureStore(history);
 
 // saves state in session storage to perserve login on refresh
-store.subscribe(throttle(() => saveState({ auth: store.getState().auth }), 1000));
+store.subscribe(
+  throttle(() => saveState({ auth: store.getState().auth }), 1000)
+);
 
-render(<Root store={store} history={history} />,
-  document.getElementById('root')
+render(
+  <Root store={store} history={history} />,
+  document.getElementById("root")
 );
