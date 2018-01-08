@@ -35,13 +35,13 @@ const Rejected = ({ logout, user }) => {
               <Card className="font" title="We Appreciate Your Application">
                 <p className="font">
                   Thank you for applying to join a Bits of Good Project Team!
-                  Unfortunately we are unable to place you on a team at this
-                  time. We received many applications and because we only have a
-                  fixed number of projects we had to turn down some good people.
+                  Unfortunately, we are unable to place you on a team at this
+                  time. We received many applications and had to turn down some
+                  good people due to the fixed number of projects.
                 </p>
                 <p className="font">
                   We are currently working on opening up new positions to get
-                  more people invovled with Bits of Good! We will reach out to
+                  more people involved with Bits of Good! We will reach out to
                   you and keep you posted with new opportunities!
                 </p>
               </Card>

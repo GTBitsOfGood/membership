@@ -12,6 +12,7 @@ const userSchema = Schema(
     websites: [String],
     graduation_date: String,
     pm_interest: Boolean,
+    em_interest: Boolean,
     github: {
       id: {
         type: String,
