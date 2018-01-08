@@ -54,6 +54,11 @@ function generateScore(user) {
     score += 1;
   }
 
+  // em interest
+  if (user.em_interest) {
+    score += 1;
+  }
+
   return score;
 }
 module.exports = {

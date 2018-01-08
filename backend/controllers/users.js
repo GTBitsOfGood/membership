@@ -144,6 +144,7 @@ module.exports.store = (req, res, next) => {
       frontend_experience: req.body.frontend_experience,
       backend_experience: req.body.backend_experience,
       pm_interest: req.body.pm_interest,
+      em_interest: req.body.em_interest,
       graduation_date: req.body.graduation_date
         ? req.body.graduation_date
         : null,
@@ -190,6 +191,9 @@ module.exports.update = (req, res, next) => {
     user.pm_interest = req.body.pm_interest
       ? req.body.pm_interest
       : user.pm_interest;
+    user.em_interest = req.body.em_interest
+      ? req.body.em_interest
+      : user.em_interest;
     user.credit_hours = req.body.credit_hours
       ? req.body.credit_hours
       : user.credit_hours;

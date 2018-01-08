@@ -350,13 +350,29 @@ class Application extends Component {
             label={
               <span>
                 Project Manager Interest&nbsp;
-                <Tooltip title="Are you interestd in being a project manager?">
+                <Tooltip title="Manage a project by communicate requirements from client to engineering team.">
                   <Icon type="question-circle-o" />
                 </Tooltip>
               </span>
             }
           >
             {getFieldDecorator('pm_interest', {
+              valuePropName: 'checked'
+            })(<Switch />)}
+          </FormItem>
+          {/* EM Interest */}
+          <FormItem
+            {...formItemLayout}
+            label={
+              <span>
+                Engineering Manager Interest&nbsp;
+                <Tooltip title="Lead a team of developers to develop a product for a client.">
+                  <Icon type="question-circle-o" />
+                </Tooltip>
+              </span>
+            }
+          >
+            {getFieldDecorator('em_interest', {
               valuePropName: 'checked'
             })(<Switch />)}
           </FormItem>

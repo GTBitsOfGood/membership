@@ -45,6 +45,20 @@ const BasicInfo = ({ data }) => {
         }
       ],
       icon: 'github'
+    },
+    {
+      title: 'Leadership Interest',
+      data: [
+        {
+          label: 'Project Manager',
+          value: `${data.pm_interest ? 'Yes' : 'No'}`
+        },
+        {
+          label: 'Engineering Manager Interest',
+          value: `${data.em_interest ? 'Yes' : 'No'}`
+        }
+      ],
+      icon: 'coffee'
     }
   ];
   return (
