@@ -12,7 +12,7 @@ export default function Root({ store, history }) {
       <ConnectedRouter history={history}>
         <div>
           <AppContainer />
-          <DevTools />
+          {/* <DevTools /> */}
         </div>
       </ConnectedRouter>
     </Provider>
@@ -23,5 +23,3 @@ Root.propTypes = {
   store: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired
 };
-
-

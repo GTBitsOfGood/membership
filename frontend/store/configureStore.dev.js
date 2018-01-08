@@ -15,10 +15,7 @@ export function configureStore(history) {
   return createStore(
     rootReducer,
     persistedState,
-    compose(
-      applyMiddleware(...middleware),
-      DevTools.instrument()
-    )
+    compose(applyMiddleware(...middleware), DevTools.instrument())
   );
 }
 
