@@ -317,7 +317,10 @@ class Application extends Component {
                   title={
                     <span>
                       Click to{' '}
-                      <a href="https://bitsofgood.org" target="_blank">
+                      <a
+                        href="https://docs.google.com/presentation/d/1kdlrxCGu1f1wS1-DpV5sMaPZZbgiSykWNhMKGUIwLY4/edit?usp=sharing"
+                        target="_blank"
+                      >
                         view projects
                       </a>
                     </span>
