@@ -68,6 +68,7 @@
     "passport-github": "^1.1.0",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
+    "react-beautiful-dnd": "^3.0.0",
     "react-dom": "^16.2.0",
     "react-loading": "^1.0.3",
     "react-redux": "^5.0.5",
