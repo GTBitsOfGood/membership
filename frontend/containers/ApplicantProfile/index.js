@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { Icon, Card, Row, Col, Modal } from 'antd';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import NotFound from '../../../../../components/NotFound';
+import * as actions from '../../ducks/admin';
+import NotFound from '../../components/NotFound';
 
 import BasicInfo from './basic-info';
 import CodingInfo from './coding-info';
 import ResponsesInfo from './responses-info';
+
 const tabTitles = [
   {
     key: 'basic',
@@ -22,7 +26,7 @@ const tabTitles = [
   }
 ];
 
-class Profile extends Component {
+class ApplicantProfile extends Component {
   constructor(props) {
     super(props);
 
@@ -58,7 +62,7 @@ class Profile extends Component {
   }
 
   handleAdminModalOk() {
-    // just need to make the DB call here to make this happen.
+    this.props.makeAdmin(this.props.data._id);
     this.setState({ adminModalShowing: false });
   }
   handleAdminModalCancel() {
@@ -69,7 +73,7 @@ class Profile extends Component {
   }
 
   handleDeleteModalOk() {
-    // just need to make the DB call here to make this happen.
+    this.props.deleteApplicant(this.props.data._id);
     this.setState({ deleteModalShowing: false });
   }
   handleDeleteModalCancel() {
@@ -126,8 +130,7 @@ class Profile extends Component {
                 description={
                   <div>
                     <p>
-                      Application Status:{' '}
-                      {this.props.data.application_status.toUpperCase()}
+                      Application Status:{` ${this.props.data.application_status.toUpperCase()}`}
                     </p>
                     <a
                       target="_blank"
@@ -163,9 +166,19 @@ class Profile extends Component {
   }
 }
 
-Profile.propTypes = {
+ApplicantProfile.propTypes = {
   data: propTypes.object,
-  match: propTypes.object
+  makeAdmin: propTypes.func,
+  deleteApplicant: propTypes.func
 };
 
-export default Profile;
+function mapStateToProps(state) {
+  return {
+    data: state.admin.currentApplicant
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actions, dispatch);
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ApplicantProfile);
