@@ -29,17 +29,33 @@ class Home extends Component {
                 </h2>
               </Card>
             </Col>
-            <Col span={6}>
+            <Col span={4}>
+              <Card title={<h3 className="center">Visitors</h3>}>
+                <h2 className="center">{this.props.numVisitors}</h2>
+              </Card>
+            </Col>
+            <Col span={4}>
               <Card title={<h3 className="center">PM Interest</h3>}>
                 <h2 className="center">{this.props.numPMInterest}</h2>
               </Card>
             </Col>
-            <Col span={6}>
-              <Card title={<h3 className="center">Accepted</h3>}>
+            <Col span={4}>
+              <Card title={<h3 className="center">EM Interest</h3>}>
                 <h2 className="center">{this.props.numAppsAccepted}</h2>
               </Card>
             </Col>
             <Col span={6}>
+              <Card title={<h3 className="center">Visit Conversion Rate</h3>}>
+                <h2 className="center">
+                  {Math.round(
+                    this.props.numAppsSubmitted /
+                      (this.props.numAppsSubmitted + this.props.numVisitors) *
+                      100
+                  )}%
+                </h2>
+              </Card>
+            </Col>
+            {/* <Col span={5}>
               <Card title={<h3 className="center">Acceptance Rate</h3>}>
                 <h2 className="center">
                   {Math.round(
@@ -51,7 +67,7 @@ class Home extends Component {
                   )}%
                 </h2>
               </Card>
-            </Col>
+            </Col> */}
           </Row>
         </div>
         <Row gutter={16}>
@@ -92,7 +108,9 @@ Home.propTypes = {
   numAppsSubmitted: propTypes.number,
   numAppsRejected: propTypes.number,
   numAppsAccepted: propTypes.number,
-  numPMInterest: propTypes.number
+  numPMInterest: propTypes.number,
+  numEMInterest: propTypes.number,
+  numVisitors: propTypes.number
 };
 
 function mapStateToProps(state) {
@@ -101,6 +119,8 @@ function mapStateToProps(state) {
     numAppsRejected: state.admin.numAppsRejected,
     numAppsAccepted: state.admin.numAppsAccepted,
     numPMInterest: state.admin.numPMInterest,
+    numEMInterest: state.admin.numEMInterest,
+    numVisitors: state.admin.numVisitors,
     newApplicants: state.admin.applicants.slice(0, 5)
   };
 }
