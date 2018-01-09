@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { List, Avatar } from 'antd';
 
-const BasicInfo = ({ data }) => {
+const CodingInfo = ({ data }) => {
   const dataSource = [
     {
       title: 'Programming Languages',
@@ -42,8 +42,8 @@ const BasicInfo = ({ data }) => {
   );
 };
 
-BasicInfo.propTypes = {
+CodingInfo.propTypes = {
   data: propTypes.object
 };
 
-export default BasicInfo;
+export default CodingInfo;

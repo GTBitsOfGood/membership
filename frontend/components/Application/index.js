@@ -6,9 +6,7 @@ import {
   Switch,
   Button,
   Icon,
-  Rate,
   Input,
-  DatePicker,
   Tooltip
 } from 'antd';
 import React, { Component } from 'react';

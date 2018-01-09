@@ -34,10 +34,7 @@ Applicants.propTypes = {
 };
 
 function mapStateToProps(state) {
-  return {
-    data: state.admin.applicants,
-    total: state.admin.applicantCount
-  };
+  return { data: state.admin.applicants, total: state.admin.applicantCount };
 }
 
 function mapDispatchToProps(dispatch) {

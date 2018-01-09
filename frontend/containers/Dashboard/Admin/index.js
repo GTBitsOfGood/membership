@@ -12,7 +12,8 @@ import Home from './Home';
 import Selection from './Selection';
 import Projects from './Projects';
 import ProjectProfile from './Projects/profile';
-import ApplicantProfile from './Applicants/Profile';
+// import ApplicantProfile from './Applicants/Profile';
+import ApplicantProfile from '../../ApplicantProfile';
 import * as actions from '../../../ducks/admin';
 
 class Admin extends Component {
