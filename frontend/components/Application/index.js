@@ -349,7 +349,7 @@ class Application extends Component {
             label={
               <span>
                 Project Manager Interest&nbsp;
-                <Tooltip title="Manage a project by communicate requirements from client to engineering team.">
+                <Tooltip title="Manage a project by communicating with the client, working on product handoff, and working the the Engineering Manager to keep the project on track">
                   <Icon type="question-circle-o" />
                 </Tooltip>
               </span>
