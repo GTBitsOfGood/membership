@@ -41,7 +41,7 @@ class Home extends Component {
             </Col>
             <Col span={4}>
               <Card title={<h3 className="center">EM Interest</h3>}>
-                <h2 className="center">{this.props.numAppsAccepted}</h2>
+                <h2 className="center">{this.props.numEMInterest}</h2>
               </Card>
             </Col>
             <Col span={6}>
