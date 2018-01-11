@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const statics = require('./userStatics');
+
 const Schema = mongoose.Schema;
 
 const userSchema = Schema(
@@ -107,6 +109,9 @@ const userSchema = Schema(
   },
   { timestamps: true }
 );
-
+userSchema.statics.findAllApplicants = statics.findAllApplicants;
+userSchema.statics.findByApplicationStatus = statics.findByApplicationStatus;
+userSchema.statics.findInterestedPMs = statics.findInterestedPMs;
+userSchema.statics.findInterestedEMs = statics.findInterestedEMs;
 // export user model to app
 module.exports = mongoose.model('User', userSchema);

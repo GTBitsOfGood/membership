@@ -16,6 +16,7 @@ const LOAD_NUM_APPS_ACCEPTED = Symbol('app/admin/LOAD_NUM_APPS_ACCEPTED');
 const LOAD_NUM_PM_INTEREST = Symbol('app/admin/LOAD_NUM_PM_INTEREST');
 const LOAD_NUM_EM_INTEREST = Symbol('app/admin/LOAD_NUM_EM_INTEREST');
 const LOAD_NUM_VISITORS = Symbol('app/admin/LOAD_NUM_VISITORS');
+const CLEAR_APPLICANTS = Symbol('app/admin/CLEAR_APPLICANTS');
 
 // State Reducer
 const initialState = {
@@ -75,6 +76,8 @@ export default function reducer(state = initialState, action) {
       return { ...state, numPMInterest: action.pm_interest };
     case LOAD_NUM_EM_INTEREST:
       return { ...state, numEMInterest: action.em_interest };
+    case CLEAR_APPLICANTS:
+      return { ...state, applicantCount: 0, applicants: [] };
     default:
       return state;
   }
@@ -82,6 +85,21 @@ export default function reducer(state = initialState, action) {
 
 // Action Creators
 
+export function sortApplicantsByScore() {
+  return dispatch => {
+    dispatch({ type: CLEAR_APPLICANTS });
+    console.log('dispatched clear');
+    axios.get('/api/users?sort=score').then(({ data }) => {
+      console.log('inside get');
+      console.log(data);
+      dispatch({
+        type: LOAD_APPLICANTS,
+        applicants: data.users,
+        applicantCount: data.count
+      });
+    });
+  };
+}
 export function makeAdmin(id) {
   return (dispatch, getState) => {
     axios
@@ -206,24 +224,24 @@ export function loadMoreApplicants(page, pageSize = 10) {
 export function loadDashboard() {
   return dispatch => {
     axios.get('/api/users?count=submitted').then(({ data }) => {
-      dispatch({ type: LOAD_NUM_APPS_SUBMITTED, submitted: data.submitted });
+      dispatch({ type: LOAD_NUM_APPS_SUBMITTED, submitted: data.users });
     });
     axios.get('/api/users?count=accepted').then(({ data }) => {
-      dispatch({ type: LOAD_NUM_APPS_ACCEPTED, accepted: data.accepted });
+      dispatch({ type: LOAD_NUM_APPS_ACCEPTED, accepted: data.users });
     });
     axios.get('/api/users?count=rejected').then(({ data }) => {
-      dispatch({ type: LOAD_NUM_APPS_REJECTED, rejected: data.rejected });
+      dispatch({ type: LOAD_NUM_APPS_REJECTED, rejected: data.users });
     });
     axios.get('/api/users?count=visitors').then(({ data }) => {
-      dispatch({ type: LOAD_NUM_VISITORS, visitors: data.visitors });
+      dispatch({ type: LOAD_NUM_VISITORS, visitors: data.users });
     });
     axios.get('/api/users?count=pm_interest').then(({ data }) => {
-      dispatch({ type: LOAD_NUM_PM_INTEREST, pm_interest: data.pm_interest });
+      dispatch({ type: LOAD_NUM_PM_INTEREST, pm_interest: data.users });
     });
     axios.get('/api/users?count=em_interest').then(({ data }) => {
       dispatch({
         type: LOAD_NUM_EM_INTEREST,
-        em_interest: data.em_interest
+        em_interest: data.users
       });
     });
   };

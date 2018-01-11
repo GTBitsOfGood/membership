@@ -3,6 +3,39 @@ const User = require('mongoose').model('User');
 const util = require('../services/util');
 
 module.exports.index = (req, res, next) => {
+  // pagination settings
+  const limit = req.query.limit || 10;
+  const skip = (req.query.page - 1 || 0) * limit;
+  const sortBy = req.query.sort || '-updatedAt';
+  // if (req.query.application_status) {
+  //   Promise.all([
+  //     User.find({
+  //       role: "applicant",
+  //       application_status: `${req.query.application_status}`
+  //     })
+  //       .sort(sortBy)
+  //       .limit(limit)
+  //       .skip(skip)
+  //       .populate("languages")
+  //       .populate("databases")
+  //       .populate("web_technologies")
+  //       .populate("deployment")
+  //       .exec(),
+  //     User.count({
+  //       role: "applicant",
+  //       application_status: `${req.query.application_status}`
+  //     }).exec()
+  //   ])
+  //     .then(([users, count]) => {
+  //       res.locals.data = { users, count };
+  //       return next();
+  //     })
+  //     .catch(err => {
+  //       console.error(err);
+  //       res.locals.errors = err;
+  //       return next();
+  //     });
+  // }
   if (req.query.count) {
     switch (req.query.count) {
       case 'submitted': {
