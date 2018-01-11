@@ -26,6 +26,9 @@ async function strsToLangs(strings, category) {
 }
 
 function generateScore(user) {
+  if (user.role === 'admin') {
+    return -1;
+  }
   let score = 0;
   // github stats
   score += user.github.public_repos + user.github.followers;
@@ -33,9 +36,12 @@ function generateScore(user) {
   // credit hours
   score += 14 - user.credit_hours;
   // graduation dates
-  const currYear = new Date().getFullYear();
-  const gradYear = parseInt(user.graduation_date.split(' ')[1], 10);
-  score += gradYear - currYear;
+
+  if (user.graduation_date) {
+    const currYear = new Date().getFullYear();
+    const gradYear = parseInt(user.graduation_date.split(' ')[1], 10);
+    score += gradYear - currYear;
+  }
 
   // programming languages
   user.languages.forEach(curr => (score += curr.value));
@@ -51,6 +57,11 @@ function generateScore(user) {
 
   // pm interest
   if (user.pm_interest) {
+    score += 1;
+  }
+
+  // em interest
+  if (user.em_interest) {
     score += 1;
   }
 

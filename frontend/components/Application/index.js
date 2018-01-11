@@ -6,9 +6,7 @@ import {
   Switch,
   Button,
   Icon,
-  Rate,
   Input,
-  DatePicker,
   Tooltip
 } from 'antd';
 import React, { Component } from 'react';
@@ -37,8 +35,6 @@ class Application extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
-        console.log(this.props.register);
         this.props.register(values);
       }
     });
@@ -350,13 +346,29 @@ class Application extends Component {
             label={
               <span>
                 Project Manager Interest&nbsp;
-                <Tooltip title="Are you interestd in being a project manager?">
+                <Tooltip title="Manage a project by communicating with the client, working on product handoff, and working the the Engineering Manager to keep the project on track">
                   <Icon type="question-circle-o" />
                 </Tooltip>
               </span>
             }
           >
             {getFieldDecorator('pm_interest', {
+              valuePropName: 'checked'
+            })(<Switch />)}
+          </FormItem>
+          {/* EM Interest */}
+          <FormItem
+            {...formItemLayout}
+            label={
+              <span>
+                Engineering Manager Interest&nbsp;
+                <Tooltip title="Lead a team of developers to develop a product for a client.">
+                  <Icon type="question-circle-o" />
+                </Tooltip>
+              </span>
+            }
+          >
+            {getFieldDecorator('em_interest', {
               valuePropName: 'checked'
             })(<Switch />)}
           </FormItem>

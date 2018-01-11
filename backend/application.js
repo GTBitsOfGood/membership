@@ -82,15 +82,16 @@ passport.deserializeUser((id, done) => {
     .exec(done);
 });
 
-const routes = require('./routes');
-router.use('/', routes);
-
+// this call needs to be exposed to public
 router.get('/profile', (req, res) => {
   if (req.user) {
     return res.status(200).json({ user: req.user });
   }
   return res.status(401).json({ error: 'Not Logged in' });
 });
+
+const routes = require('./routes');
+router.use('/', routes);
 
 router.get(
   '/auth/github',

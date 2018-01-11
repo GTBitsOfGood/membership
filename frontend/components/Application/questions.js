@@ -80,6 +80,7 @@ export const backEndFamiliarity = [
 export const graduation_dates = () => {
   let year = new Date().getFullYear();
   const dates = [];
+  dates.push(`Spring ${year}`);
   for (let i = 0; i < 6; i++) {
     dates.push(`Fall ${year}`);
     dates.push(`Spring ${++year}`);
