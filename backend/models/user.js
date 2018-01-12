@@ -111,7 +111,7 @@ const userSchema = Schema(
 );
 userSchema.statics.findApplicantsBy = statics.findApplicantsBy;
 userSchema.statics.getApplicantById = statics.getApplicantById;
-userSchema.statics.creteNewApplicant = statics.createNewApplicant;
+userSchema.statics.createNewApplicant = statics.createNewApplicant;
 userSchema.statics.updateApplicantById = statics.updateApplicantById;
 userSchema.statics.deleteApplicantById = statics.deleteApplicantById;
 // export user model to app

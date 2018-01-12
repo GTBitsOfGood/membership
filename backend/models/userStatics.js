@@ -39,64 +39,63 @@ module.exports.getApplicantById = id =>
     .exec();
 
 module.exports.createNewApplicant = data =>
-  mongoose
-    .model('User')
-    .create({
-      name: data.name,
-      role: data.role,
-      email: data.email,
-      phone: data.phone,
-      score: data.score,
-      titile: data.title,
-      github: data.github,
-      websites: data.websites,
-      languages: data.languages,
-      databases: data.databases,
-      deployment: data.deployment,
-      pm_interest: data.pm_interest,
-      em_interest: data.em_interest,
-      credit_hours: data.credit_hours,
-      free_responses: data.free_responses,
-      graduation_date: data.graduation_date,
-      web_technologies: data.web_technologies,
-      backend_experience: data.backend_experience,
-      application_status: data.application_status,
-      frontend_experience: data.frontend_experience
-    })
-    .exec();
-
-module.exports.updateApplicantById = (id, data) =>
-  mongoose
-    .model('User')
-    .update(
-      { _id: id },
-      {
-        name: data.name,
-        role: data.role,
-        email: data.email,
-        phone: data.phone,
-        score: data.score,
-        titile: data.title,
-        github: data.github,
-        websites: data.websites,
-        languages: data.languages,
-        databases: data.databases,
-        deployment: data.deployment,
-        pm_interest: data.pm_interest,
-        em_interest: data.em_interest,
-        credit_hours: data.credit_hours,
-        free_responses: data.free_responses,
-        graduation_date: data.graduation_date,
-        web_technologies: data.web_technologies,
-        backend_experience: data.backend_experience,
-        application_status: data.application_status,
-        frontend_experience: data.frontend_experience
-      }
-    )
-    .exec();
+  mongoose.model('User').create({
+    name: data.name,
+    role: data.role,
+    email: data.email,
+    phone: data.phone,
+    score: data.score,
+    titile: data.title,
+    github: data.github,
+    websites: data.websites,
+    languages: data.languages,
+    databases: data.databases,
+    deployment: data.deployment,
+    pm_interest: data.pm_interest,
+    em_interest: data.em_interest,
+    credit_hours: data.credit_hours,
+    free_responses: data.free_responses,
+    graduation_date: data.graduation_date,
+    web_technologies: data.web_technologies,
+    backend_experience: data.backend_experience,
+    application_status: data.application_status,
+    frontend_experience: data.frontend_experience
+  });
 
 module.exports.deleteApplicantById = id =>
   mongoose
     .model('User')
     .deleteOne({ _id: id })
     .exec();
+
+// this one is a bitch...
+// need to be very clever to replace this...
+// module.exports.updateApplicantById = (id, data) =>
+//   mongoose
+//     .model("User")
+//     .update(
+//       { _id: id },
+//       {
+//         name: data.name,
+//         role: data.role,
+//         email: data.email,
+//         phone: data.phone,
+//         score: data.score,
+//         titile: data.title,
+//         github: data.github,
+//         websites: data.websites,
+//         languages: data.languages,
+//         databases: data.databases,
+//         deployment: data.deployment,
+//         pm_interest: data.pm_interest,
+//         em_interest: data.em_interest,
+//         credit_hours: data.credit_hours,
+//         free_responses: data.free_responses,
+//         graduation_date: data.graduation_date,
+//         web_technologies: data.web_technologies,
+//         backend_experience: data.backend_experience,
+//         application_status: data.application_status,
+//         frontend_experience: data.frontend_experience
+//       }
+//     )
+//     .exec();

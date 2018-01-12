@@ -1,5 +1,4 @@
 const User = require('mongoose').model('User');
-
 const util = require('../services/util');
 
 module.exports.index = (req, res, next) => {
@@ -29,56 +28,22 @@ module.exports.get = (req, res, next) => {
 };
 
 module.exports.store = (req, res, next) => {
-  // protect application_status  and role changes
-  let appStatus = 'none';
-  let role = 'applicant';
-  if (req.user.role === 'admin') {
-    appStatus = req.body.application_status
-      ? req.body.application_status
-      : appStatus;
-    role = req.body.role ? req.body.role : role;
+  const data = req.body;
+  // prevent non-admins from setting these vals
+  if (!req.user || req.user.role !== 'admin') {
+    data.application_status = 'none';
+    data.role = 'applicant';
+    data.score = 0;
   }
-
-  User.create(
-    {
-      name: req.body.name,
-      email: req.body.email,
-      phone: req.body.phone,
-      title: req.body.title,
-      credit_hours: req.body.credit_hours,
-      frontend_experience: req.body.frontend_experience,
-      backend_experience: req.body.backend_experience,
-      pm_interest: req.body.pm_interest,
-      em_interest: req.body.em_interest,
-      graduation_date: req.body.graduation_date
-        ? req.body.graduation_date
-        : null,
-      score: 0,
-      role: role,
-      application_status: appStatus,
-      websites: req.body.websites ? req.body.websites : [],
-      languages: req.body.languages ? req.body.languages : [],
-      web_technologies: req.body.web_technologies
-        ? req.body.web_technologies
-        : [],
-      databases: req.body.databases ? req.body.databases : [],
-      deployment: req.body.deployment ? req.body.deployment : [],
-      free_response: req.body.free_response ? req.body.free_response : {},
-      github: req.body.github ? req.body.github : {}
-    },
-    (err, usr) => {
-      if (err) {
-        console.error(err);
-        res.locals.error = err;
-        return next();
-      }
-
-      res.locals.data = {
-        user: usr
-      };
+  User.createNewApplicant(data)
+    .then(user => {
+      res.locals.data = { user };
       return next();
-    }
-  );
+    })
+    .catch(err => {
+      res.locals.error = err;
+      return next();
+    });
 };
 
 module.exports.update = (req, res, next) => {
@@ -118,16 +83,16 @@ module.exports.update = (req, res, next) => {
     user.websites = req.body.websites ? req.body.websites : user.websites;
     user.languages = req.body.languages
       ? await util.strsToLangs(req.body.languages, 'languages')
-      : [];
+      : user.languages;
     user.web_technologies = req.body.web_technologies
       ? await util.strsToLangs(req.body.web_technologies, 'web_technologies')
-      : [];
+      : user.web_technologies;
     user.databases = req.body.databases
       ? await util.strsToLangs(req.body.databases, 'databases')
-      : [];
+      : user.databases;
     user.deployment = req.body.deployment
       ? await util.strsToLangs(req.body.deployment, 'deployment')
-      : [];
+      : user.deployment;
     user.github = req.body.github ? req.body.github : user.github;
 
     // protect application_status changes
@@ -163,20 +128,13 @@ module.exports.update = (req, res, next) => {
 };
 
 module.exports.delete = (req, res, next) => {
-  User.remove(
-    {
-      _id: req.params.id
-    },
-    (err, usr) => {
-      if (err) {
-        console.error(err);
-        res.locals.error = err;
-        return next();
-      }
-      res.locals.data = {
-        deleted: true
-      };
+  User.deleteApplicantById(req.params.id)
+    .then(() => {
+      res.locals.data = { deleted: true };
       return next();
-    }
-  );
+    })
+    .catch(err => {
+      res.locals.error = err;
+      return next();
+    });
 };

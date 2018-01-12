@@ -18,6 +18,9 @@ async function getAllLanguages() {
 
 async function strsToLangs(strings, category) {
   // if languages aren't loaded load them from DB;
+  if (strings === undefined) {
+    return undefined;
+  }
   const languages = await getAllLanguages();
 
   const match = string1 => element => string1 === element.name;
