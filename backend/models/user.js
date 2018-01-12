@@ -110,8 +110,10 @@ const userSchema = Schema(
   { timestamps: true }
 );
 userSchema.statics.findAllApplicants = statics.findAllApplicants;
-userSchema.statics.findByApplicationStatus = statics.findByApplicationStatus;
-userSchema.statics.findInterestedPMs = statics.findInterestedPMs;
-userSchema.statics.findInterestedEMs = statics.findInterestedEMs;
+userSchema.statics.findApplicantsBy = statics.findApplicantsBy;
+userSchema.statics.getApplicantById = statics.getApplicantById;
+userSchema.statics.creteNewApplicant = statics.createNewApplicant;
+userSchema.statics.updateApplicantById = statics.updateApplicantById;
+userSchema.statics.deleteApplicantById = statics.deleteApplicantById;
 // export user model to app
 module.exports = mongoose.model('User', userSchema);
