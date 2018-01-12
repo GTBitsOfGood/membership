@@ -1,45 +1,10 @@
 const mongoose = require('mongoose');
 
-module.exports.findAllApplicants = (status, options = {}) => {
+module.exports.findApplicantsBy = (query, options = {}) => {
   return new Promise((resolve, reject) => {
-    const sortBy = options.sortBy || '-updatedAt';
-    const limit = options.limit || 10;
-    const skip = (options.skip || 0) * limit;
-    Promise.all([
-      mongoose
-        .model('User')
-        .find({ role: 'applicant' })
-        .where('application_status')
-        .in(['submitted', 'rejected', 'accepted'])
-        .sort(sortBy)
-        .limit(limit)
-        .skip(skip)
-        .populate('languages')
-        .populate('databases')
-        .populate('web_technologies')
-        .populate('deployment')
-        .exec(),
-      mongoose
-        .model('User')
-        .count({ role: 'applicant' })
-        .where('application_status')
-        .in(['submitted', 'rejected', 'accepted'])
-        .exec()
-    ])
-      .then(([users, count]) => resolve({ users, count }))
-      .catch(reject);
-  });
-};
-
-module.exports.findApplicantsBy = (inputQuery, options = {}) => {
-  return new Promise((resolve, reject) => {
-    const sortBy = options.sortBy || '-updatedAt';
-    const limit = options.limit || 10;
-    const skip = (options.skip || 0) * limit;
-    const query = {
-      ...inputQuery,
-      role: 'applicant'
-    };
+    const sortBy = options.sort || '-updatedAt';
+    const limit = parseInt(options.limit, 10) || 10;
+    const skip = (parseInt(options.skip, 10) || 0) * limit;
 
     Promise.all([
       mongoose

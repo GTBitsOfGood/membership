@@ -109,7 +109,6 @@ const userSchema = Schema(
   },
   { timestamps: true }
 );
-userSchema.statics.findAllApplicants = statics.findAllApplicants;
 userSchema.statics.findApplicantsBy = statics.findApplicantsBy;
 userSchema.statics.getApplicantById = statics.getApplicantById;
 userSchema.statics.creteNewApplicant = statics.createNewApplicant;

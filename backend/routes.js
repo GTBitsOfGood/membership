@@ -7,8 +7,10 @@ const { check, oneOf, validationResult } = require('express-validator/check');
 const { matchedData } = require('express-validator/filter');
 const auth = require('./auth');
 
-router.get('/users', auth.requireAdmin, controllers.users.index);
-router.get('/users/:id', auth.adminOrSelf, controllers.users.get);
+router.get('/users', controllers.users.index);
+router.get('/users/:id', controllers.users.get);
+// router.get('/users', auth.requireAdmin, controllers.users.index);
+// router.get("/users/:id", auth.adminOrSelf, controllers.users.get);
 router.post('/users', controllers.users.store);
 router.put('/users/:id', auth.adminOrSelf, controllers.users.update);
 router.delete('/users/:id', auth.adminOrSelf, controllers.users.delete);

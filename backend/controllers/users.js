@@ -3,205 +3,27 @@ const User = require('mongoose').model('User');
 const util = require('../services/util');
 
 module.exports.index = (req, res, next) => {
-  // pagination settings
-  const limit = req.query.limit || 10;
-  const skip = (req.query.page - 1 || 0) * limit;
-  const sortBy = req.query.sort || '-updatedAt';
-  // if (req.query.application_status) {
-  //   Promise.all([
-  //     User.find({
-  //       role: "applicant",
-  //       application_status: `${req.query.application_status}`
-  //     })
-  //       .sort(sortBy)
-  //       .limit(limit)
-  //       .skip(skip)
-  //       .populate("languages")
-  //       .populate("databases")
-  //       .populate("web_technologies")
-  //       .populate("deployment")
-  //       .exec(),
-  //     User.count({
-  //       role: "applicant",
-  //       application_status: `${req.query.application_status}`
-  //     }).exec()
-  //   ])
-  //     .then(([users, count]) => {
-  //       res.locals.data = { users, count };
-  //       return next();
-  //     })
-  //     .catch(err => {
-  //       console.error(err);
-  //       res.locals.errors = err;
-  //       return next();
-  //     });
-  // }
-  if (req.query.count) {
-    switch (req.query.count) {
-      case 'submitted': {
-        User.count(
-          { application_status: 'submitted', role: 'applicant' },
-          (err, submitted) => {
-            if (err) {
-              console.log(err);
-              res.locals.error = err;
-              return next();
-            }
-
-            res.locals.data = {
-              submitted
-            };
-            return next();
-          }
-        );
-        break;
-      }
-      case 'accepted': {
-        User.count(
-          { application_status: 'accepted', role: 'applicant' },
-          (err, accepted) => {
-            if (err) {
-              console.log(err);
-              res.locals.error = err;
-              return next();
-            }
-
-            res.locals.data = {
-              accepted
-            };
-            return next();
-          }
-        );
-        break;
-      }
-      case 'rejected': {
-        User.count(
-          { application_status: 'rejected', role: 'applicant' },
-          (err, rejected) => {
-            if (err) {
-              console.log(err);
-              res.locals.error = err;
-              return next();
-            }
-
-            res.locals.data = {
-              rejected
-            };
-            return next();
-          }
-        );
-        break;
-      }
-      case 'visitors': {
-        User.count(
-          { application_status: 'none', role: 'applicant' },
-          (err, visitors) => {
-            if (err) {
-              console.log(err);
-              res.locals.error = err;
-              return next();
-            }
-
-            res.locals.data = {
-              visitors
-            };
-            return next();
-          }
-        );
-        break;
-      }
-      case 'pm_interest': {
-        User.count(
-          { pm_interest: true, role: 'applicant' },
-          (err, pmInterest) => {
-            if (err) {
-              console.log(err);
-              res.locals.error = err;
-              return next();
-            }
-
-            res.locals.data = {
-              pm_interest: pmInterest
-            };
-            return next();
-          }
-        );
-        break;
-      }
-      case 'em_interest': {
-        User.count(
-          { em_interest: true, role: 'applicant' },
-          (err, emInterest) => {
-            if (err) {
-              console.log(err);
-              res.locals.error = err;
-              return next();
-            }
-
-            res.locals.data = {
-              em_interest: emInterest
-            };
-            return next();
-          }
-        );
-        break;
-      }
-      default: {
-        console.log('this should not be hit...');
-        console.log(req.query);
-        return next();
-      }
-    }
-  } else {
-    // pagination settings
-    const limit = req.query.limit || 10;
-    const skip = (req.query.page - 1 || 0) * limit;
-
-    Promise.all([
-      User.find({ role: 'applicant' })
-        .where('application_status')
-        .in(['submitted', 'rejected', 'accepted'])
-        .sort('-updatedAt')
-        .limit(limit)
-        .skip(skip)
-        .populate('languages')
-        .populate('databases')
-        .populate('web_technologies')
-        .populate('deployment')
-        .exec(),
-      User.count({ role: 'applicant' })
-        .where('application_status')
-        .in(['submitted', 'rejected', 'accepted'])
-        .exec()
-    ])
-      .then(([users, count]) => {
-        res.locals.data = { users, count };
-        return next();
-      })
-      .catch(err => {
-        console.error(err);
-        res.locals.errors = err;
-        return next();
-      });
-  }
+  const { sort, limit, skip, ...query } = req.query;
+  User.findApplicantsBy(query, { sort, limit, skip })
+    .then(({ users, count }) => {
+      res.locals.data = { users, count };
+      return next();
+    })
+    .catch(err => {
+      console.error(err);
+      res.locals.errors = err;
+      return next();
+    });
 };
 
 module.exports.get = (req, res, next) => {
-  User.findById(req.params.id)
-    .populate('languages')
-    .populate('web_technologies')
-    .populate('databases')
-    .populate('deployment')
-    .exec((err, usr) => {
-      if (err) {
-        console.error(err);
-        res.locals.error = err;
-        return next();
-      }
-
-      res.locals.data = {
-        user: usr
-      };
+  User.getApplicantById(req.params.id)
+    .then(user => {
+      res.locals.data = { user };
+      return next();
+    })
+    .catch(err => {
+      res.locals.error = err;
       return next();
     });
 };
