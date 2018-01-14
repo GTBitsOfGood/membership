@@ -1,12 +1,11 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { List, Avatar } from "antd";
-
+import { List, Avatar } from 'antd';
 
 const BasicInfo = ({ data }) => {
   const dataSource = [
     {
-      title: "Contact Info",
+      title: 'Contact Info',
       data: [
         {
           label: 'Phone',
@@ -17,10 +16,10 @@ const BasicInfo = ({ data }) => {
           value: data.email
         }
       ],
-      icon: "idcard"
+      icon: 'idcard'
     },
     {
-      title: "Buzzport",
+      title: 'Buzzport',
       data: [
         {
           label: 'Credit Hours',
@@ -31,10 +30,10 @@ const BasicInfo = ({ data }) => {
           value: data.graduation_date
         }
       ],
-      icon: "book"
+      icon: 'book'
     },
     {
-      title: "Github Stats",
+      title: 'Github Stats',
       data: [
         {
           label: 'Public Repos',
@@ -45,7 +44,21 @@ const BasicInfo = ({ data }) => {
           value: data.github.followers
         }
       ],
-      icon: "github"
+      icon: 'github'
+    },
+    {
+      title: 'Leadership Interest',
+      data: [
+        {
+          label: 'Project Manager',
+          value: `${data.pm_interest ? 'Yes' : 'No'}`
+        },
+        {
+          label: 'Engineering Manager Interest',
+          value: `${data.em_interest ? 'Yes' : 'No'}`
+        }
+      ],
+      icon: 'coffee'
     }
   ];
   return (
@@ -55,26 +68,27 @@ const BasicInfo = ({ data }) => {
       renderItem={item => (
         <List.Item>
           <List.Item.Meta
-            avatar={
-              <Avatar icon={item.icon} />
-            }
+            avatar={<Avatar icon={item.icon} />}
             title={item.title}
             description={item.data.map(e => {
               if (e.value) {
-                return (<p key={e.label}><b>{e.label}</b>: {e.value}</p>)
-              } else {
-                return (<p key={e.label}><b>{e.label}</b>: <i>Not Set</i></p>)
+                return (
+                  <p key={e.label}>
+                    <b>{e.label}</b>: {e.value}
+                  </p>
+                );
               }
+              return (
+                <p key={e.label}>
+                  <b>{e.label}</b>: <i>Not Set</i>
+                </p>
+              );
             })}
           />
-
         </List.Item>
       )}
     />
-  )
-    ;
+  );
 };
 
 export default BasicInfo;
-
-

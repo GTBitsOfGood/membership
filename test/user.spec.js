@@ -44,7 +44,6 @@
 
 // let id = 'too slow';
 
-
 // // Start User Model Testing (CRUD)
 // describe('User Model Test Suite', () => {
 //   describe('Create User...', () => {
@@ -199,7 +198,6 @@
 //           return done();
 //         });
 //     });
-
 
 //     it('fails with an valid id that is not in DB', (done) => {
 //       chai.request(server)

@@ -1,30 +1,41 @@
-import React from "react";
-import propTypes from "prop-types";
-import {
-  Icon,
-  Button,
-  Avatar,
-  Table,
-  Divider
-} from 'antd';
+import React from 'react';
+import propTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Table } from 'antd';
 
+import * as actions from '../../../../ducks/admin';
+import { projectColumns } from './columns';
 
-import "react-table/react-table.css";
-import {projectColumns} from './columns';
-
-const Projects = ({ data, update }) => (
+const Projects = ({ data, updateCurrentProject, total, loadMoreProjects }) => (
   <div>
-    <h1 className="center">Bits of Good Projects</h1>
-    <Table columns={projectColumns(update)} dataSource={data} rowKey={(record) => record._id} />
+    <h1 className="center">Projects</h1>
+    <Table
+      pagination={{ total }}
+      columns={projectColumns(updateCurrentProject)}
+      dataSource={data}
+      rowKey={record => record._id}
+      loading={!data.length}
+      onChange={i => loadMoreProjects(i.current)}
+    />
   </div>
 );
 
 Projects.propTypes = {
   data: propTypes.array,
-  update: propTypes.func,
-
+  total: propTypes.number,
+  updateCurrentProject: propTypes.func,
+  loadMoreProjects: propTypes.func
 };
 
-export default Projects;
+function mapStateToProps(state) {
+  return {
+    data: state.admin.projects,
+    total: state.admin.projectCount
+  };
+}
 
-
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actions, dispatch);
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Projects);
