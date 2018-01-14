@@ -87,7 +87,7 @@ userSchema.statics.updateScore = user => {
   return user.save();
 };
 
-userSchema.statics.findApplicantsBy = (query, options = {}) => {
+userSchema.statics.findApplicantsBy = (query = {}, options = {}) => {
   return new Promise((resolve, reject) => {
     const sortBy = options.sort || '-updatedAt';
     const limit = parseInt(options.limit, 10) || 10;
@@ -149,13 +149,13 @@ userSchema.statics.createNewApplicant = data =>
     frontend_experience: data.frontend_experience
   });
 
-userSchema.statics.updateApplicantById = id =>
+userSchema.statics.deleteApplicantById = id =>
   mongoose
     .model('User')
     .deleteOne({ _id: id })
     .exec();
 
-userSchema.statics.deleteApplicantById = (id, data) =>
+userSchema.statics.updateApplicantById = (id, data) =>
   mongoose
     .model('User')
     .findById(id)

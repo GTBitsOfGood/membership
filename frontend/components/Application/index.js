@@ -14,10 +14,6 @@ import propTypes from 'prop-types';
 
 // Local Imports and Constants
 import {
-  programmingLanguages,
-  webTechnologies,
-  deployment,
-  databases,
   frontEndFamiliarity,
   backEndFamiliarity,
   graduation_dates
