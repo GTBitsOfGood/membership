@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 import Admin from './Admin';
 import Member from './Member';
 import Rejected from './Rejected';
-import Visitor from './Visitor';
+// import Visitor from './Visitor';
+import Visitor from '../VisitorDash';
 import Submitted from './Submitted';
 
 const Dashboard = ({ user, ...rest }) => {
