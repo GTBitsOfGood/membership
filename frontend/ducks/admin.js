@@ -223,25 +223,25 @@ export function loadMoreApplicants(page, pageSize = 10) {
 
 export function loadDashboard() {
   return dispatch => {
-    axios.get('/api/users?count=submitted').then(({ data }) => {
-      dispatch({ type: LOAD_NUM_APPS_SUBMITTED, submitted: data.users });
+    axios.get('/api/users?application_status=submitted').then(({ data }) => {
+      dispatch({ type: LOAD_NUM_APPS_SUBMITTED, submitted: data.count });
     });
-    axios.get('/api/users?count=accepted').then(({ data }) => {
-      dispatch({ type: LOAD_NUM_APPS_ACCEPTED, accepted: data.users });
+    axios.get('/api/users?application_status=accepted').then(({ data }) => {
+      dispatch({ type: LOAD_NUM_APPS_ACCEPTED, accepted: data.count });
     });
-    axios.get('/api/users?count=rejected').then(({ data }) => {
-      dispatch({ type: LOAD_NUM_APPS_REJECTED, rejected: data.users });
+    axios.get('/api/users?application_status=rejected').then(({ data }) => {
+      dispatch({ type: LOAD_NUM_APPS_REJECTED, rejected: data.count });
     });
-    axios.get('/api/users?count=visitors').then(({ data }) => {
-      dispatch({ type: LOAD_NUM_VISITORS, visitors: data.users });
+    axios.get('/api/users?application_status=none').then(({ data }) => {
+      dispatch({ type: LOAD_NUM_VISITORS, visitors: data.count });
     });
-    axios.get('/api/users?count=pm_interest').then(({ data }) => {
-      dispatch({ type: LOAD_NUM_PM_INTEREST, pm_interest: data.users });
+    axios.get('/api/users?pm_interest=true').then(({ data }) => {
+      dispatch({ type: LOAD_NUM_PM_INTEREST, pm_interest: data.count });
     });
-    axios.get('/api/users?count=em_interest').then(({ data }) => {
+    axios.get('/api/users?em_interest=true').then(({ data }) => {
       dispatch({
         type: LOAD_NUM_EM_INTEREST,
-        em_interest: data.users
+        em_interest: data.count
       });
     });
   };

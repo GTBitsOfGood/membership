@@ -32,6 +32,26 @@ export const webTechnologies = [
 ];
 
 export const databases = [
+  {
+    _id: '5a505e6ef13f039b8fda0f36',
+    updatedAt: '2018-01-06T05:28:14.969Z',
+    createdAt: '2018-01-06T05:28:14.969Z',
+    category: 'databases',
+    value: 1,
+    name: 'C#',
+    __v: 0
+  },
+  {
+    _id: '5a505e6ff13f039b8fda0f3b',
+    updatedAt: '2018-01-06T05:28:15.250Z',
+    createdAt: '2018-01-06T05:28:15.250Z',
+    category: 'databases',
+    value: 1,
+    name: 'Scala',
+    __v: 0
+  }
+];
+export const databasesOld = [
   'MySQL',
   'SQLite',
   'MongoDB',
