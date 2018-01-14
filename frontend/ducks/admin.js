@@ -84,7 +84,7 @@ export default function reducer(state = initialState, action) {
 }
 
 // Action Creators
-
+// WIP
 export function sortApplicantsByScore() {
   return dispatch => {
     dispatch({ type: CLEAR_APPLICANTS });
@@ -195,13 +195,15 @@ export function loadMoreProjects(page, pageSize = 10) {
 
 export function loadApplicants() {
   return dispatch => {
-    axios.get('/api/users').then(({ data }) => {
-      dispatch({
-        type: LOAD_APPLICANTS,
-        applicants: data.users,
-        applicantCount: data.count
+    axios
+      .get('/api/users?application_status=submitted&role=applicant')
+      .then(({ data }) => {
+        dispatch({
+          type: LOAD_APPLICANTS,
+          applicants: data.users,
+          applicantCount: data.count
+        });
       });
-    });
   };
 }
 
@@ -210,35 +212,47 @@ export function loadMoreApplicants(page, pageSize = 10) {
     const numLoaded = getState().admin.applicants.length;
     const totalCount = getState().admin.applicantCount;
     if (numLoaded < page * pageSize && numLoaded !== totalCount) {
-      axios.get(`/api/users?page=${page}`).then(({ data }) => {
-        dispatch({
-          type: LOAD_MORE_APPLICANTS,
-          applicants: data.users,
-          applicantCount: data.count
+      axios
+        .get(
+          `/api/users?application_status=submitted&role=applicant&page=${page}`
+        )
+        .then(({ data }) => {
+          dispatch({
+            type: LOAD_MORE_APPLICANTS,
+            applicants: data.users,
+            applicantCount: data.count
+          });
         });
-      });
     }
   };
 }
 
 export function loadDashboard() {
   return dispatch => {
-    axios.get('/api/users?application_status=submitted').then(({ data }) => {
-      dispatch({ type: LOAD_NUM_APPS_SUBMITTED, submitted: data.count });
-    });
-    axios.get('/api/users?application_status=accepted').then(({ data }) => {
-      dispatch({ type: LOAD_NUM_APPS_ACCEPTED, accepted: data.count });
-    });
-    axios.get('/api/users?application_status=rejected').then(({ data }) => {
-      dispatch({ type: LOAD_NUM_APPS_REJECTED, rejected: data.count });
-    });
-    axios.get('/api/users?application_status=none').then(({ data }) => {
-      dispatch({ type: LOAD_NUM_VISITORS, visitors: data.count });
-    });
-    axios.get('/api/users?pm_interest=true').then(({ data }) => {
+    axios
+      .get('/api/users?application_status=submitted&role=applicant')
+      .then(({ data }) => {
+        dispatch({ type: LOAD_NUM_APPS_SUBMITTED, submitted: data.count });
+      });
+    axios
+      .get('/api/users?application_status=accepted&role=applicant')
+      .then(({ data }) => {
+        dispatch({ type: LOAD_NUM_APPS_ACCEPTED, accepted: data.count });
+      });
+    axios
+      .get('/api/users?application_status=rejected&role=applicant')
+      .then(({ data }) => {
+        dispatch({ type: LOAD_NUM_APPS_REJECTED, rejected: data.count });
+      });
+    axios
+      .get('/api/users?application_status=none&role=applicant')
+      .then(({ data }) => {
+        dispatch({ type: LOAD_NUM_VISITORS, visitors: data.count });
+      });
+    axios.get('/api/users?pm_interest=true&role=applicant').then(({ data }) => {
       dispatch({ type: LOAD_NUM_PM_INTEREST, pm_interest: data.count });
     });
-    axios.get('/api/users?em_interest=true').then(({ data }) => {
+    axios.get('/api/users?em_interest=true&role=applicant').then(({ data }) => {
       dispatch({
         type: LOAD_NUM_EM_INTEREST,
         em_interest: data.count
