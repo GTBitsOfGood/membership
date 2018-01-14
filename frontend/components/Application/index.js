@@ -14,10 +14,6 @@ import propTypes from 'prop-types';
 
 // Local Imports and Constants
 import {
-  programmingLanguages,
-  webTechnologies,
-  deployment,
-  databases,
   frontEndFamiliarity,
   backEndFamiliarity,
   graduation_dates
@@ -136,9 +132,9 @@ class Application extends Component {
           <FormItem {...formItemLayout} label="Programming Languages">
             {getFieldDecorator('languages')(
               <Select mode="multiple" placeholder="Select Proficient Languages">
-                {programmingLanguages.map((item, index) => (
-                  <Option key={`${item + index}`} value={item}>
-                    {item}
+                {this.props.languages.map(item => (
+                  <Option key={item._id} value={item._id}>
+                    {item.name}
                   </Option>
                 ))}
               </Select>
@@ -152,9 +148,9 @@ class Application extends Component {
                 mode="multiple"
                 placeholder="Select Proficient Web Technologies"
               >
-                {webTechnologies.map((item, index) => (
-                  <Option key={`${item + index}`} value={item}>
-                    {item}
+                {this.props.web.map(item => (
+                  <Option key={item._id} value={item._id}>
+                    {item.name}
                   </Option>
                 ))}
               </Select>
@@ -168,9 +164,9 @@ class Application extends Component {
                 mode="multiple"
                 placeholder="Select Proficient Database Technologies"
               >
-                {databases.map((item, index) => (
-                  <Option key={`${item + index}`} value={item}>
-                    {item}
+                {this.props.databases.map(item => (
+                  <Option key={item._id} value={item._id}>
+                    {item.name}
                   </Option>
                 ))}
               </Select>
@@ -184,9 +180,9 @@ class Application extends Component {
                 mode="multiple"
                 placeholder="Select Proficient Deployment Technologies"
               >
-                {deployment.map((item, index) => (
-                  <Option key={`${item + index}`} value={item}>
-                    {item}
+                {this.props.deployment.map(item => (
+                  <Option key={item._id} value={item._id}>
+                    {item.name}
                   </Option>
                 ))}
               </Select>
@@ -385,7 +381,12 @@ class Application extends Component {
 }
 
 Application.propTypes = {
-  form: propTypes.object
+  form: propTypes.object,
+  register: propTypes.func,
+  languages: propTypes.array,
+  web: propTypes.array,
+  databases: propTypes.array,
+  deployment: propTypes.array
 };
 
 const WrappedApplication = Form.create()(Application);

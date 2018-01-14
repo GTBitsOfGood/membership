@@ -13,7 +13,7 @@ router.post('/users', controllers.users.store);
 router.put('/users/:id', auth.adminOrSelf, controllers.users.update);
 router.delete('/users/:id', auth.adminOrSelf, controllers.users.delete);
 
-router.get('/languages', auth.requireAdmin, controllers.languages.index);
+router.get('/languages', auth.requireLoggedIn, controllers.languages.index);
 router.get('/languages/:id', auth.requireAdmin, controllers.languages.get);
 router.put('/languages/:id', auth.requireAdmin, controllers.languages.update);
 router.post('/languages', auth.requireAdmin, controllers.languages.store);

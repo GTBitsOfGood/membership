@@ -1,18 +1,20 @@
 const Language = require('mongoose').model('Language');
 
 module.exports.index = (req, res, next) => {
-  Language.find({}, (err, languages) => {
-    if (err) {
-      console.error(err);
-      res.locals.errors = err;
-      return next();
-    }
-
-    res.locals.data = {
-      languages: languages
-    };
-    return next();
-  });
+  if (req.user.role === 'applicant') {
+    const { sort, limit, skip, ...query } = req.query;
+    const select = req.user.role === 'admin' ? '' : '_id name';
+    Language.findBy(query, { sort, limit, skip, select })
+      .then(({ languages, count }) => {
+        res.locals.data = { languages, count };
+        return next();
+      })
+      .catch(err => {
+        console.error(err);
+        res.locals.errors = err;
+        return next();
+      });
+  }
 };
 
 module.exports.get = (req, res, next) => {
