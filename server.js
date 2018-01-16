@@ -23,8 +23,9 @@ app.get('/*', (req, res) => {
 app.listen(PORT, error => {
   error
     ? console.error(error)
-    : console.info(`==> 🌎 Listening on port ${PORT}. Visit http://localhost:${PORT}/ in your browser.`);
+    : console.info(
+        `==> 🌎 Listening on port ${PORT}. Visit http://localhost:${PORT}/ in your browser.`
+      );
 });
-
 
 module.exports = app;
