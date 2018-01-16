@@ -91,7 +91,7 @@ userSchema.statics.findApplicantsBy = (query = {}, options = {}) => {
   return new Promise((resolve, reject) => {
     const sortBy = options.sort || '-updatedAt';
     const limit = parseInt(options.limit, 10) || 10;
-    const skip = (parseInt(options.skip, 10) || 0) * limit;
+    const skip = (parseInt(options.page, 10) - 1 || 0) * limit;
 
     Promise.all([
       mongoose
