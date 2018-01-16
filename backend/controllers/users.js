@@ -1,8 +1,8 @@
 const User = require('mongoose').model('User');
 
 module.exports.index = (req, res, next) => {
-  const { sort, limit, skip, ...query } = req.query;
-  User.findApplicantsBy(query, { sort, limit, skip })
+  const { sort, limit, page, ...query } = req.query;
+  User.findApplicantsBy(query, { sort, limit, page })
     .then(({ users, count }) => {
       res.locals.data = { users, count };
       return next();

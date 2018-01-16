@@ -212,6 +212,7 @@ export function loadMoreApplicants(page, pageSize = 10) {
     const numLoaded = getState().admin.applicants.length;
     const totalCount = getState().admin.applicantCount;
     if (numLoaded < page * pageSize && numLoaded !== totalCount) {
+      console.log('inside lma');
       axios
         .get(
           `/api/users?application_status=submitted&role=applicant&page=${page}`
