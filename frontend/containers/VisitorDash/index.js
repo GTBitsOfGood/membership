@@ -8,9 +8,12 @@ import axios from 'axios';
 
 // Local Imports & Constants
 import Application from '../../components/Application';
+import AppClosed from '../../components/AppClosed';
 import * as actions from '../../ducks/auth';
 
 const { Header, Content, Footer } = Layout;
+
+const ALLOW_APPLICATIONS = true;
 
 class VisitorDash extends Component {
   constructor(props) {
@@ -62,19 +65,25 @@ class VisitorDash extends Component {
             style={{ lineHeight: '64px' }}
             onClick={this.navigate}
           >
-            <Menu.Item key="application">Application</Menu.Item>
+            {ALLOW_APPLICATIONS && (
+              <Menu.Item key="application">Application</Menu.Item>
+            )}
             <Menu.Item key="logout">Logout</Menu.Item>
           </Menu>
         </Header>
         <Content className="content-container">
           <div className="content">
-            <Application
-              register={this.props.register}
-              languages={this.state.languages}
-              web={this.state.web}
-              databases={this.state.databases}
-              deployment={this.state.deployment}
-            />
+            {ALLOW_APPLICATIONS ? (
+              <Application
+                register={this.props.register}
+                languages={this.state.languages}
+                web={this.state.web}
+                databases={this.state.databases}
+                deployment={this.state.deployment}
+              />
+            ) : (
+              <AppClosed />
+            )}
           </div>
         </Content>
         <Footer className="center">
