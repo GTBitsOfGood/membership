@@ -17,6 +17,8 @@ const LOAD_NUM_PM_INTEREST = Symbol('app/admin/LOAD_NUM_PM_INTEREST');
 const LOAD_NUM_EM_INTEREST = Symbol('app/admin/LOAD_NUM_EM_INTEREST');
 const LOAD_NUM_VISITORS = Symbol('app/admin/LOAD_NUM_VISITORS');
 const CLEAR_APPLICANTS = Symbol('app/admin/CLEAR_APPLICANTS');
+const UPDATE_QUERY = Symbol('app/admin/UPDATE_QUERY');
+// const CLEAR_APPLICANTS = Symbol("app/admin/CLEAR_APPLICANTS");
 
 // State Reducer
 const initialState = {
@@ -31,7 +33,8 @@ const initialState = {
   numAppsAccepted: 0,
   numPMInterest: 0,
   numEMInterest: 0,
-  numVisitors: 0
+  numVisitors: 0,
+  query: 'application_status=submitted&role=applicant'
 };
 
 export default function reducer(state = initialState, action) {
@@ -78,26 +81,70 @@ export default function reducer(state = initialState, action) {
       return { ...state, numEMInterest: action.em_interest };
     case CLEAR_APPLICANTS:
       return { ...state, applicantCount: 0, applicants: [] };
+    case UPDATE_QUERY:
+      return { ...state, query: action.query };
     default:
       return state;
   }
 }
 
 // Action Creators
-// WIP
 export function sortApplicantsByScore() {
   return dispatch => {
     dispatch({ type: CLEAR_APPLICANTS });
-    console.log('dispatched clear');
-    axios.get('/api/users?sort=score').then(({ data }) => {
-      console.log('inside get');
-      console.log(data);
-      dispatch({
-        type: LOAD_APPLICANTS,
-        applicants: data.users,
-        applicantCount: data.count
-      });
+    dispatch({
+      type: UPDATE_QUERY,
+      query: 'application_status=submitted&role=applicant&sort=-score'
     });
+    axios
+      .get('/api/users?application_status=submitted&role=applicant&sort=-score')
+      .then(({ data }) => {
+        dispatch({
+          type: LOAD_APPLICANTS,
+          applicants: data.users,
+          applicantCount: data.count
+        });
+      });
+  };
+}
+export function filterPMs() {
+  return dispatch => {
+    dispatch({ type: CLEAR_APPLICANTS });
+    dispatch({
+      type: UPDATE_QUERY,
+      query: 'application_status=submitted&role=applicant&pm_interest=true'
+    });
+    axios
+      .get(
+        '/api/users?application_status=submitted&role=applicant&pm_interest=true'
+      )
+      .then(({ data }) => {
+        dispatch({
+          type: LOAD_APPLICANTS,
+          applicants: data.users,
+          applicantCount: data.count
+        });
+      });
+  };
+}
+export function filterEMs() {
+  return dispatch => {
+    dispatch({ type: CLEAR_APPLICANTS });
+    dispatch({
+      type: UPDATE_QUERY,
+      query: 'application_status=submitted&role=applicant&em_interest=true'
+    });
+    axios
+      .get(
+        '/api/users?application_status=submitted&role=applicant&em_interest=true'
+      )
+      .then(({ data }) => {
+        dispatch({
+          type: LOAD_APPLICANTS,
+          applicants: data.users,
+          applicantCount: data.count
+        });
+      });
   };
 }
 export function makeAdmin(id) {
@@ -195,6 +242,10 @@ export function loadMoreProjects(page, pageSize = 10) {
 
 export function loadApplicants() {
   return dispatch => {
+    dispatch({
+      type: UPDATE_QUERY,
+      query: 'application_status=submitted&role=applicant'
+    });
     axios
       .get('/api/users?application_status=submitted&role=applicant')
       .then(({ data }) => {
@@ -211,19 +262,16 @@ export function loadMoreApplicants(page, pageSize = 10) {
   return (dispatch, getState) => {
     const numLoaded = getState().admin.applicants.length;
     const totalCount = getState().admin.applicantCount;
+    const query = getState().admin.query;
+
     if (numLoaded < page * pageSize && numLoaded !== totalCount) {
-      console.log('inside lma');
-      axios
-        .get(
-          `/api/users?application_status=submitted&role=applicant&page=${page}`
-        )
-        .then(({ data }) => {
-          dispatch({
-            type: LOAD_MORE_APPLICANTS,
-            applicants: data.users,
-            applicantCount: data.count
-          });
+      axios.get(`/api/users?${query}&page=${page}`).then(({ data }) => {
+        dispatch({
+          type: LOAD_MORE_APPLICANTS,
+          applicants: data.users,
+          applicantCount: data.count
         });
+      });
     }
   };
 }

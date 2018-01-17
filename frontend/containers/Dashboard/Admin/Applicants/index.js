@@ -13,7 +13,10 @@ const Applicants = ({
   total,
   loading,
   loadMoreApplicants,
-  sortApplicantsByScore
+  sortApplicantsByScore,
+  loadApplicants,
+  filterPMs,
+  filterEMs
 }) => (
   <div>
     <h1 className="center">Applicants</h1>
@@ -30,16 +33,14 @@ const Applicants = ({
       </Col>
       <Col span={4}>
         <Card title="Table Controls">
-          <a onClick={() => alert('test')}> Sort by Time</a>
-          <br />
           <a onClick={sortApplicantsByScore}> Sort by Score</a>
           <br />
-          <a onClick={() => alert('test')}> Filter PM Interest</a>
+          <a onClick={filterPMs}> Filter PM Interest</a>
           <br />
-          <a onClick={() => alert('test')}> Filter EM Interest</a>
+          <a onClick={filterEMs}> Filter EM Interest</a>
           <br />
           <br />
-          <a onClick={() => alert('test')}> Reset</a>
+          <a onClick={loadApplicants}> Reset</a>
         </Card>
       </Col>
     </Row>
