@@ -13,7 +13,7 @@ import * as actions from '../../ducks/auth';
 
 const { Header, Content, Footer } = Layout;
 
-const ALLOW_APPLICATIONS = true;
+const ALLOW_APPLICATIONS = false;
 
 class VisitorDash extends Component {
   constructor(props) {
