@@ -13,6 +13,8 @@ require('./db');
 // Local Imports
 const User = mongoose.model('User');
 
+console.log('about to start dump');
+require('../csvDump');
 // Middleware
 router.use(morgan('dev'));
 router.use(helmet());
