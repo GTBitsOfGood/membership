@@ -10,14 +10,16 @@
     "frontend": "webpack -d --watch",
     "backend": "nodemon server.js",
     "start": "npm run build && NODE_ENV=production node server.js",
-    "test":
-      "mocha --compilers js:babel-core/register ./test/**/*.js --require ignore-styles",
+    "test": "mocha --compilers js:babel-core/register ./test/**/*.js --require ignore-styles",
     "seed": "node ./backend/seeds/index.js",
     "seeder": "npm run seed",
     "format": "prettier --single-quote --trailing-comma es5 --write '**/*.js'"
   },
   "lint-staged": {
-    "*.{js,json,css,md}": ["prettier --single-quote --write", "git add"]
+    "*.{js,json,css,md}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
@@ -51,7 +53,7 @@
     "expect": "^1.20.2",
     "express": "^4.15.2",
     "express-session": "^1.15.6",
-    "express-validator": "^4.2.1",
+    "express-validator": "^5.0.0",
     "file-loader": "^1.1.6",
     "g": "^2.0.1",
     "helmet": "^3.9.0",
