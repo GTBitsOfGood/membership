@@ -10,14 +10,16 @@
     "frontend": "webpack -d --watch",
     "backend": "nodemon server.js",
     "start": "npm run build && NODE_ENV=production node server.js",
-    "test":
-      "mocha --compilers js:babel-core/register ./test/**/*.js --require ignore-styles",
+    "test": "mocha --compilers js:babel-core/register ./test/**/*.js --require ignore-styles",
     "seed": "node ./backend/seeds/index.js",
     "seeder": "npm run seed",
     "format": "prettier --single-quote --trailing-comma es5 --write '**/*.js'"
   },
   "lint-staged": {
-    "*.{js,json,css,md}": ["prettier --single-quote --write", "git add"]
+    "*.{js,json,css,md}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
@@ -42,7 +44,7 @@
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
     "chai-arrays": "^2.0.0",
-    "chai-http": "^3.0.0",
+    "chai-http": "^4.0.0",
     "connect-mongo": "^2.0.0",
     "css-loader": "^0.28.0",
     "dotenv": "^4.0.0",
