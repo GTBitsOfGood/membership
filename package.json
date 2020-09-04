@@ -60,7 +60,7 @@
     "less-loader": "^4.0.5",
     "lodash": "^4.17.4",
     "mocha": "^3.5.3",
-    "mongodb": "^2.2.31",
+    "mongodb": "^3.1.13",
     "mongoose": "^4.12.4",
     "morgan": "^1.9.0",
     "node-sass": "^4.5.2",
